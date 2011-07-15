@@ -1,19 +1,30 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.1.0.rc4'
+gem 'pg'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+#gem 'sqlite3'
 
 # Asset template engines
 gem 'sass-rails', "~> 3.1.0.rc"
 gem 'coffee-script'
 gem 'uglifier'
 
+group :testing do
+
+end
+
+group :development do
+  gem "cheat"
+  gem 'ruby-debug19', :require => 'ruby-debug'
+end
 
 
+
+gem 'factory_girl_rails'
 # Use unicorn as the web server
 # gem 'unicorn'
 
@@ -21,9 +32,10 @@ gem 'uglifier'
 # gem 'capistrano'
 
 # To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
+
 
 gem "capybara", :group => [:development, :test]
 gem "jquery-rails"
 gem "less"
 gem "rspec-rails", ">= 2.0.1", :group => [:development, :test]
+

@@ -1,0 +1,5 @@
+setting up yield for header
+put fb script in partial
+
+work on post trips layout
+

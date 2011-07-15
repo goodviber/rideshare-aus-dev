@@ -1,0 +1,343 @@
+/* ============================== */
+/* ! Layout for desktop version   */
+/* ============================== */
+
+body {
+font-family:Arial, Helvetica, Verdana, Tahoma, sans-serif;
+margin:0;
+padding:0;
+border: 0;
+outline: 0;
+background: transparent;
+/*background-color: #D6D6DE; */
+background-image: url(images/background.jpg);
+}
+
+#logo { height: 106px; width:333px}
+
+.corner-bottom {
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    -moz-border-radius-bottomleft: 20px;
+    -moz-border-radius-bottomright: 20px;
+}
+
+.corner-top {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    -moz-border-radius-topleft: 20px;
+    -moz-border-radius-topright: 20px;
+}
+
+/*----TOP PANEL---- changed from 778px to 647px*/
+#topPan{width:880px; height:120px; position:relative; margin:0;}
+#topPan #ImgPan{width:auto; height:auto; background:#fff; color:#666; position:absolute; top:0px; left:0px; padding:0 0 0 30px;}
+#topPan #ImgPan img{width:auto; height:auto;}
+
+
+#topPan ul{width:468px; height:32px; position:absolute; top:72px; right:10px;}
+#topPan ul li{width:78px; height:32px; float:left;}
+#topPan ul li a{width:76px; height:35px; display:block; background:url(images/topmenu-normal.jpg) 0 0 no-repeat #F5F4F4; color:#666; text-decoration:none; font-size:12px; font-weight:bold; text-align:center; line-height:32px; margin:0 2px 0 0;}
+#topPan ul li a:hover{background:url(images/topmenu-hover.jpg) 0 0 no-repeat #F5F4F4; color:#fff; text-decoration:none;}
+
+#topPan ul li.home{background:url(images/topmenu-hover.jpg) 0 0 no-repeat #F5F4F4; color:#fff; text-decoration:none; font-size:12px; font-weight:bold; text-align:center; line-height:32px;}
+
+/*----/TOP PANEL----*/
+
+
+/* ===== Form Sytling (using unorded lists) ===== */
+fieldset {
+padding:0;
+border:0;
+margin-top:15px;
+}
+
+.ui-dialog .ui-state-error {
+padding: .1em;
+}
+
+ul {
+list-style: none;
+margin: 0;
+}
+
+form ul li {
+margin-bottom: 10px;
+}
+
+form ul li label {
+display: block;
+float: left;
+width: 150px;
+line-height: 24px;
+}
+
+div.left {
+float: left;
+margin-right: 7px;
+}
+
+/* ===== data table ===== */
+table.dataTable {
+margin-top: 15px;
+text-align: center;
+font-family: Verdana, Geneva, Arial, Helvetica, sans-serif ;
+font-weight: normal;
+font-size: 0.8em;
+color: #fff;
+width: 280px;
+background-color: #666;
+border: 0px;
+border-collapse: collapse;
+border-spacing: 0px;
+}
+
+table.dataTable td
+{
+background-color: #CCC;
+color: #000;
+padding: 4px;
+text-align: left;
+border: 1px #fff solid;
+white-space: nowrap;
+}
+
+table.dataTable th
+{
+background-color: #666;
+color: #fff;
+padding: 4px;
+text-align: left;
+border-bottom: 2px #fff solid;
+font-size: 1em;
+font-weight: bold;
+}
+
+/* ===== Facebook ===== */
+div.fbPic {
+float: left;
+width: 50px;
+height: 50px;
+padding-bottom: 10px;
+}
+
+div.fbPicText {
+float: left;
+width: 77px;
+height: 40px;
+margin-top: 10px;
+padding-bottom: 10px;
+padding-left: 3px;
+}
+
+.fbName {
+color: #3B5998 !important;
+cursor: pointer;
+text-decoration: none;
+font-weight: bold;
+font-size: 0.7em;
+font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+}
+
+.fbLink {
+color: #3B5998;
+cursor: pointer;
+text-decoration: none;
+padding-left: 4px;
+padding-right: 4px;
+font-size: 0.8em;
+font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+}
+
+.fbLink:hover {
+text-decoration: underline;
+}
+
+.fbName a {text-decoration: underline;}
+
+/* ===== Login ===== */
+div#fbLoginBox {
+text-align: center;
+}
+
+div#fbLoginButton {
+margin-top: 40px;
+margin-bottom: 150px;
+}
+
+#loginDetailsText {
+float: right;
+margin-right: 5px;
+}
+
+#loginDetailsImage {
+float: right;
+margin-right: 20px;
+}
+
+/* ===== Headings ===== */
+h1 {
+text-align:left;
+color: #30547F;
+}
+
+h1.center {
+text-align: center;
+}
+
+h2 {
+color: #30547F;
+}
+
+h3 {
+color: #30547F;
+text-align: center;
+}
+
+/* ===== Form fields ===== */
+.field {
+text-align: left;
+padding-top: 5px;
+padding-left: 0px;
+}
+
+.actions {
+text-align: left;
+padding-top: 5px;
+padding-left: 0px;
+padding-bottom: 20px;
+}
+
+
+/* ===== main menu ===== */
+#mainMenu {
+margin-left:20px;
+}
+
+#mainMenu ul {
+list-style: none;
+margin: 0;
+padding: 0;
+}
+
+#mainMenu li {
+
+}
+
+#mainMenu li a:link, #mainMenu li a:visited {
+font-family: "Trebuchet MS", sans-serif;
+display: block;
+font-size: 0.9em;
+text-decoration: none;
+line-height: 25px;
+border: none;
+}
+
+#mainMenu li a:hover, #mainMenu li a:active {
+text-decoration: underline;
+}
+
+#mainMenu li a.current {
+font-weight: bold;
+}
+
+#mainMenu li a.current:hover {
+cursor: default;
+text-decoration: none;
+}
+
+
+#facebookFriends {
+margin-left:20px;
+display: none;
+}
+
+div#header {
+padding-top: 20px;
+padding-bottom: 10px;
+}
+
+/* ===== Template ===== */
+div#loginDetails {
+text-align: right;
+}
+
+#logo {
+margin-left:20px;
+}
+
+#footerText {
+text-align: center;
+color: #999;
+font-size: .9em;
+margin-bottom: 20px;
+}
+
+div.row {
+background-color: white;
+}
+
+.bodyFont {
+color: #666666;
+font-family: Arial,Helvetica,sans-serif;
+text-align: left;
+padding-left: 30px;
+padding-right: 30px;
+}
+
+.text {
+text-align:center;
+margin-top:40px;
+padding-bottom:40px;
+border-bottom:1px solid #000000;
+}
+.text h2 {
+font-family:Georgia, "Times New Roman", Times, serif;
+font-size:30px;
+color:#e5e5e5;
+font-style:normal;
+font-variant:normal;
+font-weight:lighter;
+letter-spacing:2px;
+}
+
+.details {
+border-top:1px solid #666666;
+height:120px;
+}
+
+}
+#submit_button {
+text-decoration:none;
+background:none;
+border:none;
+padding-left:15px;
+cursor:pointer;
+}
+
+/* ============================= */
+/* ! Layout for mobile version   */
+/* ============================= */
+
+@media handheld, only screen and (max-width: 767px) {
+
+	body {
+
+	}
+
+}
+
+
+/* ========================================== */
+/* ! Provide higher res assets for iPhone 4   */
+/* ========================================== */
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {
+
+/*	.logo {
+		background: url(logo2x.jpg) no-repeat;
+		background-size: 212px 303px;
+	}*/
+
+}
+

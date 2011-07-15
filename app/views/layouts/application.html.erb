@@ -1,14 +1,133 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
-  <title>Cocoride</title>
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
+  <title><%= page_title %></title>
+  <!--[if lte IE 9]><%= stylesheet_link_tag 'ie' %><![endif]-->
+  <%= stylesheet_link_tag    "application", "jquery-1.5.2.min", "jquery-ui-1.8.13.custom.min", "1140", "main" %>
+  <%= javascript_include_tag "application", "css3-mediaqueries" %>
   <%= csrf_meta_tags %>
+
+  <!-- Facebook Connect -->
+  <div id="fb-root"></div>
+  <%= javascript_include_tag 'http://connect.facebook.net/en_US/all.js' %>
+
+  <script>
+    var fbAppId;
+    if (window.location.hostname == "0.0.0.0")
+      fbAppId = '119073948160554';
+    else
+      fbAppId = '163188793727561';
+
+    FB.init({
+      appId  : fbAppId,
+      status : true, // check login status
+      cookie : true, // enable cookies to allow the server to access the session
+      xfbml  : true  // parse XFBML
+    });
+
+    // Facebook login/logout
+    FB.Event.subscribe('auth.login', function(response) {
+	    FB.api('/me', function(response) {
+	    if(response.name) {
+	      var fbId = response.id;
+	      $.post("login/user_login", { fb_id: response.id, first_name: response.first_name, last_name: response.last_name, authenticity_token: _token },
+		    function(){
+		      if(fbId)
+		        saveFriendsList(fbId);
+		    });
+	    }
+	    });
+
+	    function saveFriendsList(fbId) {
+	    FB.api('/me/friends', function(response) {
+	      //$.post("facebookfriends/add", { fb_id: fbId, friend_list: response, authenticity_token: _token },
+	      //function(){
+	      	window.location = '/trip/search';
+	      //});
+	    });
+	    }
+    });
+
+    FB.Event.subscribe('auth.logout', function (response) {
+      alert('You have logged out of facebook. Please login to continue');
+      location.href = "/login?logout=true";
+    });
+
+
+    FB.api('/me', function(response) {
+      $("#fbNamePlaceholder").html(response.name);
+
+      var imageUrl = "https://graph.facebook.com/" + response.id + "/picture";
+      $("#fbImagePlaceholder").attr("src",imageUrl).show();
+
+    });
+
+    // is this needed?????
+    function logout()
+    {
+      FB.logout(function(response) {
+        $("#imagePlaceholder").hide();
+      });
+    }
+  </script>
+
+  <!-- authenticity_token -->
+  <%= javascript_tag "window._token = '#{form_authenticity_token}'" %>;
+  <%= yield(:header) %>
 </head>
 <body>
 
-<%= yield %>
+  <div id="outer" class="container">
+
+	  <div id="header" class="row corner-top">
+
+
+		  <div class="tencol">
+
+        <div id="topPan">
+
+        <div id="ImgPan"><a href="/">
+        <%= image_tag("logo.png", :alt => "Cocoride logo", :class => "round") %>
+        </a> </div>
+
+		    <ul>
+          <li><%= link_to "Home", root_url %></li>
+		      <li><%= link_to "Search", trips_url %></li>
+		      <li><%= link_to "Post", new_trip_url %></li>
+		      <li><a href="#">About</a></li>
+		      <li><a href="#">FB Page</a></li>
+
+        </ul>
+        </div>
+		  </div>
+
+		  <div id="loginDetails" class="twocol last">
+	      <div id="loginDetailsImage">
+          <img id="fbImagePlaceholder" src="" style="display:none;"/>
+        </div>
+        <div id="loginDetailsText">
+          <ul>
+            <li><span id="fbNamePlaceholder" class="fbName"></span></li>
+            <li></li>
+            <li><a class="fbLink" href="javascript:logout()">Logout</a></li>
+          </ul>
+        </div>
+		  </div>
+
+    </div><!--end header-->
+
+	  <div id="content" class="row">
+      <%= yield %>
+	  </div>
+
+	  <div class="row corner-bottom" >
+		  <div class="twelvecol">
+			  <p id="footerText">Copyright© Pavesiu 2011. Designed and developed by Adam Kirk.</p>
+		  </div><!-- end twelvecol -->
+	  </div>
+
+  </div><!--end outer-->
 
 </body>
 </html>
+
