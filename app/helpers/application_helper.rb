@@ -7,5 +7,6 @@ module ApplicationHelper
       'Cocoride - Social ridesharing'
     end
   end
+
 end
 

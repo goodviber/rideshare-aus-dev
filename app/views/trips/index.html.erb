@@ -1,16 +1,32 @@
-<h1>Listing posts</h1>
+<% content_for :header, javascript_include_tag("trips-search") %>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Body</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-</table>
+<div class="prepend-1 span-8">
+	<fieldset>
+			<legend>Search Trips</legend>
 
-<br />
+          <%= label :trip, :from_location_id, "From", :class => 'span-1' %>
+	        <%= collection_select(:trip, :from_location_id, Location.has_trips_from, :id, :name, {:prompt => 'All Cities'}, :class => 'search_loc_list') %>
 
-<%= link_to 'New Post', new_trip_path %>
+	        <%= label :trip, :to_location_id, "To", :class => 'span-1' %>
+	        <span id="toLocation">
+            <%= collection_select(:trip, :to_location_id, Location.has_trips_to, :id, :name, {:prompt => 'All Cities'}, :class => 'search_loc_list') %>
+          </span>
+          <br/><br/>
+			    <div id="dateDiv"></div>
+
+			    <input type="checkbox" name="vehicle" value="Bike" /> Search all dates<br />
+          <br />
+			    <%= button_to "Search", :action => "load_search_results", :method => :get %>
+
+	</fieldset>
+</div>
+
+<div class="prepend-1 span-13 append-1 last">
+	<fieldset>
+			<legend>Search Results</legend>
+      <div id="searchResults">
+        <%= render 'search_results' %>
+      </div>
+	</fieldset>
+</div>
 

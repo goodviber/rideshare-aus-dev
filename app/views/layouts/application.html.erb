@@ -3,9 +3,11 @@
 <head>
   <title><%= page_title %></title>
   <!--[if lte IE 9]><%= stylesheet_link_tag 'ie' %><![endif]-->
-  <%= stylesheet_link_tag    "application", "jquery-1.5.2.min", "jquery-ui-1.8.13.custom.min", "1140", "main" %>
-  <%= javascript_include_tag "application", "css3-mediaqueries" %>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "jquery-1.5.2.min", "jquery-ui-1.8.13.custom.min", :cache => true %>
   <%= csrf_meta_tags %>
+
+  <%= yield(:header) %>
 
   <!-- Facebook Connect -->
   <div id="fb-root"></div>
@@ -42,7 +44,9 @@
 	    FB.api('/me/friends', function(response) {
 	      //$.post("facebookfriends/add", { fb_id: fbId, friend_list: response, authenticity_token: _token },
 	      //function(){
-	      	window.location = '/trip/search';
+
+	      	window.location = window.location;
+
 	      //});
 	    });
 	    }
@@ -50,80 +54,80 @@
 
     FB.Event.subscribe('auth.logout', function (response) {
       alert('You have logged out of facebook. Please login to continue');
-      location.href = "/login?logout=true";
+      location.href = "/";
+    });
+
+    FB.getLoginStatus(function(response) {
+      if (response.session) {   //connected to facebook
+
+        var imageUrl = "https://graph.facebook.com/" + response.session.uid + "/picture";
+        $("#fbLoggedInImage").attr("src",imageUrl).show();
+
+        $("#loginDetailsText").show();
+          FB.api('/me', function(response) {
+            $("#fbLoggedInName").html(response.name);
+          });
+
+      } else {                  //no connection
+        $('#fbLoginButton').show();
+      }
     });
 
 
-    FB.api('/me', function(response) {
-      $("#fbNamePlaceholder").html(response.name);
 
-      var imageUrl = "https://graph.facebook.com/" + response.id + "/picture";
-      $("#fbImagePlaceholder").attr("src",imageUrl).show();
-
-    });
 
     // is this needed?????
     function logout()
     {
       FB.logout(function(response) {
-        $("#imagePlaceholder").hide();
+        $("#fbLoggedInImage").hide();
       });
     }
   </script>
 
   <!-- authenticity_token -->
   <%= javascript_tag "window._token = '#{form_authenticity_token}'" %>;
-  <%= yield(:header) %>
 </head>
-<body>
+<body <%= yield(:body_attr) %>>
 
-  <div id="outer" class="container">
+  <div class="container corner-top corner-bottom showgrid">
 
-	  <div id="header" class="row corner-top">
+      <div class="span-24 prepend-top">
+		  <div class="prepend-1 span-9">
+        <a href="/">
+          <%= image_tag("logo.png", :alt => "Cocoride logo", :class => "round") %>
+        </a>
+      </div>
 
-
-		  <div class="tencol">
-
-        <div id="topPan">
-
-        <div id="ImgPan"><a href="/">
-        <%= image_tag("logo.png", :alt => "Cocoride logo", :class => "round") %>
-        </a> </div>
-
-		    <ul>
+      <div class="span-9 tabs-container">
+		    <ul class="tabs">
           <li><%= link_to "Home", root_url %></li>
-		      <li><%= link_to "Search", trips_url %></li>
-		      <li><%= link_to "Post", new_trip_url %></li>
+		      <li><%= link_to "Search Trips", trips_url %></li>
+		      <li><%= link_to "Post Trip", new_trip_url %></li>
 		      <li><a href="#">About</a></li>
-		      <li><a href="#">FB Page</a></li>
-
         </ul>
-        </div>
 		  </div>
 
-		  <div id="loginDetails" class="twocol last">
+		  <div id="loginDetails" class="span-4 append-1 last" style="vertical-align: baseline;">
+		    <fb:login-button autologoutlink="false" perms="email" size="large" length="short" id="fbLoginButton" style="display:none;"></fb:login-button>
 	      <div id="loginDetailsImage">
-          <img id="fbImagePlaceholder" src="" style="display:none;"/>
+          <img id="fbLoggedInImage" src="" style="display:none;"/>
         </div>
-        <div id="loginDetailsText">
+        <div id="loginDetailsText" style="display:none;">
           <ul>
-            <li><span id="fbNamePlaceholder" class="fbName"></span></li>
+            <li><span id="fbLoggedInName" class="fbName"></span></li>
             <li></li>
             <li><a class="fbLink" href="javascript:logout()">Logout</a></li>
           </ul>
         </div>
 		  </div>
+      </div>
+      <div class="span-24"></div>
 
-    </div><!--end header-->
+    <%= yield %>
 
-	  <div id="content" class="row">
-      <%= yield %>
-	  </div>
-
-	  <div class="row corner-bottom" >
-		  <div class="twelvecol">
-			  <p id="footerText">Copyright© Pavesiu 2011. Designed and developed by Adam Kirk.</p>
-		  </div><!-- end twelvecol -->
+	  <div class="span-24" >
+			  <p id="footerText">Copyright© Pavesiu 2011.</p>
 	  </div>
 
   </div><!--end outer-->

@@ -10,7 +10,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110705064345) do
+ActiveRecord::Schema.define(:version => 20110719101209) do
+
+  create_table "demos", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "locations", :force => true do |t|
     t.string   "name",            :limit => 200
@@ -48,6 +54,7 @@ ActiveRecord::Schema.define(:version => 20110705064345) do
     t.string   "fb_post_id",       :limit => 500
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "trip_details"
   end
 
   create_table "users", :force => true do |t|

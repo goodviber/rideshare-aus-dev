@@ -1,0 +1,26 @@
+<table>
+  <tr>
+    <th>Leaving</th>
+    <th>From</th>
+    <th>To</th>
+    <th>Arriving</th>
+    <th>Distance</th>
+    <th>Seats</th>
+    <th></th>
+  </tr>
+
+<% @trips.each do |trip| %>
+  <tr>
+    <td><%= trip.dis_trip_time %></td>
+    <td><%= trip.from_location.name %></td>
+    <td><%= trip.to_location.name %></td>
+    <td><%=  %></td>
+    <td><%= trip.trip_distance %></td>
+    <td><%= trip.seats %></td>
+
+    <td><%= link_to 'Edit', edit_trip_path(trip) %></td>
+    <!-- <td><%= link_to 'Destroy', trip, :confirm => 'Are you sure?', :method => :delete %></td> -->
+  </tr>
+<% end %>
+</table>
+

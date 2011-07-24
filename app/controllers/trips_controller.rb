@@ -9,17 +9,19 @@ class TripsController < ApplicationController
     @trip = Trip.find(params[:id])
 
     respond_to do |format|
-      format.html
-      format.xml  { render :xml => @trip }
+      format.html # show.html.erb
+      format.json { render json: @trip }
     end
   end
 
   def new
     @trip = Trip.new
+    @trip.time_of_day = "E"
+    @trip.driver_id = session[:user_id]
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @trip }
+      format.json { render json: @trip }
     end
   end
 
@@ -32,14 +34,15 @@ class TripsController < ApplicationController
   # POST /trips.xml
   def create
     @trip = Trip.new(params[:trip])
+    #debugger
 
     respond_to do |format|
       if @trip.save
-        format.html { redirect_to(@trip, :notice => 'Trip was successfully created.') }
-        format.xml  { render :xml => @trip, :status => :created, :location => @trip }
+        format.html { redirect_to @trip, notice: 'trip was successfully created.' }
+        format.json { render json: @trip, status: :created, location: @trip }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @trip.errors, :status => :unprocessable_entity }
+        format.html { render action: "new" }
+        format.json { render json: @trip.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -51,11 +54,11 @@ class TripsController < ApplicationController
 
     respond_to do |format|
       if @trip.update_attributes(params[:trip])
-        format.html { redirect_to(@trip, :notice => 'Trip was successfully updated.') }
-        format.xml  { head :ok }
+        format.html { redirect_to @trip, notice: 'trip was successfully updated.' }
+        format.json { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @trip.errors, :status => :unprocessable_entity }
+        format.html { render action: "edit" }
+        format.json { render json: @trip.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -67,8 +70,60 @@ class TripsController < ApplicationController
     @trip.destroy
 
     respond_to do |format|
-      format.html { redirect_to(trips_url) }
-      format.xml  { head :ok }
+      format.html { redirect_to trips_url }
+      format.json { head :ok }
+    end
+  end
+
+  def get_lat_lng
+    lat_lng = Location.select("latitude, longitude").where(:id => params[:location_id])
+
+    respond_to do |format|
+      format.json { render :json => lat_lng }
+    end
+  end
+
+  def load_search_results
+    #debugger
+    fl_id = params[:from_location_id]
+    tl_id = params[:to_location_id]
+
+    if (!fl_id.blank?) && (!tl_id.blank?)
+      @trips = Trip.where("from_location_id = ?", fl_id).where("to_location_id = ?", tl_id)
+    elsif (!fl_id.blank?) && (tl_id.blank?)
+      @trips = Trip.where("from_location_id = ?", fl_id)
+    elsif (fl_id.blank?) && (!tl_id.blank?)
+      @trips = Trip.where("to_location_id = ?", tl_id)
+    else
+      @trips = Trip.all
+    end
+
+    respond_to do |format|
+      format.html { render partial: "search_results" }
+    end
+  end
+
+  def load_to_locations
+    if (!params[:from_location_id].blank?)
+      @locations = Location.has_trips_to.where("from_location_id = ?", params[:from_location_id])
+    else
+      @locations = Location.has_trips_to
+    end
+
+    respond_to do |format|
+      format.html { render partial: "to_location" }
+    end
+  end
+
+  def load_valid_dates
+    valid_dates = Trip.where("from_location_id = ?", params[:from_location_id])
+                      .where("to_location_id = ?", params[:to_location_id])
+                      .where("trip_date >= ?", DateTime.now)
+                      .select(:trip_date)
+                      .map(&:trip_date) #returns this format ["2011-07-26","2011-07-30"]
+
+    respond_to do |format|
+      format.json { render :json => valid_dates }
     end
   end
 

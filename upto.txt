@@ -1,5 +1,39 @@
-setting up yield for header
+
 put fb script in partial
 
-work on post trips layout
+Search Trips
+- Calendar dates loaded dynamically. Use js from default.cs
+- Tooltip mouse over
+
+Facebook intergration
+- Save friends list
+- Save user id to session variable, populate driver field (post)
+- load fb small icons on search trips
+- post to facebook wall, when posting new trip
+- Show mutual friend count
+
+Home Page
+- create home page
+- Write information about what the site does
+
+Terms and conditions
+- Write up terms and conditions
+- Privacy policy. link to when go to sign in with facebook
+- Provide link in footer
+
+Login Page
+- Redirect to login page if not logged in and try to access Search, Post, My trips
+
+My Trips
+- Create list of trips that have been created by the user logged in.
+- Allow delete, edit
+
+Dynamic URLS
+- Work out how to do urls in SEO friendly format
+
+Database
+- Add index on columns that are used to search
+
+Testing
+- Create test scripts
 

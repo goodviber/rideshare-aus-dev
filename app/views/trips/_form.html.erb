@@ -1,26 +1,52 @@
-<%= form_for(@trip) do |f| %>
-  <% if @trip.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@trip.errors.count, "error") %> prohibited this post from being saved:</h2>
+<fieldset>
+  <legend>Where?</legend>
+  <ol>
+    <li>
+    <%= f.label :driver_id, :class => 'span-3' %>
+    <%= f.text_field :driver_id, :class => 'span-6' %>
+    </li>
+    <li>
+      <%= f.label :from_location_id, :class => 'span-3' %>
+      <%= collection_select(:trip, :from_location_id, all_locations, :id, :name, {:prompt => 'Select City'},:class => 'span-6') %>
+    </li>
+    <li>
+      <%= f.label :to_location_id, :class => 'span-3' %>
+      <%= collection_select(:trip, :to_location_id, all_locations, :id, :name, {:prompt => 'Select City'},:class => 'span-6') %>
+    </li>
+  </ol>
+</fieldset>
+<fieldset>
+  <legend>When?</legend>
+  <ol>
+    <li>
+      <%= f.label :trip_date %>
+      <%= date_select("trip","trip_date", { :order => [:day, :month, :year] }) %>
+    </li>
+    <li>
+      <%= f.label :time_of_day %>
+      <%= f.radio_button :time_of_day, "E" %>
+      Exact Time
+      <%= f.radio_button :time_of_day, "M" %>
+      Morn
+      <%= f.radio_button :time_of_day, "A" %>
+      A/noon
+    </li>
+    <li id="liTripTime">
+      <%= f.label :trip_time %>
+      <%= time_select("trip","trip_time", {:minute_step => 15}) %>
+    </li>
+    <li>
+      <%= f.label :seats %>
+      <%= select("trip","seats", seats_avail_options) %>
+    </li>
+    <li>
+      <%= f.label :trip_details %>
+      <%= f.text_area :trip_details, :rows => 5, :cols => 31, :resize => false %>
+    </li>
+  </ol>
+</fieldset>
 
-      <ul>
-      <% @trip.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :trip_date %><br />
-    <%= f.text_field :trip_date %>
-  </div>
-  <div class="field">
-    <%= f.label :trip_time %><br />
-    <%= f.text_area :trip_time %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+<div class="actions">
+  <%= f.submit %>
+</div>
 

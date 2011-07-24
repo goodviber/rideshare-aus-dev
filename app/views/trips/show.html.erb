@@ -1,0 +1,29 @@
+
+<div class="prepend-1 span-23">
+  <div class="success">
+    <p id="notice"><%= notice %></p>
+  </div>
+  <p>
+    <b>From City:</b>
+    <%= @trip.from_location.name %>
+  </p>
+
+  <p>
+    <b>To City:</b>
+    <%= @trip.to_location.name %>
+  </p>
+
+  <p>
+    <b>Date:</b>
+    <%= @trip.trip_date %>
+  </p>
+
+  <p>
+    <b>Time:</b>
+    <%= @trip.dis_trip_time %>
+  </p>
+
+  <%= link_to 'Edit', edit_trip_path(@trip) %> |
+  <%= link_to 'Back', trips_path %>
+</div>
+
