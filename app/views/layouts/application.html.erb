@@ -4,10 +4,17 @@
   <title><%= page_title %></title>
   <!--[if lte IE 9]><%= stylesheet_link_tag 'ie' %><![endif]-->
   <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "jquery-1.5.2.min", "jquery-ui-1.8.13.custom.min", :cache => true %>
+  <%= javascript_include_tag "jquery-1.5.2.min", "jquery-ui-1.8.13.custom.min", "jquery.tools.min", "jquery-ui-init" %>
   <%= csrf_meta_tags %>
 
   <%= yield(:header) %>
+
+  <script>
+	  $(function() {
+		  $( "input:submit, a, button", ".ui-style" ).button();
+		  $( "a", ".ui-style" ).click(function() { return false; });
+	  });
+  </script>
 
   <!-- Facebook Connect -->
   <div id="fb-root"></div>
@@ -85,12 +92,20 @@
     }
   </script>
 
+    <style type="text/css">
+
+
+
+
+ </style>
+
+
   <!-- authenticity_token -->
   <%= javascript_tag "window._token = '#{form_authenticity_token}'" %>;
 </head>
 <body <%= yield(:body_attr) %>>
 
-  <div class="container corner-top corner-bottom showgrid">
+  <div class="container corner-top corner-bottom">
 
       <div class="span-24 prepend-top">
 		  <div class="prepend-1 span-9">

@@ -3,33 +3,63 @@ var ListOfFullDates;
 var availableDays = new Array();
 var queryProcessing = false;
 
+
+function bindTooltip() {
+
+    $(".customTooltip span").tooltip({
+        position: "top left",   // place tooltip on the left edge
+        offset: [0, 7],           // a little tweaking of the position
+        //effect: "fade",             // use the built-in fadeIn/fadeOut effect
+        opacity: 1                  // custom opacity setting
+    });
+
+    $(".MFcustomTooltip span").tooltip({
+        position: "top left",   // place tooltip on the left edge
+        offset: [3, 13],         // a little tweaking of the position
+        //effect: "fade",       // use the built-in fadeIn/fadeOut effect
+        opacity: 1              // custom opacity setting
+    });
+
+    $(".customTooltip").click(function () {
+        $(this).next().show();
+    });
+}
+
+
 $(document).ready(function () {
+
+	bindTooltip();
+
+	$('#filterButton').click(function() {
+		var selectedDate = $('#dateDiv').datepicker("getDate");
+		selectedDate = formatDate(selectedDate,"yy/mm/dd");
+		postSearchRequest(selectedDate);
+	});
 
 	function createDatepicker() {
 		$('#dateDiv').datepicker({
-		    dateFormat: 'dd-mm-yy',
-		    constrainInput: false,
+		    dateFormat: 'yy/mm/dd',
+		    //constrainInput: false,
 		    onSelect: function (date) {
 		        //submitData(date);
-		        postSearchRequest();
+		        //postSearchRequest(date);
 		    },
 		    beforeShowDay: setScheduledDays,
-		    //beforeShow: getValidTripDates,
-		    numberOfMonths: 1,
-		    gotoCurrent: true,
-		    showAnim: ''
+		    //beforeShow: test,
+		    numberOfMonths: 1
+		    //gotoCurrent: true,
+		    //showAnim: ''
 		});
+
     }
 
 	createDatepicker();
+	getValidTripDates();
 
     function recreateDatepicker() {
     	$('#dateDiv').datepicker( "destroy" );
     	createDatepicker();
     }
-
-    //$('#dateDiv').datepicker( "option", "disabled", true );
-
 
     $('#trip_to_location_id').live('change', function() {
 		//postSearchRequest();
@@ -38,6 +68,7 @@ $(document).ready(function () {
 
     $('#trip_from_location_id').live('change', function() {
 		//postSearchRequest();
+		getValidTripDates();
 
 		var fromLocationId = $('#trip_from_location_id').val();
 		refreshToLocations(fromLocationId);
@@ -49,14 +80,15 @@ $(document).ready(function () {
 		$.post("/trips/load_to_locations", params)
 			.success(function(partialHtml) {
 				$('#toLocation').html(partialHtml);
+				bindjQueryUI();
 		});
 	}
 
-	function postSearchRequest() {
+	function postSearchRequest(date) {
 		var fromLocationId = $('#trip_from_location_id').val();
 		var toLocationId = $('#trip_to_location_id').val();
 
-		params = { from_location_id: fromLocationId, to_location_id: toLocationId, authenticity_token: _token };
+		params = { from_location_id: fromLocationId, to_location_id: toLocationId, date: date, authenticity_token: _token };
 
 		$('#searchResults').hide();
 		$.post("/trips/load_search_results", params)
@@ -92,21 +124,34 @@ $(document).ready(function () {
 		today.setDate(today.getDate()-1);
 
 		if (date >= today)
-			return checkDateIsInArray(date);
+			return checkDateIsInArray(date, availableDays);
 		else
 			return [false, 'CLOSED', 'There are no trips for this date'];
 	}
 
-	function checkDateIsInArray(date) {
-		var year  = date.getFullYear()
-		var month = date.getMonth()+1;
-		var day   = date.getDate();
-		formattedDate = year + "-0" + month + "-" + day;
+	function checkDateIsInArray(date, array) {
+		formattedDate = formatDate(date, "yy-mm-dd");
 
-		if (jQuery.inArray(formattedDate, availableDays) != -1)
+		if (jQuery.inArray(formattedDate, array) != -1)
 			return [true, ''];
 		else
 			return [false, 'CLOSED', 'There are no trips for this date'];
+	}
+
+	function formatDate(date, format) {
+		var year  = date.getFullYear();
+		var month = date.getMonth()+1;
+		var day   = date.getDate();
+
+		if (month < 10) { month = "0" + month; }
+		if (day < 10) { day = "0" + day; }
+
+		if (format == "dd/mm/yy")
+			return day + "/" + month + "/" + year;
+		else if (format == "yy/mm/dd")
+			return year + "/" + month + "/" + day;
+		else if (format == "yy-mm-dd")
+			return year + "-" + month + "-" + day;
 	}
 
 });

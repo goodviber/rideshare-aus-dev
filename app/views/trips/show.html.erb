@@ -1,8 +1,13 @@
 
-<div class="prepend-1 span-23">
+<% if !notice.blank? %>
+<div class="prepend-1 span-22 append-1">
   <div class="success">
     <p id="notice"><%= notice %></p>
   </div>
+</div>
+<% end %>
+
+<div class="prepend-1 span-11">
   <p>
     <b>From City:</b>
     <%= @trip.from_location.name %>
@@ -14,16 +19,29 @@
   </p>
 
   <p>
-    <b>Date:</b>
-    <%= @trip.trip_date %>
+    <b>Depart Date:</b>
+    <%= l @trip.trip_date, :format => :long %>
   </p>
 
   <p>
-    <b>Time:</b>
+    <b>Depart Time:</b>
     <%= @trip.dis_trip_time %>
   </p>
 
-  <%= link_to 'Edit', edit_trip_path(@trip) %> |
+  <p>
+    <b>Trip Distance:</b>
+    <%= @trip.trip_distance %>
+  </p>
+
+  <p>
+    <b>Trip Duration:</b>
+    <%= trip_duration %>
+  </p>
+
   <%= link_to 'Back', trips_path %>
+</div>
+<div class="prepend-1 span-10 append-1 last">
+<img src="<%= @trip.driver.fb_pic_large_url %>" />
+
 </div>
 

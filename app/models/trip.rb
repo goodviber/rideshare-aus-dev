@@ -1,8 +1,8 @@
 class Trip < ActiveRecord::Base
-  belongs_to :from_location, :foreign_key => "from_location_id", :class_name => "Location"
+  belongs_to :from_location, :foreign_key => "from_location_id", :class_name => "Location", :counter_cache => :trips_from_count
   accepts_nested_attributes_for :from_location
 
-  belongs_to :to_location, :foreign_key => "to_location_id", :class_name => "Location"
+  belongs_to :to_location, :foreign_key => "to_location_id", :class_name => "Location", :counter_cache => :trips_to_count
   accepts_nested_attributes_for :to_location
 
 
@@ -11,7 +11,16 @@ class Trip < ActiveRecord::Base
 
   belongs_to :related_trip, :foreign_key => "rel_trip_id", :class_name => "Trip"
 
-  validates_presence_of :from_location_id, :to_location_id, :driver_id, :trip_date, :seats, :trip_details
+  validates_presence_of :from_location_id, :to_location_id, :driver_id, :trip_date, :seats, :trip_details, :cost
+
+  validate :future_date?
+
+  def future_date?
+    yesterday = DateTime.now-1
+    unless self[:trip_date] >= yesterday
+      errors.add(:trip_date, "must not be in the past.")
+    end
+  end
 
 
   # ActiveRecord: override how we access field
@@ -35,9 +44,9 @@ class Trip < ActiveRecord::Base
 
   def format_time_of_day(value)
     if value == "A"
-      "Afternoon"
+      "AM"
     elsif value == "M"
-      "Morning"
+      "PM"
     end
   end
 

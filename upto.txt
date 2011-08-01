@@ -1,9 +1,26 @@
 
 put fb script in partial
 
+Questions
+----------
+Best way to structure multi country site
+AJAX and google SEO
+
+
+IE8
+- top margin
+- round corners?
+
 Search Trips
 - Calendar dates loaded dynamically. Use js from default.cs
 - Tooltip mouse over
+
+Calendar
+ -remove 'ui-state-highlight' from today
+
+URL routing (SEO)
+- submit page using GET request
+- let site work without javascript
 
 Facebook intergration
 - Save friends list

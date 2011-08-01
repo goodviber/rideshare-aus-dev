@@ -1,4 +1,7 @@
 Cocoride::Application.routes.draw do
+
+  ActionController::Routing::SEPARATORS <<  "-" unless ActionController::Routing::SEPARATORS.include?("-")
+
   resources :demos
 
   # The priority is based upon order of creation:
@@ -10,7 +13,8 @@ Cocoride::Application.routes.draw do
 
   scope "(:locale)", :locale => /en|lt/ do
 
-    match '/trips/search(/:fl(-to-:tl(/:tripdate)))' => 'trips#load_search_results'
+    #match '/trips/search(/:fl(-to-:tl(/:tripdate)))' => 'trips#load_search_results'
+    match '/trips/search(/:fl(-:tl))' => 'trips#load_search_results', :as => :load_results
 
     resources :trips
 

@@ -1,0 +1,21 @@
+<div id="tooltipDiv" class="tooltip">
+<table class="minStyle">
+  <tbody>
+    <tr>
+      <td>
+      <img id="tooltipImage" src="<%= trip.driver.fb_pic_url %>">
+      </td>
+      <td width="100%" align="left">
+        <a class="fbName" target="_blank" href="<%= trip.driver.fb_link_url %>"><b><%= trip.driver.full_name %></b></a>
+        <br>
+        <a class="fbLink" target="_blank" href="<%= trip.driver.fb_link_url %>">Contact</a>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">"<%= trip.trip_details %>"
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+

@@ -34,11 +34,11 @@ class TripsController < ApplicationController
   # POST /trips.xml
   def create
     @trip = Trip.new(params[:trip])
-    #debugger
+    @trip.driver_id = session[:user_id]
 
     respond_to do |format|
       if @trip.save
-        format.html { redirect_to @trip, notice: 'trip was successfully created.' }
+        format.html { redirect_to @trip, notice: 'Trip was successfully created.' }
         format.json { render json: @trip, status: :created, location: @trip }
       else
         format.html { render action: "new" }
@@ -51,6 +51,7 @@ class TripsController < ApplicationController
   # PUT /trips/1.xml
   def update
     @trip = Trip.find(params[:id])
+    @trip.driver_id = session[:user_id]
 
     respond_to do |format|
       if @trip.update_attributes(params[:trip])
@@ -87,16 +88,17 @@ class TripsController < ApplicationController
     #debugger
     fl_id = params[:from_location_id]
     tl_id = params[:to_location_id]
+    date = params[:date]
 
-    if (!fl_id.blank?) && (!tl_id.blank?)
-      @trips = Trip.where("from_location_id = ?", fl_id).where("to_location_id = ?", tl_id)
-    elsif (!fl_id.blank?) && (tl_id.blank?)
-      @trips = Trip.where("from_location_id = ?", fl_id)
-    elsif (fl_id.blank?) && (!tl_id.blank?)
-      @trips = Trip.where("to_location_id = ?", tl_id)
-    else
-      @trips = Trip.all
-    end
+    conditions = {}
+    conditions[:from_location_id] = fl_id if !fl_id.blank?
+    conditions[:to_location_id] = tl_id   if !tl_id.blank?
+    conditions[:trip_date] = date         if !date.blank?
+
+    @trips = Trip.where(conditions)
+                 .where("trip_date >= ?", DateTime.now)
+
+    @sel_trip_date = date.to_date
 
     respond_to do |format|
       format.html { render partial: "search_results" }
@@ -116,8 +118,11 @@ class TripsController < ApplicationController
   end
 
   def load_valid_dates
-    valid_dates = Trip.where("from_location_id = ?", params[:from_location_id])
-                      .where("to_location_id = ?", params[:to_location_id])
+    conditions = {}
+    conditions[:from_location_id] = params[:from_location_id] if !params[:from_location_id].blank?
+    conditions[:to_location_id] = params[:to_location_id]     if !params[:to_location_id].blank?
+
+    valid_dates = Trip.where(conditions)
                       .where("trip_date >= ?", DateTime.now)
                       .select(:trip_date)
                       .map(&:trip_date) #returns this format ["2011-07-26","2011-07-30"]

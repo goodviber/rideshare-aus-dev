@@ -2,16 +2,12 @@
   <legend>Where?</legend>
   <ol>
     <li>
-    <%= f.label :driver_id, :class => 'span-3' %>
-    <%= f.text_field :driver_id, :class => 'span-6' %>
-    </li>
-    <li>
       <%= f.label :from_location_id, :class => 'span-3' %>
-      <%= collection_select(:trip, :from_location_id, all_locations, :id, :name, {:prompt => 'Select City'},:class => 'span-6') %>
+      <%= collection_select(:trip, :from_location_id, all_locations, :id, :name, {:prompt => 'Select City'}) %>
     </li>
     <li>
       <%= f.label :to_location_id, :class => 'span-3' %>
-      <%= collection_select(:trip, :to_location_id, all_locations, :id, :name, {:prompt => 'Select City'},:class => 'span-6') %>
+      <%= collection_select(:trip, :to_location_id, all_locations, :id, :name, {:prompt => 'Select City'}) %>
     </li>
   </ol>
 </fieldset>
@@ -35,18 +31,34 @@
       <%= f.label :trip_time %>
       <%= time_select("trip","trip_time", {:minute_step => 15}) %>
     </li>
+  </ol>
+</fieldset>
+<fieldset>
+  <legend>Other Details</legend>
+  <ol>
+    <li>
+    <%= label :trip, :driver %>
+    <%= text_field :trip, :driver, :disabled => true, :class => "text", :value => current_user.full_name %>
+    </li>
     <li>
       <%= f.label :seats %>
-      <%= select("trip","seats", seats_avail_options) %>
+      <%= select(:trip, :seats, seat_options) %>
+    </li>
+    <li>
+      <%= f.label :cost, "Cost pp ($)" %>
+      <%= select(:trip, :cost, cost_options) %>
     </li>
     <li>
       <%= f.label :trip_details %>
-      <%= f.text_area :trip_details, :rows => 5, :cols => 31, :resize => false %>
+      <%= f.text_area :trip_details, :resize => false, :class => "text", :rows => 5 %>
     </li>
   </ol>
 </fieldset>
 
-<div class="actions">
+<%= hidden_field :trip, :trip_distance %>
+<%= hidden_field :trip, :trip_duration %>
+
+<div class="actions ui-style">
   <%= f.submit %>
 </div>
 

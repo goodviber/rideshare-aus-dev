@@ -132,6 +132,9 @@ function updateTimeDistance(_data) {
     var hours = tm.getUTCHours();
     var minutes = tm.getUTCMinutes();
 
+    $('span.#trip_distance').html(Math.round(meters/1000) + " km");
+    $('span.#trip_duration').html(hours + ' hr ' + minutes + " min")
+
     $('#trip_trip_distance').val(Math.round(meters/1000));
     $('#trip_trip_duration').val(hours + ':' + minutes)
 }

@@ -1,3 +1,132 @@
+/* individual styling */
+#trip_driver {
+width: 250px;
+}
+
+#trip_seats {
+width: 60px;
+}
+
+#trip_cost {
+width: 60px;
+}
+
+#trip_trip_details {
+width: 250px;
+}
+
+.search_loc_label {
+width: 40px;
+margin-left: 15px;
+}
+
+.search_loc_list {
+width: 205px;
+margin-bottom: 7px;
+}
+
+#trip_all_dates {
+margin-left: 15px;
+margin-top: 2px;
+}
+
+#dateDiv {
+margin-left: 15px;
+margin-top: 10px;
+}
+
+#filterButton {
+margin-top: 15px;
+margin-left: 15px;
+margin-bottom: 5px;
+}
+
+/* column sizes */
+table.dataTable td {
+overflow: hidden;
+}
+
+table.dataTable td.col1 {
+width:40px;
+max-width:40px;
+}
+
+table.dataTable td.col2 {
+width:45px;
+max-width:45px;
+}
+
+table.dataTable td.col3 {
+width:120px;
+max-width:120px;
+}
+
+table.dataTable td.col4 {
+width:120px;
+max-width:120px;
+}
+
+table.dataTable td.col5 {
+width:28px;
+max-width:28px;
+}
+
+table.dataTable td.col6 {
+width:25px;
+max-width:25px;
+}
+
+table.dataTable td.col7 {
+width:45px;
+max-width:45px;
+}
+
+
+
+textarea {
+resize: none;
+}
+
+/* ------ Tool tip --------*/
+div.tooltipDiv {
+white-space: normal;
+position: absolute;
+top: 137.383px;
+left: 409.5px;
+display: none;
+}
+
+img.tooltipImage{
+margin-right:10px
+}
+
+div.customTooltip {
+width: 25px;
+height: 25px;
+}
+
+.tooltip {
+background-color:#E8E8E8;
+border:1px solid #fff;
+padding:5px 10px;
+width:230px;
+height: auto;
+display:none;
+color:#000;
+text-align:left;
+font-size:12px;
+z-index:2;
+
+/* outline radius for mozilla/firefox only */
+-moz-box-shadow:0 0 10px #000;
+-webkit-box-shadow:0 0 10px #000;
+}
+
+/* jquery ui additions */
+select.ui-widget-content {
+padding: 2px;
+}
+
 
 body {
 font-family:Arial, Helvetica, Verdana, Tahoma, sans-serif;
@@ -14,16 +143,8 @@ background-image: url(images/background.jpg);
 margin-top:70px;
 }
 
-.search_loc_list {
-width: 208px;
-}
-
 .container {
 background-color: white;
-}
-
-textarea {
-resize: none;
 }
 
 #logo { height: 106px; width:333px}
@@ -127,27 +248,29 @@ margin-right: 7px;
 
 /* ===== data table ===== */
 table.dataTable {
-margin-top: 15px;
+margin-top: 10px;
 text-align: center;
 font-family: Verdana, Geneva, Arial, Helvetica, sans-serif ;
 font-weight: normal;
 font-size: 0.8em;
 color: #fff;
-width: 280px;
 background-color: #666;
 border: 0px;
 border-collapse: collapse;
 border-spacing: 0px;
 }
 
-table.dataTable td
-{
-background-color: #CCC;
+table.dataTable td {
+background-color: rgb(247, 246, 243);
 color: #000;
 padding: 4px;
 text-align: left;
-border: 1px #fff solid;
+border: 1px #ccc solid;
 white-space: nowrap;
+}
+
+table.dataTable td.deptime {
+font-weight: bold;
 }
 
 table.dataTable th
@@ -155,11 +278,23 @@ table.dataTable th
 background-color: #666;
 color: #fff;
 padding: 4px;
-text-align: left;
 border-bottom: 2px #fff solid;
-font-size: 1em;
+border: 1px #ccc solid;
+text-align: center;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 1.2em;
 font-weight: bold;
 }
+
+table.minStyle td {
+background-color: transparent;
+color: #000;
+padding: 4px;
+text-align: left;
+border: none;
+white-space: nowrap;
+}
+
 
 /* ===== Facebook ===== */
 div.fbPic {
@@ -182,7 +317,7 @@ color: #3B5998 !important;
 cursor: pointer;
 text-decoration: none;
 font-weight: bold;
-font-size: 0.7em;
+font-size: 0.9em;
 font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
 }
 
@@ -254,6 +389,7 @@ padding-left: 30px;
 padding-right: 30px;
 }
 
+/*
 .text {
 text-align:center;
 margin-top:40px;
@@ -269,6 +405,7 @@ font-variant:normal;
 font-weight:lighter;
 letter-spacing:2px;
 }
+*/
 
 .details {
 border-top:1px solid #666666;

@@ -4,21 +4,23 @@
 	<fieldset>
 			<legend>Search Trips</legend>
 
-          <%= label :trip, :from_location_id, "From", :class => 'span-1' %>
+          <%= label :trip, :from_location_id, "From", :class => 'search_loc_label' %>
 	        <%= collection_select(:trip, :from_location_id, Location.has_trips_from, :id, :name, {:prompt => 'All Cities'}, :class => 'search_loc_list') %>
 
-	        <%= label :trip, :to_location_id, "To", :class => 'span-1' %>
+	        <%= label :trip, :to_location_id, "To", :class => 'search_loc_label' %>
 	        <span id="toLocation">
             <%= collection_select(:trip, :to_location_id, Location.has_trips_to, :id, :name, {:prompt => 'All Cities'}, :class => 'search_loc_list') %>
           </span>
-          <br/><br/>
+
 			    <div id="dateDiv"></div>
 
-			    <input type="checkbox" name="vehicle" value="Bike" /> Search all dates<br />
-          <br />
-			    <%= button_to "Search", :action => "load_search_results", :method => :get %>
+			    <input id="trip_all_dates" type="checkbox" name="vehicle" value="Bike" /> Search all dates<br />
 
+			    <div class="ui-style">
+  			    <button id="filterButton">Filter results</button>
+			    </div>
 	</fieldset>
+
 </div>
 
 <div class="prepend-1 span-13 append-1 last">

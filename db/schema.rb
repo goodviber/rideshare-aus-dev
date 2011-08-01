@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110719101209) do
+ActiveRecord::Schema.define(:version => 20110801003026) do
 
   create_table "demos", :force => true do |t|
     t.string   "name"
@@ -19,25 +19,27 @@ ActiveRecord::Schema.define(:version => 20110719101209) do
   end
 
   create_table "locations", :force => true do |t|
-    t.string   "name",            :limit => 200
-    t.string   "ascii_name",      :limit => 200
-    t.string   "alternate_names", :limit => 5000
-    t.string   "latitude",        :limit => 1000
-    t.string   "longitude",       :limit => 1000
-    t.string   "feature_class",   :limit => 1
-    t.string   "feature_code",    :limit => 10
-    t.string   "country_code",    :limit => 10
-    t.string   "cc2",             :limit => 2000
-    t.string   "admin1_code",     :limit => 20
-    t.string   "admin2_code",     :limit => 80
-    t.string   "admin3_code",     :limit => 20
-    t.string   "admin4_code",     :limit => 20
+    t.string   "name",             :limit => 200
+    t.string   "ascii_name",       :limit => 200
+    t.string   "alternate_names",  :limit => 5000
+    t.string   "latitude",         :limit => 1000
+    t.string   "longitude",        :limit => 1000
+    t.string   "feature_class",    :limit => 1
+    t.string   "feature_code",     :limit => 10
+    t.string   "country_code",     :limit => 10
+    t.string   "cc2",              :limit => 2000
+    t.string   "admin1_code",      :limit => 20
+    t.string   "admin2_code",      :limit => 80
+    t.string   "admin3_code",      :limit => 20
+    t.string   "admin4_code",      :limit => 20
     t.integer  "population"
     t.integer  "elevation"
     t.integer  "gtopo30"
-    t.string   "timezone",        :limit => 1000
+    t.string   "timezone",         :limit => 1000
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "trips_from_count",                 :default => 0
+    t.integer  "trips_to_count",                   :default => 0
   end
 
   create_table "trips", :force => true do |t|
@@ -55,6 +57,7 @@ ActiveRecord::Schema.define(:version => 20110719101209) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "trip_details"
+    t.integer  "cost",                                                           :default => 0
   end
 
   create_table "users", :force => true do |t|
