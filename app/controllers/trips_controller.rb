@@ -1,6 +1,7 @@
 class TripsController < ApplicationController
 
   def index
+    @selected_tab = "search"
     @content_for_title = "Search Trips"
     @trips = Trip.all
   end
@@ -15,6 +16,7 @@ class TripsController < ApplicationController
   end
 
   def new
+    @selected_tab = "post"
     @trip = Trip.new
     @trip.time_of_day = "E"
     @trip.driver_id = session[:user_id]
@@ -91,14 +93,15 @@ class TripsController < ApplicationController
     date = params[:date]
 
     conditions = {}
-    conditions[:from_location_id] = fl_id if !fl_id.blank?
-    conditions[:to_location_id] = tl_id   if !tl_id.blank?
-    conditions[:trip_date] = date         if !date.blank?
+    conditions[:from_location_id] = fl_id if fl_id != "-1"
+    conditions[:to_location_id] = tl_id   if tl_id != "-1"
+    conditions[:trip_date] = date         if date != "-1"
 
     @trips = Trip.where(conditions)
                  .where("trip_date >= ?", DateTime.now)
+                 .order("trip_date, trip_time")
 
-    @sel_trip_date = date.to_date
+    @sel_trip_date = date.to_date if date != "-1"
 
     respond_to do |format|
       format.html { render partial: "search_results" }
@@ -106,10 +109,11 @@ class TripsController < ApplicationController
   end
 
   def load_to_locations
-    if (!params[:from_location_id].blank?)
-      @locations = Location.has_trips_to.where("from_location_id = ?", params[:from_location_id])
+
+    if (params[:from_location_id] == "-1")
+      @locations = Location.to_locations
     else
-      @locations = Location.has_trips_to
+      @locations = Location.where("from_location_id = ?", params[:from_location_id]).to_locations
     end
 
     respond_to do |format|
@@ -119,8 +123,8 @@ class TripsController < ApplicationController
 
   def load_valid_dates
     conditions = {}
-    conditions[:from_location_id] = params[:from_location_id] if !params[:from_location_id].blank?
-    conditions[:to_location_id] = params[:to_location_id]     if !params[:to_location_id].blank?
+    conditions[:from_location_id] = params[:from_location_id] if params[:from_location_id] != "-1"
+    conditions[:to_location_id] = params[:to_location_id]     if params[:to_location_id] != "-1"
 
     valid_dates = Trip.where(conditions)
                       .where("trip_date >= ?", DateTime.now)
@@ -129,6 +133,16 @@ class TripsController < ApplicationController
 
     respond_to do |format|
       format.json { render :json => valid_dates }
+    end
+  end
+
+  def my_trips
+    #debugger
+    @selected_tab = "my_trips"
+    @trips = Trip.all
+
+    respond_to do |format|
+      format.html # new.html.erb
     end
   end
 

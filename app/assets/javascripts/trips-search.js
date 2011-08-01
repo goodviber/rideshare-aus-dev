@@ -30,9 +30,16 @@ $(document).ready(function () {
 
 	bindTooltip();
 
+	$('#searchResultsContainer').hide();
+
 	$('#filterButton').click(function() {
 		var selectedDate = $('#dateDiv').datepicker("getDate");
 		selectedDate = formatDate(selectedDate,"yy/mm/dd");
+
+		if ($('#trip_all_dates').attr('checked')) {
+			selectedDate = -1;
+		}
+
 		postSearchRequest(selectedDate);
 	});
 
@@ -43,6 +50,8 @@ $(document).ready(function () {
 		    onSelect: function (date) {
 		        //submitData(date);
 		        //postSearchRequest(date);
+		        $('#trip_all_dates').attr('checked', false);
+
 		    },
 		    beforeShowDay: setScheduledDays,
 		    //beforeShow: test,
@@ -64,11 +73,13 @@ $(document).ready(function () {
     $('#trip_to_location_id').live('change', function() {
 		//postSearchRequest();
 		getValidTripDates();
+		$('#trip_all_dates').attr('checked', true);
     });
 
     $('#trip_from_location_id').live('change', function() {
 		//postSearchRequest();
 		getValidTripDates();
+		$('#trip_all_dates').attr('checked', true);
 
 		var fromLocationId = $('#trip_from_location_id').val();
 		refreshToLocations(fromLocationId);
@@ -93,7 +104,9 @@ $(document).ready(function () {
 		$('#searchResults').hide();
 		$.post("/trips/load_search_results", params)
 		  .success(function(partialHtml) {
+		  	$('#searchResultsContainer').show();
 			refreshSearchResults(partialHtml);
+			bindTooltip();
 		  });
 	}
 

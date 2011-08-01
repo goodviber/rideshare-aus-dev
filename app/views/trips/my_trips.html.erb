@@ -1,0 +1,46 @@
+
+<div class="prepend-1 span-22 append-1">
+	<fieldset>
+			<legend>My Trips</legend>
+
+        <table class="dataTable">
+          <tr>
+            <th></th>
+            <th>Leaving</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Cost</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+
+        <% @trips.each do |trip| %>
+          <tr>
+            <td class="col1"><%= l trip.trip_date, :format => :very_short %></td>
+            <td class="deptime col2"><%= trip.dis_trip_time %></td>
+            <td class="col3"><%= trip.from_location.name %></td>
+            <td class="col4"><%= trip.to_location.name %></td>
+            <td><%= trip.cost %></td>
+
+
+            <td>
+              <div class="customTooltip">
+                <span>
+                  <img style="width:25px;" src="<%= trip.driver.fb_pic_url %>">
+                </span>
+              </div>
+              <%= render 'tool_tip', :trip => trip %>
+            </td>
+            <td><%= link_to 'Show', trip_path(trip) %></td>
+            <td><%= link_to 'Delete', trip, :confirm => 'Are you sure?', :method => :delete %></td>
+            <td><%= link_to 'Edit', edit_trip_path(trip) %></td>
+          </tr>
+        <% end %>
+        </table>
+
+      </div>
+	</fieldset>
+</div>
+

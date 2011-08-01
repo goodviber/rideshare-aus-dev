@@ -12,8 +12,12 @@ $().ready(function () {
 	initializeMap();
 	setDefaultLatLngOnEdit();
 
-	$("#liTripTime").show();
+	if ($('#trip_time_of_day_e').attr("checked"))
+		$("#liTripTime").show();
+	else
+		$("#liTripTime").hide();
 
+	// Time of day [radio buttons]
 	$('#trip_time_of_day_e').click(function () {
 		$("#liTripTime").show();
 	});

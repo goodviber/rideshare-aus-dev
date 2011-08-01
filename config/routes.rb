@@ -15,11 +15,13 @@ Cocoride::Application.routes.draw do
 
     #match '/trips/search(/:fl(-to-:tl(/:tripdate)))' => 'trips#load_search_results'
     match '/trips/search(/:fl(-:tl))' => 'trips#load_search_results', :as => :load_results
+    match '/trips/mytrips' => 'trips#my_trips', :as => :my_trips
 
     resources :trips
 
     match '/trips/load_search_results' => 'trips#load_search_results'
     match '/trips/load_valid_dates' => 'trips#load_valid_dates'
+
   end
 
 
@@ -72,7 +74,7 @@ Cocoride::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'login#index'
+  root :to => 'home#index'
 
   # See how all your routes lay out with "rake routes"
 
