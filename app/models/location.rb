@@ -5,13 +5,13 @@ class Location < ActiveRecord::Base
 
   scope :has_trips_from, select("locations.id, name || ' (' || count(name) || ')' as name")
                         .joins(:trips_from)
-                        .where("trip_date >= ?", DateTime.now)
+                        .where("trip_date >= ?", DateTime.now.to_date)
                         .group("locations.id, name")
                         .order("name")
 
   scope :has_trips_to, select("locations.id, name || ' (' || count(name) || ')' as name")
                       .joins(:trips_to)
-                      .where("trip_date > ?", DateTime.now-1)
+                      .where("trip_date >= ?", DateTime.now.to_date)
                       .group("locations.id, name")
                       .order("name")
 
@@ -20,11 +20,11 @@ class Location < ActiveRecord::Base
 
   scope :from_locations_total_row, select("-1 as id, 'All Cities (' || count(name) || ')' as name")
                                   .joins(:trips_from)
-                                  .where("trip_date >= ?", DateTime.now)
+                                  .where("trip_date >= ?", DateTime.now.to_date)
 
   scope :to_locations_total_row, select("-1 as id, 'All Cities (' || count(name) || ')' as name")
                                  .joins(:trips_to)
-                                 .where("trip_date >= ?", DateTime.now)
+                                 .where("trip_date >= ?", DateTime.now.to_date)
 
 
 

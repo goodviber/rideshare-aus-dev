@@ -98,7 +98,7 @@ class TripsController < ApplicationController
     conditions[:trip_date] = date         if date != "-1"
 
     @trips = Trip.where(conditions)
-                 .where("trip_date >= ?", DateTime.now)
+                 .where("trip_date >= ?", DateTime.now.to_date)
                  .order("trip_date, trip_time")
 
     @sel_trip_date = date.to_date if date != "-1"
@@ -127,7 +127,7 @@ class TripsController < ApplicationController
     conditions[:to_location_id] = params[:to_location_id]     if params[:to_location_id] != "-1"
 
     valid_dates = Trip.where(conditions)
-                      .where("trip_date >= ?", DateTime.now)
+                      .where("trip_date >= ?", DateTime.now.to_date)
                       .select(:trip_date)
                       .map(&:trip_date) #returns this format ["2011-07-26","2011-07-30"]
 

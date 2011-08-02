@@ -17,8 +17,7 @@ class Trip < ActiveRecord::Base
   validate :future_date?, :valid_from_locations?, :valid_to_locations?
 
   def future_date?
-    yesterday = DateTime.now-1
-    unless self[:trip_date] >= yesterday
+    unless self[:trip_date] >= DateTime.now.to_date
       errors.add(:trip_date, "must not be in the past.")
     end
   end
