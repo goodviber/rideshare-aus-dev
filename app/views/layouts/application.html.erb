@@ -4,7 +4,7 @@
   <title><%= page_title %></title>
   <!--[if lte IE 9]><%= stylesheet_link_tag 'ie' %><![endif]-->
   <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "jquery-1.5.2.min", "jquery-ui-1.8.13.custom.min", "jquery.tools.min", "jquery-ui-init" %>
+  <%= javascript_include_tag "application", "jquery-1.5.2.min", "jquery-ui-1.8.13.custom.min", "jquery.tools.min", "jquery-ui-init" %>
   <%= csrf_meta_tags %>
 
   <%= yield(:header) %>
@@ -155,9 +155,28 @@
         </div>
 		  </div>
       </div>
-      <div class="span-24"></div>
 
-    <%= yield %>
+      <div class="prepend-1 span-22 append-1">
+
+        <% if notice %>
+          <p class="notice"><%= notice %></p>
+        <% end %>
+
+        <% if alert %>
+          <p class="alert"><%= alert %></p>
+        <% end %>
+
+        <div id="user_nav">
+          <% if user_signed_in? %>
+            Signed in as <%= current_user.email %>. Not you?
+            <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+          <% else %>
+            <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>
+          <% end %>
+        </div>
+
+        <%= yield %>
+      </div>
 
 	  <div class="span-24" >
 			  <p id="footerText">Privacy | Terms & Conditions | FAQ's | Contact Us</p>

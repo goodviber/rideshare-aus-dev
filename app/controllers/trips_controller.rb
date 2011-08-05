@@ -1,5 +1,7 @@
 class TripsController < ApplicationController
 
+  before_filter :authenticate_user!, :only => [:new, :edit, :update]
+
   def index
     @selected_tab = "search"
     @content_for_title = "Search Trips"

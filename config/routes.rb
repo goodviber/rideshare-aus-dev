@@ -1,5 +1,7 @@
 Cocoride::Application.routes.draw do
 
+  devise_for :users
+
   ActionController::Routing::SEPARATORS <<  "-" unless ActionController::Routing::SEPARATORS.include?("-")
 
   resources :demos
