@@ -52,8 +52,13 @@
       <%= f.label :trip_details %>
       <%= f.text_area :trip_details, :resize => false, :class => "text", :rows => 5 %>
     </li>
+    <li>
+      <%= check_box "misc", :post_to_wall, :checked => true %> Post trip to my facebook wall, so my friends can see it<br/>
+    </li>
   </ol>
 </fieldset>
+
+
 
 <%= hidden_field :trip, :trip_distance %>
 <%= hidden_field :trip, :trip_duration %>

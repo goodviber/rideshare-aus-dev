@@ -15,6 +15,8 @@ gem 'sass-rails', "~> 3.1.0.rc"
 gem 'coffee-script'
 gem 'uglifier'
 gem 'devise'
+gem 'omniauth', :git => 'git://github.com/intridea/omniauth.git'
+gem 'fb_graph'
 
 group :testing do
 
@@ -24,8 +26,6 @@ group :development do
   gem "cheat"
   gem 'ruby-debug19', :require => 'ruby-debug'
 end
-
-
 
 gem 'factory_girl_rails'
 # Use unicorn as the web server

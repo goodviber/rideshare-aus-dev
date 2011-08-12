@@ -41,6 +41,18 @@ margin-left: 15px;
 margin-bottom: 5px;
 }
 
+p.extralarge {
+font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;
+font-size: 3em;
+vertical-align: center;
+margin-top: 110px;
+}
+
+.notice, .alert{
+margin-top: 5px;
+}
+
+
 /* column sizes */
 table.dataTable td {
 overflow: hidden;
@@ -172,12 +184,12 @@ background-color: white;
 }
 
 /*----TOP PANEL---- changed from 778px to 647px*/
-#topPan{width:475px; height:120px; position:relative; margin:0;}
+#topPan{width:auto; height:auto; position:relative; margin:0;}
 #topPan #ImgPan{width:auto; height:auto; background:#fff; color:#666; position:absolute; top:0px; left:0px; padding:0 0 0 30px;}
 #topPan #ImgPan img{width:auto; height:auto;}
 
 
-#topPan ul{width:468px; height:32px; position:absolute; top:72px; right:10px;}
+#topPan ul{width:468px; height:32px; position:absolute; top:12px; right:10px;}
 #topPan ul li{width:78px; height:32px; float:left;}
 #topPan ul li a{width:76px; height:35px; display:block; background:url(images/topmenu-normal.jpg) 0 0 no-repeat #F5F4F4; color:#666; text-decoration:none; font-size:12px; font-weight:bold; text-align:center; line-height:32px; margin:0 2px 0 0;}
 #topPan ul li a:hover{background:url(images/topmenu-hover.jpg) 0 0 no-repeat #F5F4F4; color:#fff; text-decoration:none;}
@@ -307,21 +319,6 @@ white-space: nowrap;
 
 
 /* ===== Facebook ===== */
-div.fbPic {
-float: left;
-width: 50px;
-height: 50px;
-}
-
-div.fbPicText {
-float: left;
-width: 77px;
-height: 40px;
-margin-top: 10px;
-padding-bottom: 10px;
-padding-left: 3px;
-}
-
 .fbName {
 color: #3B5998 !important;
 cursor: pointer;
@@ -343,28 +340,27 @@ padding-left: 4px;
 padding-right: 4px;
 font-size: 0.8em;
 font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+margin: 0px;
 }
 
 .fbLink:hover {
 text-decoration: underline;
 }
 
-/* ===== Login ===== */
-div#fbLoginBox {
+div#fbLogin {
+margin-top: 40px;
 text-align: center;
 }
 
-div#fbLoginButton {
-margin-top: 40px;
-margin-bottom: 150px;
-}
-
+/* ===== Login ===== */
 #loginDetailsText {
 float: right;
 margin-right: 5px;
 }
 
 #loginDetailsImage {
+/*height: 50px;
+width: 50px;*/
 float: right;
 }
 
@@ -374,6 +370,7 @@ float: right;
 /* ===== Template ===== */
 div#loginDetails {
 text-align: right;
+height: 55px;
 }
 
 #logo {

@@ -1,6 +1,6 @@
 class TripsController < ApplicationController
 
-  before_filter :authenticate_user!, :only => [:new, :edit, :update]
+  before_filter :authenticate_user!, :only => [:new, :edit, :update, :my_trips]
 
   def index
     @selected_tab = "search"
@@ -38,11 +38,14 @@ class TripsController < ApplicationController
   # POST /trips.xml
   def create
     @trip = Trip.new(params[:trip])
-    @trip.driver_id = session[:user_id]
+    @trip.driver_id = current_user.id
 
     respond_to do |format|
       if @trip.save
-        format.html { redirect_to @trip, notice: 'Trip was successfully created.' }
+        flash[:notice] = 'Trip was successfully created.'
+        post_to_fanpage_wall(@trip)
+        post_to_users_wall(@trip) if params['misc']['post_to_wall'] == "1"
+        format.html { redirect_to @trip }
         format.json { render json: @trip, status: :created, location: @trip }
       else
         format.html { render action: "new" }
@@ -75,7 +78,7 @@ class TripsController < ApplicationController
     @trip.destroy
 
     respond_to do |format|
-      format.html { redirect_to trips_url }
+      format.html { redirect_to my_trips_url, :notice => 'Trip was successfully removed.' }
       format.json { head :ok }
     end
   end
@@ -89,7 +92,6 @@ class TripsController < ApplicationController
   end
 
   def load_search_results
-    #debugger
     fl_id = params[:from_location_id]
     tl_id = params[:to_location_id]
     date = params[:date]
@@ -139,13 +141,37 @@ class TripsController < ApplicationController
   end
 
   def my_trips
-    #debugger
     @selected_tab = "my_trips"
     @trips = Trip.all
 
     respond_to do |format|
       format.html # new.html.erb
     end
+  end
+
+  def post_to_users_wall(trip)
+    me = FbGraph::User.me(session['token'])
+    message = trip.from_location.name + " - " + trip.to_location.name + " [" + trip.trip_date.to_s(:short) + "]"
+    me.feed!(
+      :message => trip.trip_details,
+      :link => 'www.cocoride.com.au',
+      :name => message,
+      :description => "Share the cost. Share the experience. Share the ride."
+    )
+    flash[:notice] = flash[:notice] + ' Trip posted to your facebook wall.'
+  end
+
+  def post_to_fanpage_wall(trip)
+    page = FbGraph::Page.new(116697818393412) #Ridesurfing page ID: 116697818393412
+    message = "Rideshare: " + trip.from_location.name + " - " + trip.to_location.name + " [" + trip.trip_date.to_s(:short) + "]"
+    page.feed!(
+      :access_token => session['token'],
+      :message => trip.trip_details,
+      :link => 'www.cocoride.com.au',
+      :name => message,
+      :description => "Share the cost. Share the experience. Share the ride.",
+      :picture => "http://upload.wikimedia.org/wikipedia/commons/3/3a/Matrix-50x50.gif"
+    )
   end
 
 end

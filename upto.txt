@@ -1,6 +1,10 @@
 
 put fb script in partial
 
+remove fb_id column from users table
+
+logout fb - https://gist.github.com/848721
+
 Questions
 ----------
 Best way to structure multi country site

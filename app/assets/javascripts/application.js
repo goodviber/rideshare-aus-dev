@@ -7,3 +7,12 @@
 //= require jquery
 //= require jquery_ujs
 
+$(document).ready(function () {
+
+	//show loading image when facebook login is clicked
+	$('img#fbLoginButton').click(function() {
+		$('img#fbLoginButton').hide();
+		$('img#loadingImage').show();
+	});
+});
+

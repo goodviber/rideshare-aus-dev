@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -7,6 +8,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   # attr_accessible :email, :password, :password_confirmation, :remember_me
 
+  has_many :authentications
   has_many :trips, :as => 'driver', :foreign_key => 'driver_id'
 
   #validates_presence_of :fb_id
@@ -16,15 +18,23 @@ class User < ActiveRecord::Base
   end
 
   def fb_pic_url
-    "http://graph.facebook.com/#{self.fb_id}/picture"
+    "http://graph.facebook.com/#{fb_id}/picture" if fb_id
   end
 
   def fb_pic_large_url
-    "http://graph.facebook.com/#{self.fb_id}/picture?type=large"
+    "http://graph.facebook.com/#{fb_id}/picture?type=large" if fb_id
   end
 
   def fb_link_url
-    "http://www.facebook.com/people/@/#{self.fb_id}"
+    "http://www.facebook.com/people/@/#{fb_id}" if fb_id
+  end
+
+  def fb_id
+    if self.authentications.count > 0
+      self.authentications.where(:provider => 'facebook').first.uid
+    else
+      nil
+    end
   end
 end
 

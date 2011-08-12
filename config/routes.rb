@@ -1,5 +1,6 @@
 Cocoride::Application.routes.draw do
 
+  resources :authentications
   devise_for :users
 
   ActionController::Routing::SEPARATORS <<  "-" unless ActionController::Routing::SEPARATORS.include?("-")
@@ -14,6 +15,9 @@ Cocoride::Application.routes.draw do
   # Keep in mind you can assign values other than :controller and :action
 
   scope "(:locale)", :locale => /en|lt/ do
+
+    match 'auth/:provider/callback' => 'authentications#create'
+    match 'auth/facebook/logout' => 'authentications#facebook_logout', :as => :facebook_logout
 
     #match '/trips/search(/:fl(-to-:tl(/:tripdate)))' => 'trips#load_search_results'
     match '/trips/search(/:fl(-:tl))' => 'trips#load_search_results', :as => :load_results

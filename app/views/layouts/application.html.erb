@@ -19,7 +19,7 @@
 	  });
   </script>
 
-  <!-- Facebook Connect -->
+  <!-- Facebook Connect
   <div id="fb-root"></div>
   <%= javascript_include_tag 'http://connect.facebook.net/en_US/all.js' %>
 
@@ -30,13 +30,20 @@
     else
       fbAppId = '163188793727561';
 
+
+
     FB.init({
       appId  : fbAppId,
       status : true, // check login status
       cookie : true, // enable cookies to allow the server to access the session
       xfbml  : true  // parse XFBML
     });
+    </script>
 
+    -->
+
+
+<!--
     // Facebook login/logout
     FB.Event.subscribe('auth.login', function(response) {
 	    FB.api('/me', function(response) {
@@ -95,13 +102,7 @@
     }
   </script>
 
-    <style type="text/css">
-
-
-
-
- </style>
-
+-->
 
   <!-- authenticity_token -->
   <%= javascript_tag "window._token = '#{form_authenticity_token}'" %>;
@@ -128,32 +129,38 @@
 		  </div>
       -->
 
-		  <div class="span-9 ">
-		  <div id="topPan">
-		    <ul>
-          <li id="home" class="selected"><%= link_to "Home", root_url %></li>
-		      <li id="search"><%= link_to "Search", trips_url %></li>
-		      <li id="post"><%= link_to "Post", new_trip_url %></li>
-		      <li id="my_trips"><%= link_to "My Trips", my_trips_url %></a></li>
-		      <li id="about"><a href="#">About</a></li>
-        </ul>
-       </div>
-		  </div>
+		  <div class="span-14 last">
 
+		    <div id="loginDetails" class="append-1 span-13 last">
 
-		  <div id="loginDetails" class="span-4 append-1 last" style="vertical-align: baseline;">
-		    <fb:login-button autologoutlink="false" perms="email" size="large" length="short" id="fbLoginButton" style="display:none;"></fb:login-button>
-	      <div id="loginDetailsImage">
-          <img id="fbLoggedInImage" src="" style="display:none;"/>
+	        <div id="loginDetailsImage">
+            <%= fb_image_url %>
+          </div>
+          <div id="loginDetailsText">
+            <div id="user_nav">
+              <% if user_signed_in? %>
+                <p class="fbName"><%= current_user.full_name %></p>
+                  <%= link_to "Logout", destroy_user_session_path, :method => :delete %>
+              <% else %>
+                <%= link_to "Log in", new_user_session_path %> or <%= link_to "sign up", new_user_registration_path %>
+              <% end %>
+            </div>
+          </div>
         </div>
-        <div id="loginDetailsText" style="display:none;">
-          <ul>
-            <li><span id="fbLoggedInName" class="fbName"></span></li>
-            <li></li>
-            <li><a class="fbLink" href="javascript:logout()">Logout</a></li>
-          </ul>
-        </div>
-		  </div>
+
+        <div class="append-1 span-13 last">
+		      <div id="topPan">
+		        <ul>
+              <li id="home" class="selected"><%= link_to "Home", root_url %></li>
+		          <li id="search"><%= link_to "Search", trips_url %></li>
+		          <li id="post"><%= link_to "Post", new_trip_url %></li>
+		          <li id="my_trips"><%= link_to "My Trips", my_trips_url %></a></li>
+		          <li id="about"><a href="#">About</a></li>
+            </ul>
+           </div>
+		      </div>
+		    </div>
+
       </div>
 
       <div class="prepend-1 span-22 append-1">
@@ -166,14 +173,7 @@
           <p class="alert"><%= alert %></p>
         <% end %>
 
-        <div id="user_nav">
-          <% if user_signed_in? %>
-            Signed in as <%= current_user.email %>. Not you?
-            <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-          <% else %>
-            <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>
-          <% end %>
-        </div>
+
 
         <%= yield %>
       </div>
