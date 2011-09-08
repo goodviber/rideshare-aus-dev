@@ -1,4 +1,7 @@
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :facebook, '119073948160554', 'f96ca2df959982257ff65cee4c5be74d', {:scope => 'publish_stream,offline_access,email'}
+
+  APP_CONFIG = YAML.load_file("#{Rails.root.to_s}/config/omniauth_config.yml")[Rails.env]
+
+  provider :facebook, APP_CONFIG['app_id'], APP_CONFIG['app_secret'], {:scope => 'publish_stream,offline_access,email'}
 end
 
