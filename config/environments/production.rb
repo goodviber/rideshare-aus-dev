@@ -12,7 +12,7 @@ Cocoride::Application.configure do
   config.serve_static_assets = false
 
   # Compress JavaScripts and CSS
-  config.assets.compress = true
+  config.assets.compress = false #turn off temporary
 
   # Specify the default JavaScript compressor
   config.assets.js_compressor  = :uglifier
@@ -52,3 +52,4 @@ Cocoride::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 end
+
