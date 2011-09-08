@@ -41,11 +41,11 @@
     <%= text_field :trip, :driver, :disabled => true, :class => "text", :value => current_user.full_name %>
     </li>
     <li>
-      <%= f.label :seats %>
+      <%= f.label :seats, "Seats Avail" %>
       <%= select(:trip, :seats, seat_options) %>
     </li>
     <li>
-      <%= f.label :cost, "Cost pp ($)" %>
+      <%= f.label :cost, "Cost (Per Per)" %>
       <%= select(:trip, :cost, cost_options) %>
     </li>
     <li>

@@ -1,6 +1,29 @@
 # Australian English translations for Ruby on Rails
 
 en:
+  login: "Log in"
+  logout: "Log out"
+  sign_up: "Sign up"
+
+  leaving: "Leaving"
+  arriving: "Arriving"
+  Seats: "Seats"
+  from: "From"
+  to: "To"
+  duration: "Duration"
+  distance: "Distance"
+  cost: "Cost"
+  no_cost: "Free"
+
+  search_all_dates: "Search all dates"
+
+  tabs:
+    home: "Home"
+    search: "Search"
+    post: "Post"
+    my_trips: "My Trips"
+    about: "About"
+
   date:
     formats:
       default: "%d-%m-%Y"
@@ -61,10 +84,10 @@ en:
   time:
     formats:
       default: "%a, %d %b %Y %H:%M:%S %z"
-      short: "%d %b %H:%M"
+      short: "%H:%M, %d %B"
       long: "%B %d, %Y %H:%M"
       time_only: "%H:%M"
-      time_only_long: "%H hr %M min"
+      time_only_long: "%Hhr, %Mmin"
     am: "am"
     pm: "pm"
 

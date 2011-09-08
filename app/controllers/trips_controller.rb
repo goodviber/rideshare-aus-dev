@@ -11,6 +11,8 @@ class TripsController < ApplicationController
   def show
     @trip = Trip.find(params[:id])
 
+    @trip_count = current_user.trips.where("trip_date < ?", DateTime.now).count
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @trip }
@@ -92,6 +94,7 @@ class TripsController < ApplicationController
   end
 
   def load_search_results
+
     fl_id = params[:from_location_id]
     tl_id = params[:to_location_id]
     date = params[:date]
@@ -108,7 +111,7 @@ class TripsController < ApplicationController
     @sel_trip_date = date.to_date if date != "-1"
 
     respond_to do |format|
-      format.html { render partial: "search_results" }
+      format.html { render partial: "search_results"}
     end
   end
 

@@ -2,6 +2,29 @@
 # by Laurynas Butkus (laurynas.butkus@gmail.com)
 
 lt:
+  login: "Prisijungti"
+  logout: "Atsijungti"
+  sign_up: "Užsiregistruoti"
+
+  leaving: "Išvyksta"
+  arriving: "Atvyksta"
+  Seats: "Vietos"
+  from: "Nuo"
+  to: "Iki"
+  duration: "Trukmė"
+  distance: "Atstumas"
+  cost: "Kaina"
+  no_cost: "0 Lt"
+
+  search_all_dates: "Paieška visas datas"
+
+  tabs:
+    home: "Namo"
+    search: "Ieškoti"
+    post: "Paštu"
+    my_trips: "Kelionės"
+    about: "Apie"
+
   number:
     format:
       separator: ","

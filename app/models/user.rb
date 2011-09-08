@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   # attr_accessible :email, :password, :password_confirmation, :remember_me
 
   has_many :authentications
-  has_many :trips, :as => 'driver', :foreign_key => 'driver_id'
+  has_many :trips, :foreign_key => 'driver_id'
 
   #validates_presence_of :fb_id
 

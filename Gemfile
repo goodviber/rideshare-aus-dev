@@ -1,8 +1,12 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.0.rc4'
+gem 'rails', '3.1.0'
 gem 'pg'
 gem 'rails-i18n'
+gem 'heroku'
+gem 'taps'
+gem 'activeadmin'
+
 # gem 'blueprint-rails'
 
 # Bundle edge Rails instead:
@@ -11,12 +15,17 @@ gem 'rails-i18n'
 #gem 'sqlite3'
 
 # Asset template engines
-gem 'sass-rails', "~> 3.1.0.rc"
+gem 'sass-rails', "~> 3.1.0"
 gem 'coffee-script'
 gem 'uglifier'
 gem 'devise'
-gem 'omniauth', :git => 'git://github.com/intridea/omniauth.git'
+gem 'omniauth'
 gem 'fb_graph'
+gem "jquery-rails"
+gem "less"
+
+gem "capybara", :group => [:development, :test]
+gem "rspec-rails", ">= 2.0.1", :group => [:development, :test]
 
 group :testing do
 
@@ -33,12 +42,4 @@ gem 'factory_girl_rails'
 
 # Deploy with Capistrano
 # gem 'capistrano'
-
-# To use debugger
-
-
-gem "capybara", :group => [:development, :test]
-gem "jquery-rails"
-gem "less"
-gem "rspec-rails", ">= 2.0.1", :group => [:development, :test]
 

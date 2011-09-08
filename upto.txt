@@ -1,3 +1,12 @@
+script to allow admins to post trips on users behalf
+upload to heroku account
+change fb_id to string?
+Complete LT text conversion
+load dataset for Australian cities
+update rails to 3.1
+
+
+
 
 put fb script in partial
 
@@ -10,14 +19,9 @@ Questions
 Best way to structure multi country site
 AJAX and google SEO
 
-
 IE8
 - top margin
 - round corners?
-
-Search Trips
-- Calendar dates loaded dynamically. Use js from default.cs
-- Tooltip mouse over
 
 Calendar
  -remove 'ui-state-highlight' from today
@@ -30,7 +34,6 @@ Facebook intergration
 - Save friends list
 - Save user id to session variable, populate driver field (post)
 - load fb small icons on search trips
-- post to facebook wall, when posting new trip
 - Show mutual friend count
 
 Home Page
@@ -47,7 +50,6 @@ Login Page
 
 My Trips
 - Create list of trips that have been created by the user logged in.
-- Allow delete, edit
 
 Dynamic URLS
 - Work out how to do urls in SEO friendly format

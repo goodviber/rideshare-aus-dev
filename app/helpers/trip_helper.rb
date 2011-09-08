@@ -13,7 +13,17 @@ module TripHelper
   end
 
   def cost_options
-    {'Free' => '0', '5' => '5', '10' => '10', '15' => '15', '20' => '20', '25' => '25', '30' => '30'}
+    {t(:no_cost) => '0',
+    number_to_currency(5, :precision => 0) => '5',
+    number_to_currency(10, :precision => 0) => '10',
+    number_to_currency(15, :precision => 0) => '15',
+    number_to_currency(20, :precision => 0) => '20',
+    number_to_currency(25, :precision => 0) => '25',
+    number_to_currency(30, :precision => 0) => '30',
+    number_to_currency(35, :precision => 0) => '35',
+    number_to_currency(40, :precision => 0) => '40',
+    number_to_currency(45, :precision => 0) => '45',
+    number_to_currency(50, :precision => 0) => '50'}
   end
 
   def all_locations
@@ -30,6 +40,20 @@ module TripHelper
     else
       "N/A"
     end
+  end
+
+  def departing_time
+    d = @trip.trip_date
+    t = @trip.trip_time
+    l d.to_datetime.advance(:hours => t.hour, :minutes => t.min), :format => :short
+  end
+
+  def arrival_time
+    d = @trip.trip_date
+    t = @trip.trip_time
+    duration = @trip.trip_duration
+    depart = d.to_datetime.advance(:hours => t.hour, :minutes => t.min)
+    l depart.advance(:hours => duration.hour, :minutes => duration.min), :format => :short
   end
 
 end

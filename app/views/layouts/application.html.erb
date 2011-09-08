@@ -10,6 +10,10 @@
   <%= yield(:header) %>
 
   <script>
+    // this needs to go here rather than in .erb.js file, as local is not set correctly in .erb.js file
+    // "locale" is used in javascript code throughout the application
+    locale = "<%= I18n.locale %>";
+
 	  $(function() {
 		  $( "input:submit, a, button", ".ui-style" ).button();
 		  $( "a", ".ui-style" ).click(function() { return false; });
@@ -140,9 +144,9 @@
             <div id="user_nav">
               <% if user_signed_in? %>
                 <p class="fbName"><%= current_user.full_name %></p>
-                  <%= link_to "Logout", destroy_user_session_path, :method => :delete %>
+                  <%= link_to(t("logout"), destroy_user_session_path, :method => :delete) %>
               <% else %>
-                <%= link_to "Log in", new_user_session_path %> or <%= link_to "sign up", new_user_registration_path %>
+                <%= link_to(t("login"), new_user_session_path) %> or <%= link_to "sign up", new_user_registration_path %>
               <% end %>
             </div>
           </div>
@@ -151,11 +155,11 @@
         <div class="append-1 span-13 last">
 		      <div id="topPan">
 		        <ul>
-              <li id="home" class="selected"><%= link_to "Home", root_url %></li>
-		          <li id="search"><%= link_to "Search", trips_url %></li>
-		          <li id="post"><%= link_to "Post", new_trip_url %></li>
-		          <li id="my_trips"><%= link_to "My Trips", my_trips_url %></a></li>
-		          <li id="about"><a href="#">About</a></li>
+              <li id="home" class="selected"><%= link_to(t("tabs.home"), root_url) %></li>
+		          <li id="search"><%= link_to(t("tabs.search"), trips_url) %></li>
+		          <li id="post"><%= link_to(t("tabs.post"), new_trip_url)%></li>
+		          <li id="my_trips"><%= link_to(t("tabs.my_trips"), my_trips_url)%></a></li>
+		          <li id="about"><a href="#"><%= t("tabs.about") %></a></li>
             </ul>
            </div>
 		      </div>

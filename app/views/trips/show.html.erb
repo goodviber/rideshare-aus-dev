@@ -1,39 +1,78 @@
 
-<div class="prepend-1 span-11">
-  <p>
-    <b>From City:</b>
-    <%= @trip.from_location.name %>
-  </p>
+<div class="span-8">
 
-  <p>
-    <b>To City:</b>
-    <%= @trip.to_location.name %>
-  </p>
+<fieldset>
+  <legend>Trip Summary</legend>
+  <ol>
+    <li>
+      <label>From City:</label>
+      <%= @trip.from_location.name %>
+    </li>
+    <li>
+      <label>To City:</label>
+      <%= @trip.to_location.name %>
+    </li>
+    <li>
+      <label>Departing:</label>
+      <b><%= departing_time %></b>
+    </li>
+    <li>
+      <label>Arriving (Est):</label>
+      <%= arrival_time %>
+    </li>
+    <li>
+      <label>Cost:</label>
+      <%= number_to_currency(@trip.cost, :precision => 0) %>
+    </li>
+    <li>
+      <label>Trip Distance:</label>
+      <%= @trip.trip_distance.round.to_s + " km" %>
+    </li>
+    <li>
+      <label>Trip Duration:</label>
+      <%= trip_duration %>
+    </li>
+  </ol>
+</fieldset>
 
-  <p>
-    <b>Depart Date:</b>
-    <%= l @trip.trip_date, :format => :long %>
-  </p>
 
-  <p>
-    <b>Depart Time:</b>
-    <%= @trip.dis_trip_time %>
-  </p>
-
-  <p>
-    <b>Trip Distance:</b>
-    <%= @trip.trip_distance %>
-  </p>
-
-  <p>
-    <b>Trip Duration:</b>
-    <%= trip_duration %>
-  </p>
-
-  <%= link_to 'Back', trips_path %>
+  <%= link_to 'Continue', trips_path %>
 </div>
-<div class="prepend-1 span-10 append-1 last">
-<img src="<%= @trip.driver.fb_pic_large_url %>" />
+<div class="prepend-1 span-13 last">
 
+  <fieldset>
+    <legend>Driver Details</legend>
+    <div class="span-7">
+      <ol>
+        <li>
+          <label>Driver Name:</label>
+          <%= @trip.driver.full_name %>
+        </li>
+        <li>
+          <label># Trips Driven:</label>
+          <%= @trip_count %>
+        </li>
+        <li>
+          <label>Message:</label><br/>
+          <%= @trip.trip_details %>
+        </li>
+        <br/>
+        <li>
+
+          <div class="ui-style">
+            <form action="http://www.facebook.com" target="_blank">­
+                <input type="Submit" value="Contact <%= @trip.driver.first_name %>">
+            </form>
+          </div>
+        </li>
+      </ol>
+    </div>
+
+
+
+    <div class="span-5 last">
+      <img src="<%= @trip.driver.fb_pic_large_url %>" />
+    </div>
+  </fieldset>
 </div>
 

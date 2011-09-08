@@ -96,13 +96,14 @@ $(document).ready(function () {
 	}
 
 	function postSearchRequest(date) {
+
 		var fromLocationId = $('#trip_from_location_id').val();
 		var toLocationId = $('#trip_to_location_id').val();
 
 		params = { from_location_id: fromLocationId, to_location_id: toLocationId, date: date, authenticity_token: _token };
 
 		$('#searchResults').hide();
-		$.post("/trips/load_search_results", params)
+		$.post("/" + locale + "/trips/load_search_results", params)
 		  .success(function(partialHtml) {
 		  	$('#searchResultsContainer').show();
 			refreshSearchResults(partialHtml);
