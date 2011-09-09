@@ -2,6 +2,10 @@ Rails.application.config.middleware.use OmniAuth::Builder do
 
   APP_CONFIG = YAML.load_file("#{Rails.root.to_s}/config/omniauth_config.yml")[Rails.env]
 
-  provider :facebook, APP_CONFIG['app_id'], APP_CONFIG['app_secret'], {:scope => 'publish_stream,offline_access,email'}
+  #ENV is configured in heroku app. "heroku config"
+  app_id = ENV['app_config'] || APP_CONFIG['app_id']
+  app_secret = ENV['app_config'] || APP_CONFIG['app_secret']
+
+  provider :facebook, app_id, app_secret, {:scope => 'publish_stream,offline_access,email'}
 end
 
