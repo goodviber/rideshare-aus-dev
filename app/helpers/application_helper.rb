@@ -4,7 +4,7 @@ module ApplicationHelper
     if @content_for_title
       'Cocoride' + (" - " + @content_for_title).to_s
     else
-      'Cocoride - Social ridesharing'
+      'Cocoride - Inter-city ride sharing'
     end
   end
 

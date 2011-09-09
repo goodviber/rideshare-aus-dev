@@ -23,3 +23,7 @@ where feature_class != 'P'
 
 select count(*) from locations  // 1050 records [AU.txt]
 
+clear database
+--------------
+rake db:reset
+
