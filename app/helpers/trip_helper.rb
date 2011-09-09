@@ -43,17 +43,26 @@ module TripHelper
   end
 
   def departing_time
-    d = @trip.trip_date
-    t = @trip.trip_time
-    l d.to_datetime.advance(:hours => t.hour, :minutes => t.min), :format => :short
+    if @trip.trip_time
+      d = @trip.trip_date
+      t = @trip.trip_time
+      l d.to_datetime.advance(:hours => t.hour, :minutes => t.min), :format => :short
+    else
+      t(:afternoon) if @trip.time_of_day == "A"
+      t(:morning) if @trip.time_of_day == "M"
+    end
   end
 
   def arrival_time
-    d = @trip.trip_date
-    t = @trip.trip_time
-    duration = @trip.trip_duration
-    depart = d.to_datetime.advance(:hours => t.hour, :minutes => t.min)
-    l depart.advance(:hours => duration.hour, :minutes => duration.min), :format => :short
+    if @trip.trip_time
+      d = @trip.trip_date
+      t = @trip.trip_time
+      duration = @trip.trip_duration
+      depart = d.to_datetime.advance(:hours => t.hour, :minutes => t.min)
+      l depart.advance(:hours => duration.hour, :minutes => duration.min), :format => :short
+    else
+      "N/A"
+    end
   end
 
 end
