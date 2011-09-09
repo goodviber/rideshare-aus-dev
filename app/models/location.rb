@@ -28,7 +28,7 @@ class Location < ActiveRecord::Base
 
 
 
-  scope :popular_cities, where("country_code = 'LT' AND POPULATION > 60000")
+  scope :popular_cities, where("(country_code = 'LT' AND POPULATION > 60000) OR (country_code = 'AU' AND feature_code = 'PPLA')")
 
   scope :blank_row, select("-1 as id, '-------------------------------' as name").limit(1)
 

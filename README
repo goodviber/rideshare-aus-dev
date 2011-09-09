@@ -16,5 +16,10 @@ SQL commands to run
 delete from locations
 where population < 1000
 
-select count(*) from locations  //should be 1080 records
+select count(*) from locations  // 1080 records [AU.txt]
+
+delete from locations
+where feature_class != 'P'
+
+select count(*) from locations  // 1050 records [AU.txt]
 
