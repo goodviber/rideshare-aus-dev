@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110812075941) do
+ActiveRecord::Schema.define(:version => 20110928113709) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -48,6 +49,16 @@ ActiveRecord::Schema.define(:version => 20110812075941) do
     t.datetime "updated_at"
     t.integer  "trips_from_count",                 :default => 0
     t.integer  "trips_to_count",                   :default => 0
+  end
+
+  create_table "queued_posts", :id => false, :force => true do |t|
+    t.string   "page_id"
+    t.string   "post_id"
+    t.string   "fb_id"
+    t.text     "message"
+    t.datetime "post_created_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "trips", :force => true do |t|
