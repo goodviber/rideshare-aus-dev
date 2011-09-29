@@ -61,5 +61,84 @@ class Trip < ActiveRecord::Base
     end
   end
 
+  def self.load_from_fb_page(page_id)
+    #TO DO - setup using app_id and secret in config file
+    #see https://github.com/iliu/mysite-examples/blob/fb_graph_cache/config/facebook.yml for example
+    gscc_app = FbGraph::Application.new(119073948160554);
+    access_token = gscc_app.get_access_token('f96ca2df959982257ff65cee4c5be74d');
+    page = FbGraph::Page.new(page_id, :access_token => access_token).fetch;
+
+    load_count = 0
+    continue = true
+    most_recent_post_created_at = '01-01-2000'
+    most_recent_post_created_at = QueuedPost.where(:page_id => page_id).maximum(:post_created_at) if QueuedPost.where(:page_id => page_id).maximum(:post_created_at)
+
+    #Page1: 0-25 trips
+    page.feed.each do |post|
+      if post.created_time > most_recent_post_created_at
+        add_post(page_id, post)
+        load_count+=1
+      else
+        continue = false
+        break
+      end
+    end
+
+    #Page2: 25-50 trips
+    if continue
+      page.feed.next.each do |post|
+        if post.created_time > most_recent_post_created_at
+          add_post(page_id, post)
+          load_count+=1
+        else
+          continue = false
+          break
+        end
+      end
+    end
+
+    #Page3: 50-75 trips
+    if continue
+      page.feed.next.next.each do |post|
+        if post.created_time > most_recent_post_created_at
+          add_post(page_id, post)
+          load_count+=1
+        else
+          continue = false
+          break
+        end
+      end
+    end
+
+    #Page4: 75-100 trips
+    if continue
+      page.feed.next.next.next.each do |post|
+        if post.created_time > most_recent_post_created_at
+          add_post(page_id, post)
+          load_count+=1
+        else
+          continue = false
+          break
+        end
+      end
+    end
+
+    if load_count == 0
+      "[#{page_id}] Database is up to date."
+    else
+      "[#{page_id}] #{load_count} post have been successfully loaded."
+    end
+  end
+
+  def self.add_post(page_id, post)
+    new_post = QueuedPost.new
+    new_post.page_id = page_id
+    new_post.post_id = post.identifier
+    new_post.fb_id = post.from.identifier
+    new_post.message = post.message
+    new_post.post_created_at = post.created_time
+    new_post.save
+  end
+
 end
 
