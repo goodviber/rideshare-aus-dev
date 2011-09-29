@@ -16,6 +16,8 @@ class Trip < ActiveRecord::Base
 
   validate :future_date?, :valid_from_locations?, :valid_to_locations?
 
+  @@load_count = 0
+
   def future_date?
     unless self[:trip_date] >= DateTime.now.to_date
       errors.add(:trip_date, "must not be in the past.")
@@ -68,68 +70,25 @@ class Trip < ActiveRecord::Base
     access_token = gscc_app.get_access_token('f96ca2df959982257ff65cee4c5be74d');
     page = FbGraph::Page.new(page_id, :access_token => access_token).fetch;
 
-    load_count = 0
+    @@load_count = 0
     continue = true
     most_recent_post_created_at = '01-01-2000'
     most_recent_post_created_at = QueuedPost.where(:page_id => page_id).maximum(:post_created_at) if QueuedPost.where(:page_id => page_id).maximum(:post_created_at)
 
-    #Page1: 0-25 trips
-    page.feed.each do |post|
-      if post.created_time > most_recent_post_created_at
-        add_post(page_id, post)
-        load_count+=1
-      else
-        continue = false
-        break
-      end
-    end
+    #load pages 1-4 of fan page posts
+    continue = fetch_fb_first_page(page, most_recent_post_created_at)
+    continue = fetch_fb_second_page(page, most_recent_post_created_at) if continue
+    continue = fetch_fb_third_page(page, most_recent_post_created_at)  if continue
+    fetch_fb_fourth_page(page, most_recent_post_created_at)            if continue
 
-    #Page2: 25-50 trips
-    if continue
-      page.feed.next.each do |post|
-        if post.created_time > most_recent_post_created_at
-          add_post(page_id, post)
-          load_count+=1
-        else
-          continue = false
-          break
-        end
-      end
-    end
-
-    #Page3: 50-75 trips
-    if continue
-      page.feed.next.next.each do |post|
-        if post.created_time > most_recent_post_created_at
-          add_post(page_id, post)
-          load_count+=1
-        else
-          continue = false
-          break
-        end
-      end
-    end
-
-    #Page4: 75-100 trips
-    if continue
-      page.feed.next.next.next.each do |post|
-        if post.created_time > most_recent_post_created_at
-          add_post(page_id, post)
-          load_count+=1
-        else
-          continue = false
-          break
-        end
-      end
-    end
-
-    if load_count == 0
+    if @@load_count == 0
       "[#{page_id}] Database is up to date."
     else
-      "[#{page_id}] #{load_count} post have been successfully loaded."
+      "[#{page_id}] #{@@load_count} post have been successfully loaded."
     end
   end
 
+  private
   def self.add_post(page_id, post)
     new_post = QueuedPost.new
     new_post.page_id = page_id
@@ -138,6 +97,66 @@ class Trip < ActiveRecord::Base
     new_post.message = post.message
     new_post.post_created_at = post.created_time
     new_post.save
+  end
+
+  private
+  def self.fetch_fb_first_page(page, load_after_datetime) #0-25
+    continue = true
+    page.feed.each do |post|
+      if post.created_time > load_after_datetime
+        add_post(page.identifier, post)
+        @@load_count+=1
+      else
+        continue = false
+        break
+      end
+    end
+    continue
+  end
+
+  private
+  def self.fetch_fb_second_page(page, load_after_datetime) #25-50
+    continue = true
+    page.feed.next.each do |post|
+      if post.created_time > load_after_datetime
+        add_post(page.identifier, post)
+        @@load_count+=1
+      else
+        continue = false
+        break
+      end
+    end
+    continue
+  end
+
+  private
+  def self.fetch_fb_third_page(page, load_after_datetime) #50-75
+    continue = true
+    page.feed.next.next.each do |post|
+      if post.created_time > load_after_datetime
+        add_post(page.identifier, post)
+        @@load_count+=1
+      else
+        continue = false
+        break
+      end
+    end
+    continue
+  end
+
+  private
+  def self.fetch_fb_fourth_page(page, load_after_datetime) #75-100
+    continue = true
+    page.feed.next.next.next.each do |post|
+      if post.created_time > load_after_datetime
+        add_post(page.identifier, post)
+        @@load_count+=1
+      else
+        continue = false
+        break
+      end
+    end
+    continue
   end
 
 end
