@@ -212,7 +212,7 @@ background-color: white;
 #topPanLong #ImgPan img{width:auto; height:auto;}
 
 
-#topPanLong ul{width:768px; height:32px; position:absolute; top:12px; right:10px;}
+#topPanLong ul{width:900px; height:32px; position:absolute; top:12px; right:10px;}
 #topPanLong ul li{width:182px; height:32px; float:left;}
 #topPanLong ul li a{width:180px; height:35px; display:block; background:url(images/topmenu-normal-long.jpg) 0 0 no-repeat #F5F4F4; color:#666; text-decoration:none; font-size:12px; font-weight:bold; text-align:center; line-height:32px; margin:0 2px 0 0;}
 #topPanLong ul li a:hover{background:url(images/topmenu-hover-long.jpg) 0 0 no-repeat #F5F4F4; color:#fff; text-decoration:none;}
