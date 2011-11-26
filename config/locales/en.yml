@@ -90,6 +90,7 @@ en:
       long: "%B %d, %Y %H:%M"
       time_only: "%H:%M"
       time_only_long: "%Hhr, %Mmin"
+      time_date_short: "%d %b [%H:%M]"
     am: "am"
     pm: "pm"
 

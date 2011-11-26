@@ -8,18 +8,16 @@
     <th>Message</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @posts.each do |post| %>
   <tr>
     <td><%= post.id %></td>
     <td><%= post.fb_page(post.page_id) %></td>
-    <td><%= l post.post_created_at, :format => :short %></td>
+    <td><%= l post.post_created_at, :format => :time_date_short %></td>
     <td class="message"><%= post.message %></td>
     <td><%= link_to 'Process', new_trip_path %></td>
     <td><%= link_to 'Remove', post, :confirm => 'Are you sure?', :method => :delete %></td>
-    <td></td>
   </tr>
 <% end %>
 </table>
