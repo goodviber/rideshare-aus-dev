@@ -1,6 +1,6 @@
 class CreateQueuedPosts < ActiveRecord::Migration
   def change
-    create_table :queued_posts, :id => false do |t|
+    create_table :queued_posts do |t|
       t.string :page_id
       t.string :post_id
       t.string :fb_id

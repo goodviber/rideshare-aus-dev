@@ -59,5 +59,36 @@ class Location < ActiveRecord::Base
     full_list = p1 + p2
   end
 
+  #override find_by_alternate_names
+  def self.find_by_alternate_names(city_to_check)
+    Location.populate_alternate_names
+    location_id = nil
+    @@alternate_names.each do |row|
+      city_names = row.alternate_names.split(',')
+      #debugger
+      city_names.each do |city|
+        city.strip!
+        if city == city_to_check
+          return row   #location row
+        end
+      end
+    end
+    nil #return nil if no matches
+    rescue Exception => exc
+      puts exc.to_s
+  end
+
+  @@alternate_names = nil
+  private
+  def self.populate_alternate_names
+    #load top 250 cities alternate_names
+    if !@@alternate_names
+      @@alternate_names = Location.limit(250)
+      .select(:id)
+      .select(:alternate_names)
+      .where('alternate_names is not null')
+      .order('population desc')
+    end
+  end
 end
 

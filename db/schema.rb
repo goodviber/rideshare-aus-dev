@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110928113709) do
+ActiveRecord::Schema.define(:version => 20111007025907) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(:version => 20110928113709) do
     t.integer  "trips_to_count",                   :default => 0
   end
 
-  create_table "queued_posts", :id => false, :force => true do |t|
+  create_table "queued_posts", :force => true do |t|
     t.string   "page_id"
     t.string   "post_id"
     t.string   "fb_id"
@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(:version => 20110928113709) do
     t.string   "fb_post_id",       :limit => 500
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "trip_details"
+    t.text     "trip_details"
     t.integer  "cost",                                                           :default => 0
   end
 

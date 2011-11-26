@@ -12,7 +12,7 @@ class Trip < ActiveRecord::Base
 
   belongs_to :related_trip, :foreign_key => "rel_trip_id", :class_name => "Trip"
 
-  validates_presence_of :from_location_id, :to_location_id, :driver_id, :trip_date, :seats, :trip_details, :cost
+  validates_presence_of :from_location_id, :to_location_id, :driver_id, :trip_date, :trip_details, :cost
 
   validate :future_date?, :valid_from_locations?, :valid_to_locations?
 
@@ -72,8 +72,10 @@ class Trip < ActiveRecord::Base
 
     @@load_count = 0
     continue = true
+    #TO DO - create config table that stores, fb page name, id and last imported date
+    #the current code is incorrect as the records that contain max(date) are deleted when processed successfully
     most_recent_post_created_at = '01-01-2000'
-    most_recent_post_created_at = QueuedPost.where(:page_id => page_id).maximum(:post_created_at) if QueuedPost.where(:page_id => page_id).maximum(:post_created_at)
+    most_recent_post_created_at = QueuedPost.where(:page_id => page.identifier).maximum(:post_created_at) if QueuedPost.where(:page_id => page.identifier).maximum(:post_created_at)
 
     #load pages 1-4 of fan page posts
     continue = fetch_fb_first_page(page, most_recent_post_created_at)
@@ -86,6 +88,9 @@ class Trip < ActiveRecord::Base
     else
       "[#{page_id}] #{@@load_count} post have been successfully loaded."
     end
+
+  rescue Exception => error
+      "[#{page_id}] Error: " + error.to_s
   end
 
   private
@@ -97,8 +102,12 @@ class Trip < ActiveRecord::Base
     new_post.message = post.message
     new_post.post_created_at = post.created_time
     new_post.save
+
+    rescue Exception => exc
+
   end
 
+  #TO DO: refactor to store "page.feed" in array variable depending on page_num [eg 1-4] (new paramater)
   private
   def self.fetch_fb_first_page(page, load_after_datetime) #0-25
     continue = true
@@ -157,6 +166,105 @@ class Trip < ActiveRecord::Base
       end
     end
     continue
+  end
+
+  def self.migrate_data
+    processed_count = 0
+    #QueuedPost.where('message is null').delete
+
+    list_of_posts = QueuedPost.all
+
+    success = false
+    list_of_posts.each do |post|
+      success = transform_and_load(post)
+      processed_count+=1 if success
+    end
+
+    "#{processed_count} of #{list_of_posts.count} post have successfully loaded into the system."
+  end
+
+  def self.transform_and_load(post)
+    trip = Trip.new
+
+    #10-11 val, 12val 14 Val, 23H, 12:30
+    trip_time = post.message.match(/([0-2][0-9][-])*[0-2]*[0-9]\s?([v|V|h|H]|:[0-5][0-9])(\s|\z|(al))/)
+
+    trip_date = post.message.match(/([0]?[1-9]|[1|2][0-9]|[3][0|1])[.\/-]([0]?[1-9]|[1][0-2])[.\/-]?([0-9]{4}|[0-9]{2})?/)
+    # 5d, (spalio 8d), (spalio 8 d)
+    trip_date = post.message.match(/([0]?[1-9]|[1|2][0-9]|[3][0|1])[\s]?[d][\s).]/) if !trip_date
+
+    cleaned_date = trip_date.to_s.gsub(/[.-\/()]/,' ')
+    cleaned_date.strip!
+    date_array = cleaned_date.split(' ')
+
+    #debugger if date_array[1]
+    trip.trip_date = Date.new(DateTime.now.year, date_array[0].to_i, date_array[1].to_i) if date_array[1]
+    #trip.trip_date = Date.new(DateTime.now.year, DateTime.now.month, date_array[1].to_i) if date_array[1]
+    #trip.trip_date = trip_date_f
+
+    cleaned_message = post.message.gsub(/[!~,().?-]/,' ')
+    words = cleaned_message.split(' ')
+
+    location_ids = Array.new
+    mobile_number = 0
+
+    words.each { |word|
+
+      #check if word contains any numbers.
+      #Yes - could be date, time, or cost, phone number
+      #No - could be location
+      if contains_number(word)
+        if is_mobile?(word)
+          mobile_number = word
+        end
+      else
+        if word.length > 2
+          city = word
+          city.strip! #remove white spaces
+          #debugger if post.id == 772
+          location = Location.find_by_name(city.capitalize)
+          #check "ascii_name" column if we did not find anything in previous step and city contains ascii only chars
+          location = Location.find_by_ascii_name(city.capitalize) if !location && city.ascii_only?
+          if !location
+            location = Location.new
+            location = Location.find_by_alternate_names(city.capitalize)
+          end
+          if location
+            location_ids << location.id if location.id && !location_ids.include?(location.id)
+          end
+        end
+      end
+    }
+
+    trip.from_location_id = location_ids[0] if location_ids[0]
+    trip.to_location_id = location_ids[1]   if location_ids[1]
+    trip.trip_time = "8:00" if !trip_time
+    trip.time_of_day = trip_time.to_s
+    trip.trip_date = DateTime.now+1         if !trip.trip_date
+    trip.cost = 10
+    trip.driver_id = 1
+    trip.trip_details = post.message
+
+    if trip.save
+      #remove the post from the queue if successfully added
+      QueuedPost.find_by_post_id(post.post_id).delete
+      true
+    else
+      false
+    end
+
+    rescue Exception => exc
+      puts "Error occured processing queued_posts id #{post.id}\n-" + exc.to_s
+  end
+
+  private
+  def self.is_mobile?(string)
+    string.match(/\A[+-]?\d+?(\.\d+)?\Z/) && string.length > 7
+  end
+
+  private
+  def self.contains_number(string)
+    string.match(/\d/)
   end
 
 end

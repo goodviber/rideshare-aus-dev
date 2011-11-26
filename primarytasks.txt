@@ -1,0 +1,21 @@
+
+- ability to automatically upload as many trips as possible
+ - refine transformation code
+ - note down sections to outsource. That can be easily defined. Ie regular expressions?
+
+- hire odesk employee to enter trips in manually that fail to load automatically
+- Get odesk employee to do quality checks?
+
+- Setup workflow sections
+
+- show (error)
+
+- Change logo and page text to pavesiu.lt
+- Add language flags
+
+
+Future tasks
+-------------
+- After 1-2months, require fb login to view trips.
+- Split mobile number into own db field (display on details/show screen)
+

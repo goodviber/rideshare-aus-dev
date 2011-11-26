@@ -93,6 +93,13 @@ width:45px;
 max-width:45px;
 }
 
+table.dataTable td.message {
+width:450px;
+max-width:450px;
+text-wrap:normal;
+white-space:normal;
+}
+
 textarea {
 resize: none;
 }
@@ -147,7 +154,6 @@ select.ui-widget-content {
 padding: 2px;
 }
 
-
 body {
 font-family:Arial, Helvetica, Verdana, Tahoma, sans-serif;
 margin:0;
@@ -197,6 +203,23 @@ background-color: white;
 #topPan ul li.selected a{background:url(images/topmenu-hover.jpg) 0 0 no-repeat #F5F4F4; color:#fff; text-decoration:none;}
 
 #topPan ul li.home{background:url(images/topmenu-hover.jpg) 0 0 no-repeat #F5F4F4; color:#fff; text-decoration:none; font-size:12px; font-weight:bold; text-align:center; line-height:32px;}
+
+/*----/TOP PANEL----*/
+
+/*----TOP PANEL LONG (Modified for staff) ---- changed from 778px to 647px*/
+#topPanLong{width:auto; height:auto; position:relative; margin:0;}
+#topPanLong #ImgPan{width:auto; height:auto; background:#fff; color:#666; position:absolute; top:0px; left:0px; padding:0 0 0 30px;}
+#topPanLong #ImgPan img{width:auto; height:auto;}
+
+
+#topPanLong ul{width:768px; height:32px; position:absolute; top:12px; right:10px;}
+#topPanLong ul li{width:182px; height:32px; float:left;}
+#topPanLong ul li a{width:180px; height:35px; display:block; background:url(images/topmenu-normal-long.jpg) 0 0 no-repeat #F5F4F4; color:#666; text-decoration:none; font-size:12px; font-weight:bold; text-align:center; line-height:32px; margin:0 2px 0 0;}
+#topPanLong ul li a:hover{background:url(images/topmenu-hover-long.jpg) 0 0 no-repeat #F5F4F4; color:#fff; text-decoration:none;}
+
+#topPanLong ul li.selected a{background:url(images/topmenu-hover-long.jpg) 0 0 no-repeat #F5F4F4; color:#fff; text-decoration:none;}
+
+#topPanLong ul li.home{background:url(images/topmenu-hover-long.jpg) 0 0 no-repeat #F5F4F4; color:#fff; text-decoration:none; font-size:12px; font-weight:bold; text-align:center; line-height:32px;}
 
 /*----/TOP PANEL----*/
 
@@ -371,6 +394,10 @@ float: right;
 div#loginDetails {
 text-align: right;
 height: 55px;
+}
+
+div#staffMenu {
+height: 60px;
 }
 
 #logo {
