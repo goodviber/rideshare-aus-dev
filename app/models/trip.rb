@@ -184,6 +184,11 @@ class Trip < ActiveRecord::Base
   end
 
   def self.transform_and_load(post)
+
+    #create user/driver if doesn't exist
+    auth_user = Authentication.find_by_uid(post.fb_id)
+    user = User.create_from_fb_id(post.fb_id) if !auth_user
+
     trip = Trip.new
 
     #10-11 val, 12val 14 Val, 23H, 12:30
@@ -242,7 +247,7 @@ class Trip < ActiveRecord::Base
     trip.time_of_day = trip_time.to_s
     trip.trip_date = DateTime.now+1         if !trip.trip_date
     trip.cost = 10
-    trip.driver_id = 1
+    trip.driver_id = user.id
     trip.trip_details = post.message
 
     if trip.save

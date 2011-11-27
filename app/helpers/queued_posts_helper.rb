@@ -5,7 +5,7 @@ module QueuedPostsHelper
   end
 
   def man_processed_count
-    @count = QueuedPost.where(:process_type => "P").order("post_created_at DESC").count
+    @count = QueuedPost.where(:process_type => "M").order("post_created_at DESC").count
   end
 
   def auto_processed_count

@@ -24,6 +24,7 @@ class TripsController < ApplicationController
     @trip = Trip.new
     @trip.time_of_day = "E"
     @trip.driver_id = session[:user_id]
+    @man_driver_fb_id = "0" #disables the manual driver add section
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,10 +36,18 @@ class TripsController < ApplicationController
     @selected_tab = "post"
 
     @post = QueuedPost.find(params[:post_id])
+    user_id = Authentication.find_by_uid(@post.fb_id).user_id if Authentication.find_by_uid(@post.fb_id)
 
     @trip = Trip.new
     @trip.time_of_day = "E"
-    @trip.driver_id = 1
+    @trip.trip_details = @post.message
+
+    if user_id  #user exists
+      @trip.driver_id = user_id
+    else
+      u = User.create_from_fb_id(@post.fb_id)
+      @trip.driver_id = u.id
+    end
 
     respond_to do |format|
       format.html { render action: "new" }
@@ -48,16 +57,27 @@ class TripsController < ApplicationController
   # GET /trips/1/edit
   def edit
     @trip = Trip.find(params[:id])
+
+    #disables the manual driver add section
+    @man_driver_fb_id = "0"
   end
 
   # POST /trips
   # POST /trips.xml
   def create
     @trip = Trip.new(params[:trip])
-    @trip.driver_id = current_user.id
+    queued_post = QueuedPost.find(params[:hid][:post_id])
+
+    #if a driver is assigned, this means the post was manually created (ie QueuedPost)
+    @trip.driver_id = current_user.id if !@trip.driver_id
 
     respond_to do |format|
       if @trip.save
+        queued_post.trip_id = @trip.id
+        queued_post.process_type = 'M'
+        queued_post.processed_at = DateTime.now
+        queued_post.save
+
         flash[:notice] = 'Trip was successfully created.'
         post_to_fanpage_wall(@trip)
         post_to_users_wall(@trip) if params['misc']['post_to_wall'] == "1"

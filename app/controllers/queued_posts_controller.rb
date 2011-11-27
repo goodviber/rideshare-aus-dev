@@ -28,7 +28,7 @@ class QueuedPostsController < ApplicationController
 
   def manually_processed
     @selected_tab = "man_processed"
-    @posts = QueuedPost.order("post_created_at DESC")
+    @posts = QueuedPost.where(:process_type => "M").order("processed_at DESC")
 
     respond_to do |format|
       format.html # show.html.erb

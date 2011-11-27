@@ -56,12 +56,16 @@
       <%= check_box "misc", :post_to_wall, :checked => true %> Post trip to my facebook wall, so my friends can see it<br/>
     </li>
   </ol>
+
+  <!-- used when manually creating trips from queued_posts -->
+  <% if post_id %>
+  <input id="hid_post_id" name="hid[post_id]" type="hidden" value="<%= post_id %>" />
+  <% end %>
 </fieldset>
-
-
 
 <%= hidden_field :trip, :trip_distance %>
 <%= hidden_field :trip, :trip_duration %>
+<%= hidden_field :trip, :driver_id %>
 
 <div class="actions ui-style">
   <%= f.submit %>

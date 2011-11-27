@@ -36,5 +36,25 @@ class User < ActiveRecord::Base
       nil
     end
   end
+
+  def self.create_from_fb_id(fb_id)
+
+    response = RestClient.get 'https://graph.facebook.com/' + fb_id
+    fb_obj = JSON.parse(response.body)
+
+    rand = User.maximum(:id).to_i + 1
+    user = User.new
+    user.first_name = fb_obj['first_name'] if fb_obj['first_name']
+    user.last_name = fb_obj['last_name']   if fb_obj['last_name']
+    user.email = rand.to_s + "@system.com"
+    user.password = "123456"
+
+    user.authentications.build(:provider => 'facebook', :uid => fb_id)
+    user.save!
+    user
+  rescue Exception => error
+      "Error: " + error.to_s
+  end
+
 end
 
