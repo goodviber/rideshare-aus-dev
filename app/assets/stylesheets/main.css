@@ -94,8 +94,8 @@ max-width:45px;
 }
 
 table.dataTable td.message {
-width:450px;
-max-width:450px;
+
+
 text-wrap:normal;
 white-space:normal;
 }
@@ -371,7 +371,7 @@ text-decoration: underline;
 }
 
 div#fbLogin {
-margin-top: 40px;
+margin-top: 10px;
 text-align: center;
 }
 

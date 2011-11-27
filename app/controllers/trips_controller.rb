@@ -31,6 +31,20 @@ class TripsController < ApplicationController
     end
   end
 
+  def manual_new
+    @selected_tab = "post"
+
+    @post = QueuedPost.find(params[:post_id])
+
+    @trip = Trip.new
+    @trip.time_of_day = "E"
+    @trip.driver_id = 1
+
+    respond_to do |format|
+      format.html { render action: "new" }
+    end
+  end
+
   # GET /trips/1/edit
   def edit
     @trip = Trip.find(params[:id])

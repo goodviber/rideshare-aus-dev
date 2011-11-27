@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111007025907) do
+ActiveRecord::Schema.define(:version => 20111126105700) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -59,6 +59,11 @@ ActiveRecord::Schema.define(:version => 20111007025907) do
     t.datetime "post_created_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "trip_id"
+    t.text     "process_type"
+    t.text     "error_msg"
+    t.datetime "processed_at"
+    t.datetime "deleted_at"
   end
 
   create_table "trips", :force => true do |t|

@@ -18,7 +18,7 @@
 		  $( "input:submit, a, button", ".ui-style" ).button();
 		  $( "a", ".ui-style" ).click(function() { return false; });
 
-		  $("#topPan ul li").removeClass("selected");
+		  $("#topPanLong ul li").removeClass("selected");
 		  $("#<%= @selected_tab %>").addClass("selected");
 	  });
   </script>
@@ -35,9 +35,10 @@
 
 		        <div id="topPanLong" >
 		          <ul>
-                <li id="need_att" class="selected"><%= link_to(t("tabs.need_attention"), root_url) %></li>
-		            <li id="man_done"><%= link_to(t("tabs.manually_processed"), trips_url) %></li>
-		            <li id="post"><%= link_to(t("tabs.auto_processed"), new_trip_url)%></li>
+		            <% p = "4" %>
+                <li id="need_att" class="selected"><%= link_to(t("tabs.need_attention_(#{need_att_count})"), posts_need_attention_url) %></li>
+		            <li id="man_processed"><%= link_to(t("tabs.manually_processed_(#{man_processed_count})"), posts_manually_processed_url) %></li>
+		            <li id="auto_processed"><%= link_to(t("tabs.auto_processed_(#{auto_processed_count})"), posts_auto_processed_url)%></li>
               </ul>
             </div>
          </div>

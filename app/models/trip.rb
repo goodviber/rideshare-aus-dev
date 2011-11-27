@@ -246,8 +246,13 @@ class Trip < ActiveRecord::Base
     trip.trip_details = post.message
 
     if trip.save
-      #remove the post from the queue if successfully added
-      QueuedPost.find_by_post_id(post.post_id).delete
+      #update Queued Post
+      qp = QueuedPost.find_by_post_id(post.post_id)
+      qp.process_type = "A"
+      qp.trip_id = trip.id
+      qp.processed_at = DateTime.now
+      qp.save
+
       true
     else
       false

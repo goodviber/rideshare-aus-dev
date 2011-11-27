@@ -6,6 +6,9 @@ class AuthenticationsController < ApplicationController
 
   def create
 
+    #debug output
+    #render :text => request.env["omniauth.auth"].to_yaml
+
     omniauth = request.env["omniauth.auth"]
     session['token'] = omniauth['credentials']['token']
 
@@ -41,7 +44,6 @@ class AuthenticationsController < ApplicationController
         sign_in_and_redirect(:user, existing_user)
       end
     end
-
   end
 
   def destroy

@@ -17,7 +17,28 @@ class QueuedPostsController < ApplicationController
   end
 
   def need_attention
+    @selected_tab = "need_att"
+    @posts = QueuedPost.where("process_type is null").order("post_created_at DESC")
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @posts }
+    end
+  end
+
+  def manually_processed
+    @selected_tab = "man_processed"
     @posts = QueuedPost.order("post_created_at DESC")
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @posts }
+    end
+  end
+
+  def auto_processed
+    @selected_tab = "auto_processed"
+    @posts = QueuedPost.where(:process_type => "A").order("post_created_at DESC")
 
     respond_to do |format|
       format.html # show.html.erb

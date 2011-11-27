@@ -23,91 +23,6 @@
 	  });
   </script>
 
-  <!-- Facebook Connect
-  <div id="fb-root"></div>
-  <%= javascript_include_tag 'http://connect.facebook.net/en_US/all.js' %>
-
-  <script>
-    var fbAppId;
-    if (window.location.hostname == "0.0.0.0")
-      fbAppId = '119073948160554';
-    else
-      fbAppId = '163188793727561';
-
-
-
-    FB.init({
-      appId  : fbAppId,
-      status : true, // check login status
-      cookie : true, // enable cookies to allow the server to access the session
-      xfbml  : true  // parse XFBML
-    });
-    </script>
-
-    -->
-
-
-<!--
-    // Facebook login/logout
-    FB.Event.subscribe('auth.login', function(response) {
-	    FB.api('/me', function(response) {
-	    if(response.name) {
-	      var fbId = response.id;
-	      $.post("login/user_login", { fb_id: response.id, first_name: response.first_name, last_name: response.last_name, authenticity_token: _token },
-		    function(){
-		      if(fbId)
-		        saveFriendsList(fbId);
-		    });
-	    }
-	    });
-
-	    function saveFriendsList(fbId) {
-	    FB.api('/me/friends', function(response) {
-	      //$.post("facebookfriends/add", { fb_id: fbId, friend_list: response, authenticity_token: _token },
-	      //function(){
-
-	      	window.location = window.location;
-
-	      //});
-	    });
-	    }
-    });
-
-    FB.Event.subscribe('auth.logout', function (response) {
-      alert('You have logged out of facebook. Please login to continue');
-      location.href = "/";
-    });
-
-    FB.getLoginStatus(function(response) {
-      if (response.session) {   //connected to facebook
-
-        var imageUrl = "https://graph.facebook.com/" + response.session.uid + "/picture";
-        $("#fbLoggedInImage").attr("src",imageUrl).show();
-
-        $("#loginDetailsText").show();
-          FB.api('/me', function(response) {
-            $("#fbLoggedInName").html(response.name);
-          });
-
-      } else {                  //no connection
-        $('#fbLoginButton').show();
-      }
-    });
-
-
-
-
-    // is this needed?????
-    function logout()
-    {
-      FB.logout(function(response) {
-        $("#fbLoggedInImage").hide();
-      });
-    }
-  </script>
-
--->
-
   <!-- authenticity_token -->
   <%= javascript_tag "window._token = '#{form_authenticity_token}'" %>;
 </head>
@@ -146,7 +61,10 @@
                 <p class="fbName"><%= current_user.full_name %></p>
                   <%= link_to(t("logout"), destroy_user_session_path, :method => :delete) %>
               <% else %>
-                <%= link_to(t("login"), new_user_session_path) %> or <%= link_to "sign up", new_user_registration_path %>
+                <%= link_to(t("login"), new_user_session_path) %>
+                <!-- DISABLE NON-FACEBOOK
+                or <%= link_to "sign up", new_user_registration_path %>
+                <!-->
               <% end %>
             </div>
           </div>
@@ -176,8 +94,6 @@
         <% if alert %>
           <p class="alert"><%= alert %></p>
         <% end %>
-
-
 
         <%= yield %>
       </div>

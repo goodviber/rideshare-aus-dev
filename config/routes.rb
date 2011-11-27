@@ -22,7 +22,12 @@ Cocoride::Application.routes.draw do
     #match '/trips/search(/:fl(-to-:tl(/:tripdate)))' => 'trips#load_search_results'
     match '/trips/search(/:fl(-:tl))' => 'trips#load_search_results', :as => :load_results
     match '/trips/mytrips' => 'trips#my_trips', :as => :my_trips
+
     match '/queued_posts/need_attention' => 'queued_posts#need_attention', :as => :posts_need_attention
+    match '/queued_posts/manually_processed' => 'queued_posts#manually_processed', :as => :posts_manually_processed
+    match '/queued_posts/auto_processed' => 'queued_posts#auto_processed', :as => :posts_auto_processed
+
+    match '/trips/manual_new' => 'trips#manual_new', :as => :new_manual_trip
 
     resources :trips
     resources :queued_posts
