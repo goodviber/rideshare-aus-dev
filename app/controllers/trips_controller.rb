@@ -57,9 +57,6 @@ class TripsController < ApplicationController
   # GET /trips/1/edit
   def edit
     @trip = Trip.find(params[:id])
-
-    #disables the manual driver add section
-    @man_driver_fb_id = "0"
   end
 
   # POST /trips
