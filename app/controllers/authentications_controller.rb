@@ -15,6 +15,14 @@ class AuthenticationsController < ApplicationController
     authentication = Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
 
     if authentication   #user exists, sign in
+
+      #user was system generated, update their email since we now have email access permission
+      if User.find(authentication.user_id).email.include? "@system.com"
+        u = User.find(authentication.user_id)
+        u.email = omniauth['user_info']['email'] if omniauth['user_info']['email']
+        u.save
+      end
+
       flash[:notice] = "You are now logged in."
       sign_in_and_redirect(:user, authentication.user)
     elsif current_user  #add authentication to user that is logged in

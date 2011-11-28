@@ -26,6 +26,7 @@ Cocoride::Application.routes.draw do
     match '/queued_posts/need_attention' => 'queued_posts#need_attention', :as => :posts_need_attention
     match '/queued_posts/manually_processed' => 'queued_posts#manually_processed', :as => :posts_manually_processed
     match '/queued_posts/auto_processed' => 'queued_posts#auto_processed', :as => :posts_auto_processed
+    match '/queued_posts/deleted' => 'queued_posts#deleted', :as => :posts_deleted
 
     match '/trips/manual_new' => 'trips#manual_new', :as => :new_manual_trip
 

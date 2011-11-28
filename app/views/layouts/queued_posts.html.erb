@@ -39,6 +39,7 @@
                 <li id="need_att" class="selected"><%= link_to(t("tabs.need_attention_(#{need_att_count})"), posts_need_attention_url) %></li>
 		            <li id="man_processed"><%= link_to(t("tabs.manually_processed_(#{man_processed_count})"), posts_manually_processed_url) %></li>
 		            <li id="auto_processed"><%= link_to(t("tabs.auto_processed_(#{auto_processed_count})"), posts_auto_processed_url)%></li>
+		            <li id="deleted"><%= link_to(t("tabs.deleted_(#{deleted_count})"), posts_deleted_url)%></li>
               </ul>
             </div>
          </div>

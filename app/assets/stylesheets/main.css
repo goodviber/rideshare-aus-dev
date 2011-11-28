@@ -293,7 +293,7 @@ margin-right: 7px;
 
 /* ===== data table ===== */
 table.dataTable {
-margin-top: 10px;
+margin-top: 0px;
 text-align: center;
 font-family: Verdana, Geneva, Arial, Helvetica, sans-serif ;
 font-weight: normal;

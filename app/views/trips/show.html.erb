@@ -26,7 +26,7 @@
     </li>
     <li>
       <label>Trip Distance:</label>
-      <%= @trip.trip_distance.round.to_s + " km" %>
+      <%= trip_distance %>
     </li>
     <li>
       <label>Trip Duration:</label>
@@ -60,7 +60,7 @@
         <li>
 
           <div class="ui-style">
-            <form action="http://www.facebook.com" target="_blank">­
+            <form action="http://www.facebook.com/<%= @trip.driver.fb_id %>" target="_blank">­
                 <input type="Submit" value="Contact <%= @trip.driver.first_name %>">
             </form>
           </div>

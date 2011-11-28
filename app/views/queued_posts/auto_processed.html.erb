@@ -4,7 +4,7 @@
     <th>Post ID</td>
     <th>FB Page</td>
     <th>Posted At</th>
-    <th>Message</th>
+    <th>Processed</th>
     <th></th>
     <th></th>
   </tr>
@@ -14,10 +14,11 @@
     <td><%= post.id %></td>
     <td><%= post.fb_page(post.page_id) %></td>
     <td><%= l post.post_created_at, :format => :time_date_short %></td>
-    <td class="message"><%= post.message %></td>
     <td><%= l post.processed_at, :format => :time_date_short %></td>
+    <td class="message"><%= post.message %></td>
     <td><%= link_to 'show', edit_trip_path(post.trip_id) %></td>
   </tr>
 <% end %>
 </table>
+<br/>
 

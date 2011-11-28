@@ -176,7 +176,7 @@ class TripsController < ApplicationController
 
   def my_trips
     @selected_tab = "my_trips"
-    @trips = Trip.all
+    @trips = Trip.where(:driver_id => current_user.id)
 
     respond_to do |format|
       format.html # new.html.erb

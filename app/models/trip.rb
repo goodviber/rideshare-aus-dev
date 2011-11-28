@@ -168,11 +168,15 @@ class Trip < ActiveRecord::Base
     continue
   end
 
+  def self.remove_duplicates
+    del_count = QueuedPost.where("id not in (?)",QueuedPost.all.uniq_by { |p| p.message }.map(&:id)).delete_all
+    "#{del_count} duplicate entries have been removed."
+  end
+
   def self.migrate_data
     processed_count = 0
-    #QueuedPost.where('message is null').delete
 
-    list_of_posts = QueuedPost.all
+    list_of_posts = QueuedPost.where("processed_at is null")
 
     success = false
     list_of_posts.each do |post|
@@ -187,7 +191,12 @@ class Trip < ActiveRecord::Base
 
     #create user/driver if doesn't exist
     auth_user = Authentication.find_by_uid(post.fb_id)
-    user = User.create_from_fb_id(post.fb_id) if !auth_user
+    if auth_user
+      driver_id = auth_user.user_id
+    else
+      user = User.create_from_fb_id(post.fb_id) if !auth_user
+      driver_id = user.id
+    end
 
     trip = Trip.new
 
@@ -247,7 +256,7 @@ class Trip < ActiveRecord::Base
     trip.time_of_day = trip_time.to_s
     trip.trip_date = DateTime.now+1         if !trip.trip_date
     trip.cost = 10
-    trip.driver_id = user.id
+    trip.driver_id = driver_id
     trip.trip_details = post.message
 
     if trip.save
@@ -260,6 +269,11 @@ class Trip < ActiveRecord::Base
 
       true
     else
+      qp = QueuedPost.find_by_post_id(post.post_id)
+      qp.trip_id = trip.id
+      qp.error_msg = trip.errors.full_messages[0]
+      qp.save
+
       false
     end
 

@@ -42,6 +42,14 @@ module TripHelper
     end
   end
 
+  def trip_distance
+    if @trip.trip_distance
+      @trip.trip_distance.round.to_s + " km"
+    else
+      "N/A"
+    end
+  end
+
   def departing_time
     if @trip.trip_time
       d = @trip.trip_date

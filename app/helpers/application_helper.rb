@@ -2,9 +2,9 @@ module ApplicationHelper
 
   def page_title
     if @content_for_title
-      'Cocoride' + (" - " + @content_for_title).to_s
+      'Pavesiu.lt' + (" | " + @content_for_title).to_s
     else
-      'Cocoride - Inter-city ride sharing'
+      'Pavesiu.lt | visas keliones vienoje vietoje'
     end
   end
 

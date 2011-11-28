@@ -1,5 +1,7 @@
 class QueuedPostsController < ApplicationController
 
+  before_filter :authenticate_user!
+
   def index
     respond_to do |format|
       format.html { redirect_to posts_need_attention_url }
@@ -8,7 +10,10 @@ class QueuedPostsController < ApplicationController
 
   def destroy
     @queued_post = QueuedPost.find(params[:id])
-    @queued_post.destroy
+    #@queued_post.destroy
+    @queued_post.deleted_at = DateTime.now
+    @queued_post.process_type = 'D'
+    @queued_post.save
 
     respond_to do |format|
       format.html { redirect_to posts_need_attention_url, :notice => 'Post was successfully removed.' }
@@ -39,6 +44,16 @@ class QueuedPostsController < ApplicationController
   def auto_processed
     @selected_tab = "auto_processed"
     @posts = QueuedPost.where(:process_type => "A").order("post_created_at DESC")
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @posts }
+    end
+  end
+
+  def deleted
+    @selected_tab = "deleted"
+    @posts = QueuedPost.where(:process_type => "D").order("post_created_at DESC")
 
     respond_to do |format|
       format.html # show.html.erb

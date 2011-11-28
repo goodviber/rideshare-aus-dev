@@ -32,6 +32,12 @@ $().ready(function () {
 
 	$('#trip_from_location_id').change(function () { setLatLng(this.id, this.value); });
 	$('#trip_to_location_id').change(function () { setLatLng(this.id, this.value); });
+
+	//used when manually creating trips from queued_posts
+	if ($('#hid_post_id').val())
+	{
+		$('#misc_post_to_wall').attr('checked', false);
+	}
 });
 
 function setLatLng(selListId, selListValue) {

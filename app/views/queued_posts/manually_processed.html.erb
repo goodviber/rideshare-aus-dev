@@ -14,10 +14,11 @@
     <td><%= post.id %></td>
     <td><%= post.fb_page(post.page_id) %></td>
     <td><%= l post.post_created_at, :format => :time_date_short %></td>
-    <td>11:22</td>
+    <td><%= l post.processed_at, :format => :time_date_short %></td>
     <td class="message"><%= post.message %></td>
-    <td><%= link_to 'Show', new_trip_path %></td>
+    <td><%= link_to 'show', trip_path(post.trip_id) %></td>
   </tr>
 <% end %>
 </table>
+<br />
 
