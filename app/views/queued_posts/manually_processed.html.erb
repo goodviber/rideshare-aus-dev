@@ -1,5 +1,6 @@
 
 <table class="dataTable">
+<% if man_processed_count != 0 %>
   <tr>
     <th>Post ID</td>
     <th>FB Page</td>
@@ -8,6 +9,7 @@
     <th>Message</th>
     <th></th>
   </tr>
+<% end %>
 
 <% @posts.each do |post| %>
   <tr>

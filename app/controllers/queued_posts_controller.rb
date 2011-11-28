@@ -21,6 +21,19 @@ class QueuedPostsController < ApplicationController
     end
   end
 
+  def undestroy
+    @queued_post = QueuedPost.find(params[:id])
+    #@queued_post.destroy
+    @queued_post.deleted_at = nil
+    @queued_post.process_type = nil
+    @queued_post.save
+
+    respond_to do |format|
+      format.html { redirect_to posts_deleted_url, :notice => 'Post was successfully un-deleted.' }
+      format.json { head :ok }
+    end
+  end
+
   def need_attention
     @selected_tab = "need_att"
     @posts = QueuedPost.where("process_type is null").order("post_created_at DESC")
