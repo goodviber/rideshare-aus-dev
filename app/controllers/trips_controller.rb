@@ -4,7 +4,7 @@ class TripsController < ApplicationController
 
   def index
     @selected_tab = "search"
-    @content_for_title = "Search Trips"
+    @content_for_title = "Ieskoti"
     @trips = Trip.all
   end
 
@@ -21,6 +21,8 @@ class TripsController < ApplicationController
 
   def new
     @selected_tab = "post"
+    @content_for_title = "Pastu"
+
     @trip = Trip.new
     @trip.time_of_day = "E"
     @trip.driver_id = session[:user_id]
@@ -63,17 +65,20 @@ class TripsController < ApplicationController
   # POST /trips.xml
   def create
     @trip = Trip.new(params[:trip])
-    queued_post = QueuedPost.find(params[:hid][:post_id])
-
+    queued_post = QueuedPost.find(params[:hid][:post_id]) if params[:hid]
     #if a driver is assigned, this means the post was manually created (ie QueuedPost)
     @trip.driver_id = current_user.id if !@trip.driver_id
 
     respond_to do |format|
       if @trip.save
-        queued_post.trip_id = @trip.id
-        queued_post.process_type = 'M'
-        queued_post.processed_at = DateTime.now
-        queued_post.save
+
+        # mark queued_post as processed
+        if queued_post
+          queued_post.trip_id = @trip.id
+          queued_post.process_type = 'M'
+          queued_post.processed_at = DateTime.now
+          queued_post.save
+        end
 
         flash[:notice] = 'Trip was successfully created.'
         post_to_fanpage_wall(@trip)
