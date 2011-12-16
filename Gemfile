@@ -18,7 +18,7 @@ gem 'activeadmin'
 gem 'sass-rails', "~> 3.1.0"
 gem 'coffee-script'
 gem 'uglifier'
-gem 'devise'
+gem "devise", "~> 1.5.2"
 gem 'omniauth'
 gem 'fb_graph'
 gem "jquery-rails"
