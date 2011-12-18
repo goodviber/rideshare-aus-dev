@@ -10,8 +10,7 @@ class TripsController < ApplicationController
 
   def show
     @trip = Trip.find(params[:id])
-
-    @trip_count = current_user.trips.where("trip_date < ?", DateTime.now).count
+    #@trip_count = @trip.driver_id.trips.where("trip_date < ?", DateTime.now).count
 
     respond_to do |format|
       format.html # show.html.erb
