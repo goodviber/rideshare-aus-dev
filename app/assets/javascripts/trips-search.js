@@ -103,9 +103,11 @@ $(document).ready(function () {
 		params = { from_location_id: fromLocationId, to_location_id: toLocationId, date: date, authenticity_token: _token };
 
 		$('#searchResults').hide();
+		$('#searchResultsContainer').show();
+		$('#loading').show();
 		$.post("/" + locale + "/trips/load_search_results", params)
 		  .success(function(partialHtml) {
-		  	$('#searchResultsContainer').show();
+		  	$('#loading').hide();
 			refreshSearchResults(partialHtml);
 			bindTooltip();
 		  });
