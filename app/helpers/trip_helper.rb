@@ -73,5 +73,13 @@ module TripHelper
     end
   end
 
+  def driver_name
+    if @trip.driver_id
+      @trip.driver.full_name
+    else
+      current_user.full_name
+    end
+  end
+
 end
 
