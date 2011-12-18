@@ -59,8 +59,9 @@
           </div>
         </div>
 
-        <div class="append-1 span-13 last">
-		      <div id="topPan">
+        <div class="append-1 span-12 last">
+
+		      <div id="topPan" class="span-9">
 		        <ul>
               <li id="home" class="selected"><%= link_to(t("tabs.home"), root_url) %></li>
 		          <li id="search"><%= link_to(t("tabs.search"), trips_url) %></li>
@@ -69,7 +70,13 @@
 		          <!-- <li id="about"><a href="#"><%= t("tabs.about") %></a></li> -->
             </ul>
            </div>
-		      </div>
+
+           <div id="lan" class="span-3">
+           <%= link_to(image_tag("lt_flag.png", :alt => "English", :title => "Versti į lietuvių"),root_url(:locale => :lt)) %> Lithuanian
+           <br/>
+           <%= link_to(image_tag("en_flag.png", :alt => "English", :title => "Translate to English"),root_url(:locale => :en)) %> English
+           </div>
+
 		    </div>
 
       </div>
