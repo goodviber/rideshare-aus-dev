@@ -224,6 +224,9 @@ class Trip < ActiveRecord::Base
       end
     end
 
+    cost = post.message.match(/[0-9]{2}\s*[L|l][t|T]/)
+    trip.cost = cost[0].gsub(/[^0-9]/, '') if cost
+
     cleaned_message = post.message.gsub(/[!~,().?-]/,' ')
     words = cleaned_message.split(' ')
 
@@ -265,7 +268,7 @@ class Trip < ActiveRecord::Base
     #if no date could be found, then use the date that the trip was posted on + 1 day
     trip.trip_date = (post.post_created_at+1.day).to_date  if !trip.trip_date
 
-    trip.cost = 10
+    trip.cost = 0 if !trip.cost
     trip.driver_id = driver_id
     trip.trip_details = post.message
 
