@@ -177,6 +177,7 @@ class Trip < ActiveRecord::Base
     processed_count = 0
 
     list_of_posts = QueuedPost.where("processed_at is null")
+    to_process_count = list_of_posts.count
 
     success = false
     list_of_posts.each do |post|
@@ -184,7 +185,7 @@ class Trip < ActiveRecord::Base
       processed_count+=1 if success
     end
 
-    "#{processed_count} of #{list_of_posts.count} post have successfully loaded into the system."
+    "#{processed_count} of #{to_process_count} post have successfully loaded into the system."
   end
 
   def self.transform_and_load(post)
@@ -203,18 +204,25 @@ class Trip < ActiveRecord::Base
     #10-11 val, 12val 14 Val, 23H, 12:30
     trip_time = post.message.match(/([0-2][0-9][-])*[0-2]*[0-9]\s?([v|V|h|H]|:[0-5][0-9])(\s|\z|(al))/)
 
-    trip_date = post.message.match(/([0]?[1-9]|[1|2][0-9]|[3][0|1])[.\/-]([0]?[1-9]|[1][0-2])[.\/-]?([0-9]{4}|[0-9]{2})?/)
-    # 5d, (spalio 8d), (spalio 8 d)
-    trip_date = post.message.match(/([0]?[1-9]|[1|2][0-9]|[3][0|1])[\s]?[d][\s).]/) if !trip_date
+    #Dates: Try format - 5d, (spalio 8d), (spalio 8 d)
+    trip_date = post.message.match(/([0]?[1-9]|[1|2][0-9]|[3][0|1])[\s]?[d][\s).]/)
+    trip_day_of_month = trip_date[0].gsub(/[^0-9]/, '') if trip_date
 
-    cleaned_date = trip_date.to_s.gsub(/[.-\/()]/,' ')
-    cleaned_date.strip!
-    date_array = cleaned_date.split(' ')
+    begin
+      trip.trip_date = Date.strptime("{#{trip_day_of_month}}", "{%d}") if trip_day_of_month && trip_date
+    rescue Exception => e
+    end
 
-    #debugger if date_array[1]
-    trip.trip_date = Date.new(DateTime.now.year, date_array[0].to_i, date_array[1].to_i) if date_array[1]
-    #trip.trip_date = Date.new(DateTime.now.year, DateTime.now.month, date_array[1].to_i) if date_array[1]
-    #trip.trip_date = trip_date_f
+    #Dates: next try this format - (05.31)
+    if !trip_date
+      trip_date = post.message.match(/\d(0?[1-9]|1[012])[- .](0?[1-9]|[12][0-9]|3[01])\d/)
+      trip_date_arr = trip_date[0].split(/[.-]/) if trip_date
+
+      begin
+        trip.trip_date = Date.strptime("{#{trip_date_arr[0]} #{trip_date_arr[1]}}", "{%m %d}") if trip_date_arr
+      rescue Exception => e
+      end
+    end
 
     cleaned_message = post.message.gsub(/[!~,().?-]/,' ')
     words = cleaned_message.split(' ')
@@ -235,7 +243,7 @@ class Trip < ActiveRecord::Base
         if word.length > 2
           city = word
           city.strip! #remove white spaces
-          #debugger if post.id == 772
+
           location = Location.find_by_name(city.capitalize)
           #check "ascii_name" column if we did not find anything in previous step and city contains ascii only chars
           location = Location.find_by_ascii_name(city.capitalize) if !location && city.ascii_only?
@@ -254,7 +262,9 @@ class Trip < ActiveRecord::Base
     trip.to_location_id = location_ids[1]   if location_ids[1]
     trip.trip_time = "8:00" if !trip_time
     trip.time_of_day = trip_time.to_s
-    trip.trip_date = DateTime.now+1         if !trip.trip_date
+    #if no date could be found, then use the date that the trip was posted on + 1 day
+    trip.trip_date = (post.post_created_at+1.day).to_date  if !trip.trip_date
+
     trip.cost = 10
     trip.driver_id = driver_id
     trip.trip_details = post.message
@@ -278,6 +288,7 @@ class Trip < ActiveRecord::Base
     end
 
     rescue Exception => exc
+      #debugger
       puts "Error occured processing queued_posts id #{post.id}\n-" + exc.to_s
   end
 
