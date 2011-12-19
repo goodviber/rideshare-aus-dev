@@ -16,7 +16,7 @@
     <td class="deptime col2"><%= trip.dis_trip_time %></td>
     <td class="col3"><%= trip.from_location.name %></td>
     <td class="col4"><%= trip.to_location.name %></td>
-    <td><%= number_to_currency(trip.cost, :precision => 0) %></td>
+    <td><%= number_to_currency(trip.cost, :precision => 0) if trip.cost != 0 %></td>
     <!-- <td><%= link_to 'Destroy', trip, :confirm => 'Are you sure?', :method => :delete %></td> -->
 
     <td>

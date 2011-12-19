@@ -173,6 +173,12 @@ class Trip < ActiveRecord::Base
     "#{del_count} duplicate entries have been removed."
   end
 
+  def self.remove_old_posts(days_old)
+    qp_count = QueuedPost.where("post_created_at < ?",DateTime.now-days_old.days).delete_all
+    t_count = Trip.where("created_at < ?", DateTime.now-days_old.days).delete_all
+    "Cleared #{qp_count} records from QueuedPost. Cleared #{t_count} records from Trip"
+  end
+
   def self.migrate_data
     processed_count = 0
 
@@ -265,8 +271,9 @@ class Trip < ActiveRecord::Base
     trip.to_location_id = location_ids[1]   if location_ids[1]
     trip.trip_time = "8:00" if !trip_time
     trip.time_of_day = trip_time.to_s
-    #if no date could be found, then use the date that the trip was posted on + 1 day
-    trip.trip_date = (post.post_created_at+1.day).to_date  if !trip.trip_date
+    #if no date could be found, then use the date that the trip was posted on
+    #if it was posted after 6pm (ie midnight-6hr), then post on next day
+    trip.trip_date = (post.post_created_at+6.hour).to_date  if !trip.trip_date
 
     trip.cost = 0 if !trip.cost
     trip.driver_id = driver_id
