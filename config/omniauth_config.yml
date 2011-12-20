@@ -3,8 +3,8 @@ development:
   app_secret: f96ca2df959982257ff65cee4c5be74d
 
 test:
-  app_id: 119073948160554
-  app_secret: f96ca2df959982257ff65cee4c5be74d
+  app_id: 160944414007085
+  app_secret: 7f753f629ffebc36c28879c560805429
 
 production:
   app_id: <%= ENV['APP_ID'] %>
