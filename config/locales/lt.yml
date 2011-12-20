@@ -1,5 +1,4 @@
-# Lithuanian translations for Ruby on Rails
-# by Laurynas Butkus (laurynas.butkus@gmail.com)
+# Lithuanian translations for Ruby on Rails. by Laurynas Butkus (laurynas.butkus@gmail.com)
 
 lt:
   login: "Prisijungti"
@@ -13,12 +12,50 @@ lt:
   to: "Iki"
   duration: "Trukmė"
   distance: "Atstumas"
+  departing: "Išvykstantiems"
+  arriving: "Atvykstančių"
   cost: "Kaina"
   no_cost: "0 Lt"
   morning: "Iki pietų"
   afternoon: "Po pietų"
+  driver_name: "Vairuotojas Vardas"
+  driver: "Vairuotojas"
+  message: "Kelionės detalės"
+  ttime: "Laikas"
 
   search_all_dates: "Paieška visas datas"
+  search: "Ieškoti"
+  more: "Išsamiau"
+  loading: "Pakrovimas..."
+  contact: "susisiekite su"
+  contact_only: "susisiekti"
+
+  return_sr: "Grįžti į paieškos rezultatus"
+  no_trips_msg: "Jums dar nėra paskelbtas bet keliones."
+  fb_post_msg: "Rašyti kelionę į mano Facebook sienelės, todėl mano draugai gali matyti"
+
+  select_list:
+    select_city: "Pasirinkite miestą"
+    all_cities: "Visi miestai"
+
+  trip_time:
+    exact: "Tikslaus laiko"
+    morning: "Rytas"
+    afternoon: "Popietė"
+
+  buttons:
+    post_trip: "Paštu kelionės"
+
+  headings:
+    search_filter: "paieškos filtrai"
+    search_results: "paieškos rezultatai"
+    where: "Kur?"
+    when: "Kada?"
+    other_details: "Kita informacija"
+    route_details: "Maršrutas detalės"
+    trip_summary: "Kelionės duomenys"
+    driver_details: "Vairuotojo duomenys"
+    my_trips: "Mano Keliones"
 
   tabs:
     home: "Namo"
@@ -143,7 +180,7 @@ lt:
       default: "%Y-%m-%d"
       short: "%b %d"
       long: "%B %d, %Y"
-      very_short: "%m/%d"
+      very_short: "%m.%d"
 
     day_names:
       - sekmadienis

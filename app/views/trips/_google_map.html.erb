@@ -1,12 +1,12 @@
 <fieldset>
-  <legend>Route Details</legend>
+  <legend><%= t "headings.route_details" %></legend>
   <ol>
     <li>
-      <%= label :trip, :trip_distance %>
+      <%= label :trip, t("distance") %>
       <span id="trip_distance"></span>
     </li>
     <li>
-      <%= label :trip, :trip_duration %>
+      <%= label :trip, t("duration") %>
       <span id="trip_duration"></span>
     </li>
   </ol>

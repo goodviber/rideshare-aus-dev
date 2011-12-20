@@ -2,62 +2,62 @@
 <div class="span-8">
 
 <fieldset>
-  <legend>Trip Summary</legend>
+  <legend><%= t "headings.trip_summary" %></legend>
   <ol>
     <li>
-      <label>From City:</label>
+      <label><%= t :from %>:</label>
       <%= @trip.from_location.name %>
     </li>
     <li>
-      <label>To City:</label>
+      <label><%= t :to %>:</label>
       <%= @trip.to_location.name %>
     </li>
     <li>
-      <label>Departing:</label>
+      <label><%= t :departing %>:</label>
       <b><%= departing_time %></b>
     </li>
     <li>
-      <label>Arriving (Est):</label>
+      <label><%= t :arriving %>:</label>
       <%= arrival_time %>
     </li>
     <li>
-      <label>Cost:</label>
+      <label><%= t :cost %>:</label>
       <%= number_to_currency(@trip.cost, :precision => 0) %>
     </li>
     <li>
-      <label>Trip Distance:</label>
+      <label><%= t :distance %>:</label>
       <%= trip_distance %>
     </li>
     <li>
-      <label>Trip Duration:</label>
+      <label><%= t :duration %>:</label>
       <%= trip_duration %>
     </li>
   </ol>
 </fieldset>
 
 
-  <%= link_to 'Continue', trips_path %>
+  <%= link_to t(:return_sr), trips_path %>
 </div>
 <div class="prepend-1 span-13 last">
 
   <fieldset>
-    <legend>Driver Details</legend>
+    <legend><%= t "headings.driver_details" %></legend>
     <div class="span-7">
       <ol>
         <li>
-          <label>Driver Name:</label>
+          <label class="long"><%= t :driver_name %>:</label><br/>
           <%= @trip.driver.full_name %>
         </li>
+        <br/>
         <li>
-          <label>Message:</label><br/>
+          <label class="long"><%= t :message %>:</label><br/>
           <%= @trip.trip_details %>
         </li>
         <br/>
         <li>
-
           <div class="ui-style">
             <form action="http://www.facebook.com/<%= @trip.driver.fb_id %>" target="_blank">­
-                <input type="Submit" value="Contact <%= @trip.driver.first_name %>">
+                <input type="Submit" value="<%= t :contact %> <%= @trip.driver.first_name %>">
             </form>
           </div>
         </li>

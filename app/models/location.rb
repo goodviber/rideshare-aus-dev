@@ -18,15 +18,13 @@ class Location < ActiveRecord::Base
   scope :apply_filter, where("feature_class = 'P'")
                       .where("feature_code not in ('PPLX','PPLQ')")
 
-  scope :from_locations_total_row, select("-1 as id, 'All Cities (' || count(name) || ')' as name")
+  scope :from_locations_total_row, select("-1 as id, 'All cities (' || count(name) || ')' as name")
                                   .joins(:trips_from)
                                   .where("trip_date >= ?", DateTime.now.to_date)
 
   scope :to_locations_total_row, select("-1 as id, 'All Cities (' || count(name) || ')' as name")
                                  .joins(:trips_to)
                                  .where("trip_date >= ?", DateTime.now.to_date)
-
-
 
   scope :popular_cities, where("(country_code = 'LT' AND POPULATION > 60000) OR (country_code = 'AU' AND feature_code = 'PPLA')")
 

@@ -12,12 +12,50 @@ en:
   to: "To"
   duration: "Duration"
   distance: "Distance"
+  departing: "Departing"
+  arriving: "Arriving (est)"
   cost: "Cost"
   no_cost: "Free"
   morning: "Morning"
   afternoon: "Afternoon"
+  driver_name: "Driver Name"
+  driver: "Driver"
+  message: "Message"
+  ttime: "Time"
 
   search_all_dates: "Search all dates"
+  search: "Search"
+  more: "Details"
+  loading: "Loading..."
+  contact: "Contact"
+  contact_only: "Contact"
+
+  return_sr: "Return to Search Results"
+  no_trips_msg: "You have not posted any trips yet."
+  fb_post_msg: "Post trip to my facebook wall, so my friends can see it"
+
+  select_list:
+    select_city: "Select City"
+    all_cities: "All Cities"
+
+  trip_time:
+    exact: "Exact Time"
+    morning: "Morn"
+    afternoon: "A/noon"
+
+  buttons:
+    post_trip: "Post Trip"
+
+  headings:
+    search_results: "Search Results"
+    search_filter: "Search Filters"
+    where: "Where?"
+    when: "When?"
+    other_details: "Other Details"
+    route_details: "Route Details"
+    trip_summary: "Trip Summary"
+    driver_details: "Driver Details"
+    my_trips: "My Trips"
 
   tabs:
     home: "Home"

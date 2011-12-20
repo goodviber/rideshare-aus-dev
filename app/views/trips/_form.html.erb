@@ -1,43 +1,43 @@
 <fieldset>
-  <legend>Where?</legend>
+  <legend><%= t "headings.where" %></legend>
   <ol>
     <li>
-      <%= f.label :from_location_id, :class => 'span-3' %>
-      <%= collection_select(:trip, :from_location_id, Location.all_cities, :id, :name, {:prompt => 'Select City'}) %>
+      <%= f.label :from_location_id, t(:from), :class => 'span-3' %>
+      <%= collection_select(:trip, :from_location_id, Location.all_cities, :id, :name, {:prompt => t("select_list.select_city")}) %>
     </li>
     <li>
-      <%= f.label :to_location_id, :class => 'span-3' %>
-      <%= collection_select(:trip, :to_location_id, Location.all_cities, :id, :name, {:prompt => 'Select City'}) %>
+      <%= f.label :to_location_id, t(:to), :class => 'span-3' %>
+      <%= collection_select(:trip, :to_location_id, Location.all_cities, :id, :name, {:prompt => t("select_list.select_city")}) %>
     </li>
   </ol>
 </fieldset>
 <fieldset>
-  <legend>When?</legend>
+  <legend><%= t "headings.when" %></legend>
   <ol>
     <li>
       <%= f.label :trip_date %>
       <%= date_select("trip","trip_date", { :order => [:day, :month, :year] }) %>
     </li>
     <li>
-      <%= f.label :time_of_day %>
+      <%= f.label :time_of_day, t(:departing) %>
       <%= f.radio_button :time_of_day, "E" %>
-      Exact Time
+      <%= t("trip_time.exact") %>
       <%= f.radio_button :time_of_day, "M" %>
-      Morn
+      <%= t("trip_time.morning") %>
       <%= f.radio_button :time_of_day, "A" %>
-      A/noon
+      <%= t("trip_time.afternoon") %>
     </li>
     <li id="liTripTime">
-      <%= f.label :trip_time %>
+      <%= f.label :trip_time, t(:ttime) %>
       <%= time_select("trip","trip_time", {:minute_step => 15}) %>
     </li>
   </ol>
 </fieldset>
 <fieldset>
-  <legend>Other Details</legend>
+  <legend><%= t "headings.other_details" %></legend>
   <ol>
     <li>
-    <%= label :trip, :driver %>
+    <%= label :trip, t(:driver) %>
     <%= text_field :trip, :driver, :disabled => true, :class => "text", :value => driver_name %>
     </li>
     <!--
@@ -47,15 +47,15 @@
     </li>
     -->
     <li>
-      <%= f.label :cost, "Cost (Per Per)" %>
+      <%= f.label :cost, t(:cost) %>
       <%= select(:trip, :cost, cost_options) %>
     </li>
     <li>
-      <%= f.label :trip_details %>
+      <%= f.label :trip_details, t(:message) %>
       <%= f.text_area :trip_details, :resize => false, :class => "text", :rows => 5 %>
     </li>
     <li>
-      <%= check_box "misc", :post_to_wall, :checked => true %> Post trip to my facebook wall, so my friends can see it<br/>
+      <%= check_box "misc", :post_to_wall, :checked => true %><%= t(:fb_post_msg) %><br/>
     </li>
   </ol>
 
@@ -70,6 +70,6 @@
 <%= hidden_field :trip, :driver_id %>
 
 <div class="actions ui-style">
-  <%= f.submit %>
+  <%= f.submit t("buttons.post_trip") %>
 </div>
 

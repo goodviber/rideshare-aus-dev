@@ -264,6 +264,10 @@ vertical-align: top;
 width: 120px;
 }
 
+label.long {
+width: 160px;
+}
+
 .ui-dialog .ui-state-error {
 padding: .1em;
 }

@@ -28,7 +28,7 @@
       <%= render 'tool_tip', :trip => trip %>
     </td>
 
-    <td><%= link_to 'Details', trip_path(trip) %></td>
+    <td><%= link_to(t(:more), trip_path(trip)) %></td>
   </tr>
 <% end %>
 </table>
