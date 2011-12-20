@@ -7,6 +7,6 @@ test:
   app_secret: 7f753f629ffebc36c28879c560805429
 
 production:
-  app_id: <%= ENV['APP_ID'] %>
-  app_secret: <%= ENV['APP_SECRET'] %>
+  app_id: 163188793727561
+  app_secret: 824d2398c1e4a61e092c574dfec08989
 
