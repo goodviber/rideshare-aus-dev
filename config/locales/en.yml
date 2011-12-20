@@ -1,6 +1,7 @@
 # Australian English translations for Ruby on Rails
 
 en:
+  current_lng: "en"
   login: "Log in"
   logout: "Log out"
   sign_up: "Sign up"

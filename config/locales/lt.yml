@@ -1,6 +1,7 @@
 # Lithuanian translations for Ruby on Rails. by Laurynas Butkus (laurynas.butkus@gmail.com)
 
 lt:
+  current_lng: "lt"
   login: "Prisijungti"
   logout: "Atsijungti"
   sign_up: "Užsiregistruoti"
