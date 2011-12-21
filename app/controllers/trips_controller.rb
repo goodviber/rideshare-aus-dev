@@ -194,21 +194,24 @@ class TripsController < ApplicationController
       :message => trip.trip_details,
       :link => 'www.pavesiu.lt',
       :name => message,
-      :description => "Pavesiu.lt Vaziuoju is miesto A i miesta B"
+      :description => "Pavesiu.lt Vaziuoju is miesto A i miesta B",
+      :picture => "http://pavesiu.heroku.com/assets/pavesiu-logo-50x50.png"
     )
     flash[:notice] = flash[:notice] + ' Trip posted to your facebook wall.'
   end
 
   def post_to_fanpage_wall(trip)
-    page = FbGraph::Page.new(116697818393412) #Ridesurfing page ID: 116697818393412
-    message = "Rideshare: " + trip.from_location.name + " - " + trip.to_location.name + " [" + trip.trip_date.to_s(:short) + "]"
+    fb_page_id = ENV['FB_PAGE_ID'] || '116697818393412' #default: ridesurfing fan page
+    page = FbGraph::Page.new(fb_page_id)
+    message = trip.from_location.name + " - " + trip.to_location.name + " [" + l(trip.trip_date, :format => :very_short) + "]"
+
     page.feed!(
       :access_token => session['token'],
       :message => trip.trip_details,
       :link => 'www.pavesiu.lt',
       :name => message,
       :description => "Pavesiu.lt Vaziuoju is miesto A i miesta B",
-      :picture => "http://upload.wikimedia.org/wikipedia/commons/3/3a/Matrix-50x50.gif"
+      :picture => "http://pavesiu.heroku.com/assets/pavesiu-logo-50x50.png"
     )
   end
 
