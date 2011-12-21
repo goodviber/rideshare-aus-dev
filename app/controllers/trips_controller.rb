@@ -192,9 +192,9 @@ class TripsController < ApplicationController
     message = trip.from_location.name + " - " + trip.to_location.name + " [" + trip.trip_date.to_s(:short) + "]"
     me.feed!(
       :message => trip.trip_details,
-      :link => 'www.cocoride.com.au',
+      :link => 'www.pavesiu.lt',
       :name => message,
-      :description => "Share the cost. Share the experience. Share the ride."
+      :description => "Pavesiu.lt Vaziuoju is miesto A i miesta B"
     )
     flash[:notice] = flash[:notice] + ' Trip posted to your facebook wall.'
   end
@@ -205,9 +205,9 @@ class TripsController < ApplicationController
     page.feed!(
       :access_token => session['token'],
       :message => trip.trip_details,
-      :link => 'www.cocoride.com.au',
+      :link => 'www.pavesiu.lt',
       :name => message,
-      :description => "Share the cost. Share the experience. Share the ride.",
+      :description => "Pavesiu.lt Vaziuoju is miesto A i miesta B",
       :picture => "http://upload.wikimedia.org/wikipedia/commons/3/3a/Matrix-50x50.gif"
     )
   end
