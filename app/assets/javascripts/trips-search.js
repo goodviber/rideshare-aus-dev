@@ -135,13 +135,13 @@ $(document).ready(function () {
 
 
 	function setScheduledDays(date) {
-		today = new Date();
-		today.setDate(today.getDate()-1);
+		//today = new Date();
+		//today.setDate(today.getDate()-2);
 
-		if (date >= today)
+		//if (date >= today)
 			return checkDateIsInArray(date, availableDays);
-		else
-			return [false, 'CLOSED', 'There are no trips for this date'];
+		//else
+		//	return [false, 'CLOSED', 'There are no trips for this date'];
 	}
 
 	function checkDateIsInArray(date, array) {
