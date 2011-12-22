@@ -19,3 +19,8 @@ Future tasks
 - After 1-2months, require fb login to view trips.
 - Split mobile number into own db field (display on details/show screen)
 
+
+Spelling mistakes
+-------------------
+LOGO - Vaziuoju iš taško A į tašką B -> Važiuoju
+

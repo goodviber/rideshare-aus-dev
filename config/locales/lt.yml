@@ -13,7 +13,7 @@ lt:
   to: "Iki"
   duration: "Trukmė"
   distance: "Atstumas"
-  departing: "Išvykstantiems"
+  departing: "Išvykimas"
   arriving: "Atvykstančių"
   cost: "Kaina"
   no_cost: "0 Lt"
@@ -24,7 +24,7 @@ lt:
   message: "Kelionės detalės"
   ttime: "Laikas"
 
-  search_all_dates: "Paieška visas datas"
+  search_all_dates: "Ieškoti visų datų"
   search: "Ieškoti"
   more: "Išsamiau"
   loading: "Pakrovimas..."
@@ -32,7 +32,7 @@ lt:
   contact_only: "susisiekti"
 
   return_sr: "Grįžti į paieškos rezultatus"
-  no_trips_msg: "Jums dar nėra paskelbtas bet keliones."
+  no_trips_msg: "Jūs dar nesate paskelbęs kelionių."
   fb_post_msg: "Rašyti kelionę į mano Facebook sienelės, todėl mano draugai gali matyti"
 
   select_list:
@@ -40,12 +40,12 @@ lt:
     all_cities: "Visi miestai"
 
   trip_time:
-    exact: "Tikslaus laiko"
-    morning: "Rytas"
-    afternoon: "Popietė"
+    exact: "Laikas"
+    morning: "Iki pietų"
+    afternoon: "Po pietų"
 
   buttons:
-    post_trip: "Paštu kelionės"
+    post_trip: "Paskelbti kelionę"
 
   headings:
     search_filter: "paieškos filtrai"
@@ -53,15 +53,15 @@ lt:
     where: "Kur?"
     when: "Kada?"
     other_details: "Kita informacija"
-    route_details: "Maršrutas detalės"
+    route_details: "Maršruto detalės"
     trip_summary: "Kelionės duomenys"
     driver_details: "Vairuotojo duomenys"
-    my_trips: "Mano Keliones"
+    my_trips: "Mano kelionės"
 
   tabs:
-    home: "Namo"
+    home: "Į pradžią"
     search: "Ieškoti"
-    post: "Paštu"
+    post: "Skelbti"
     my_trips: "Kelionės"
     about: "Apie"
 
