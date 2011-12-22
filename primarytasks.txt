@@ -24,3 +24,8 @@ Spelling mistakes
 -------------------
 LOGO - Vaziuoju iš taško A į tašką B -> Važiuoju
 
+Trip.all.uniq_by{ |p| [p.driver_id, p.trip_date, p.to_location_id, p.from_location_id] }.count
+
+
+Location.select("-1 as id, 'All cities (' || count(name) || ')' as name").joins(:trips_from).where("trip_date >= ?", DateTime.now.to_date)
+
