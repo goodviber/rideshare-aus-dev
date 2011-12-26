@@ -169,20 +169,22 @@ class Trip < ActiveRecord::Base
   end
 
   def self.remove_duplicates
-    del_count = QueuedPost.where("id not in (?)",QueuedPost.all.uniq_by { |p| p.message }.map(&:id)).delete_all
+    #del_count = QueuedPost.where("id not in (?)",QueuedPost.all.uniq_by { |p| p.message }.map(&:id)).delete_all
+    del_count = QueuedPost.where("id not in (?) and process_type is null",QueuedPost.all.uniq_by { |p| p.message }.map(&:id)).update_all("process_type = 'D', deleted_msg = 'duplicate entry', deleted_at = current_timestamp")
+    #Billing.update_all( "author = 'David'", "title LIKE '%Rails%'" )
     "#{del_count} duplicate entries have been removed."
   end
 
   def self.remove_old_posts(days_old)
     qp_count = QueuedPost.where("post_created_at < ?",DateTime.now-days_old.days).delete_all
     t_count = Trip.where("created_at < ?", DateTime.now-days_old.days).delete_all
-    "Cleared #{qp_count} records from QueuedPost. Cleared #{t_count} records from Trip"
+    "Cleared #{qp_count} records from QueuedPost.\nCleared #{t_count} records from Trip."
   end
 
   def self.migrate_data
     processed_count = 0
 
-    list_of_posts = QueuedPost.where("processed_at is null")
+    list_of_posts = QueuedPost.where("process_type is null")
     to_process_count = list_of_posts.count
 
     success = false
@@ -279,27 +281,48 @@ class Trip < ActiveRecord::Base
     trip.driver_id = driver_id
     trip.trip_details = post.message
 
-    if trip.save
-      #update Queued Post
-      qp = QueuedPost.find_by_post_id(post.post_id)
-      qp.process_type = "A"
-      qp.trip_id = trip.id
-      qp.processed_at = DateTime.now
-      qp.save
+    trip_exists = check_trip_exists(trip)
 
-      true
+    if !trip_exists
+      if trip.save
+        #update Queued Post
+        qp = QueuedPost.find_by_post_id(post.post_id)
+        qp.process_type = "A"
+        qp.trip_id = trip.id
+        qp.processed_at = DateTime.now
+        qp.save
+
+        true
+      else
+        qp = QueuedPost.find_by_post_id(post.post_id)
+        qp.trip_id = trip.id
+        qp.error_msg = trip.errors.full_messages[0]
+        qp.save
+
+        false
+      end
     else
-      qp = QueuedPost.find_by_post_id(post.post_id)
-      qp.trip_id = trip.id
-      qp.error_msg = trip.errors.full_messages[0]
-      qp.save
+        qp = QueuedPost.find_by_post_id(post.post_id)
+        qp.process_type = "D"
+        qp.deleted_at = DateTime.now
+        qp.deleted_msg = "User already has trip on this day"
+        qp.save
 
-      false
+        false
     end
 
     rescue Exception => exc
       #debugger
       puts "Error occured processing queued_posts id #{post.id}\n-" + exc.to_s
+  end
+
+  private
+  def self.check_trip_exists(trip)
+    t = Trip.where(:to_location_id => trip.to_location,
+                  :from_location_id => trip.from_location_id,
+                  :driver_id => trip.driver_id,
+                  :trip_date => trip.trip_date)
+    t.exists?
   end
 
   private

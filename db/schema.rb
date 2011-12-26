@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111218082047) do
+ActiveRecord::Schema.define(:version => 20111226040746) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -58,12 +58,13 @@ ActiveRecord::Schema.define(:version => 20111218082047) do
     t.text     "error_msg"
     t.datetime "processed_at"
     t.datetime "deleted_at"
+    t.text     "deleted_msg"
   end
 
   create_table "trips", :force => true do |t|
     t.integer  "to_location_id"
     t.integer  "from_location_id"
-    t.integer  "seats",            :limit => 2,                                  :default => 0, :null => false
+    t.integer  "seats",                                                          :default => 0, :null => false
     t.integer  "driver_id",                                                                     :null => false
     t.date     "trip_date"
     t.time     "trip_time"
