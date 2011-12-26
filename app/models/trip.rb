@@ -318,6 +318,8 @@ class Trip < ActiveRecord::Base
 
   private
   def self.check_trip_exists(trip)
+    #Users should only be allowed to post one trip, per day to the same destination.
+    #If a trip has already been posted to the destination city for that particular user, do not post any more, as these are duplicated trips.
     t = Trip.where(:to_location_id => trip.to_location,
                   :from_location_id => trip.from_location_id,
                   :driver_id => trip.driver_id,
