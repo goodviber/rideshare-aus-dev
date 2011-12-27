@@ -4,10 +4,11 @@
 <% if deleted_count != 0 %>
   <tr>
     <th>Post ID</td>
+    <th>Deleted At</th>
     <th>FB Page</td>
     <th>Posted At</th>
-    <th>Deleted</th>
-    <th>Message</th>
+    <th>Facebook ID</th>
+    <th>Reason</th>
     <th></th>
   </tr>
 <% end %>
@@ -15,11 +16,12 @@
 <% @posts.each do |post| %>
   <tr>
     <td><%= post.id %></td>
+    <td><%= l post.deleted_at, :format => :time_date_short %></td>
     <td><%= post.fb_page(post.page_id) %></td>
     <td><%= l post.post_created_at, :format => :time_date_short %></td>
-    <td><%= l post.deleted_at, :format => :time_date_short %></td>
-    <td class="message"><%= post.message %></td>
-    <td><%= link_to 'undo', { :action => "undestroy", :id => post }, :confirm => 'Are you sure you want to UNDO delete of this post?', :method => :post %></td>
+    <td><a href="http:\\www.facebook.com\<%= post.fb_id %>" target="_blank"><%= post.fb_id %></a></td>
+    <td class="message"><%= post.deleted_msg %></td>
+    <td><%= link_to 'un-delete', { :action => "undestroy", :id => post }, :confirm => 'Are you sure you want to UNDO delete of this post?', :method => :post %></td>
   </tr>
 <% end %>
 </table>

@@ -80,8 +80,8 @@ class TripsController < ApplicationController
         end
 
         flash[:notice] = 'Trip was successfully created.'
-        post_to_fanpage_wall(@trip)
-        post_to_users_wall(@trip) if params['misc']['post_to_wall'] == "1"
+        post_to_fanpage_wall(@trip) if !queued_post #do not post for manual posts
+        post_to_users_wall(@trip) if params['misc']['post_to_wall'] == "1" and !queued_post
         format.html { redirect_to @trip }
         format.json { render json: @trip, status: :created, location: @trip }
       else
