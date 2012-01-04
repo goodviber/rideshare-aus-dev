@@ -23,7 +23,7 @@ class AuthenticationsController < ApplicationController
         u.save
       end
 
-      flash[:notice] = "You are now logged in."
+      #flash[:notice] = "You are now logged in."
       sign_in_and_redirect(:user, authentication.user)
     elsif current_user  #add authentication to user that is logged in
       current_user.authentications.create!(:provider => omniauth['provider'], :uid => omniauth['uid'])
@@ -42,7 +42,7 @@ class AuthenticationsController < ApplicationController
         user.authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
         user.save!
 
-        flash[:notice] = "You are now logged in."
+        #flash[:notice] = "You are now logged in."
         sign_in_and_redirect(:user, user)
       else
         existing_user.authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
@@ -67,6 +67,10 @@ class AuthenticationsController < ApplicationController
       fb_session_key = split_token[1]
       redirect_to "http://www.facebook.com/logout.php?api_key=#{fb_api_key}&session_key=#{fb_session_key}&confirm=1&next=#{destroy_user_session_url}";
     end
+  end
+
+  def failure
+    redirect_to root_url, notice: 'Authentication failed. Please try again.'
   end
 
 end

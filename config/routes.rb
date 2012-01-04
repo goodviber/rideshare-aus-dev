@@ -18,6 +18,7 @@ Cocoride::Application.routes.draw do
 
     match 'auth/:provider/callback' => 'authentications#create'
     match 'auth/facebook/logout' => 'authentications#facebook_logout', :as => :facebook_logout
+    match 'auth/failure' => 'authentications#failure'
 
     #match '/trips/search(/:fl(-to-:tl(/:tripdate)))' => 'trips#load_search_results'
     match '/trips/search(/:fl(-:tl))' => 'trips#load_search_results', :as => :load_results

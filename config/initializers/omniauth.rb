@@ -6,6 +6,6 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   app_id = ENV['app_id'] || APP_CONFIG['app_id']
   app_secret = ENV['app_secret'] || APP_CONFIG['app_secret']
 
-  provider :facebook, app_id, app_secret, {:scope => 'publish_stream,offline_access,email'}
+  provider :facebook, app_id, app_secret, {:scope => 'publish_stream, email'}
 end
 
