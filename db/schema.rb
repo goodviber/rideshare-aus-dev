@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120104032034) do
+ActiveRecord::Schema.define(:version => 20120104034354) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -44,6 +44,11 @@ ActiveRecord::Schema.define(:version => 20120104032034) do
     t.integer  "trips_from_count",                 :default => 0
     t.integer  "trips_to_count",                   :default => 0
   end
+
+  add_index "locations", ["alternate_names"], :name => "index_locations_on_alternate_names"
+  add_index "locations", ["ascii_name"], :name => "index_locations_on_ascii_name"
+  add_index "locations", ["id"], :name => "index_locations_on_id", :unique => true
+  add_index "locations", ["name"], :name => "index_locations_on_name"
 
   create_table "queued_posts", :force => true do |t|
     t.string   "page_id"
@@ -78,6 +83,11 @@ ActiveRecord::Schema.define(:version => 20120104032034) do
     t.text     "trip_details"
     t.integer  "cost",                                                           :default => 0
   end
+
+  add_index "trips", ["from_location_id"], :name => "index_trips_on_from_location_id"
+  add_index "trips", ["id"], :name => "index_trips_on_id", :unique => true
+  add_index "trips", ["to_location_id"], :name => "index_trips_on_to_location_id"
+  add_index "trips", ["trip_date"], :name => "index_trips_on_trip_date"
 
   create_table "users", :force => true do |t|
     t.string   "first_name"
