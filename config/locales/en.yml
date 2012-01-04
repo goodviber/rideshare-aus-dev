@@ -152,8 +152,8 @@ en:
 
     currency:
       format:
-        format: "%u%n"
-        unit: "$"
+        format: "%n %u"
+        unit: "Lt"
         separator: "."
         delimiter: ","
         precision: 2

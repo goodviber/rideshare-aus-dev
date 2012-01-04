@@ -55,7 +55,7 @@ class QueuedPostsController < ApplicationController
     @posts = QueuedPost.where(:process_type => "M").order("processed_at DESC")
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html
       format.json { render json: @posts }
     end
   end

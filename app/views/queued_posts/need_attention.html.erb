@@ -1,24 +1,29 @@
 
-<table class="dataTable">
-  <tr>
-    <th>Post ID</td>
-    <th>FB Page</td>
-    <th>Posted At</th>
-    <th>Message</th>
-    <th></th>
-    <th></th>
-  </tr>
+<% if @posts.count > 0 %>
+  <table class="dataTable">
+    <tr>
+      <th>Post ID</td>
+      <th>FB Page</td>
+      <th>Posted At</th>
+      <th>Message</th>
+      <th></th>
+      <th></th>
+    </tr>
 
-<% @posts.each do |post| %>
-  <tr>
-    <td><%= post.id %></td>
-    <td><%= post.fb_page(post.page_id) %></td>
-    <td><%= l post.post_created_at, :format => :time_date_short %></td>
-    <td class="message"><%= post.message %></td>
-    <td><%= link_to 'X', post, :confirm => 'Are you sure you want to delete this post?', :method => :delete %></td>
-    <td><%= link_to 'Process', new_manual_trip_url(:post_id => post.id), :target => "_blank" %></td>
-  </tr>
+  <% @posts.each do |post| %>
+    <tr>
+      <td><%= post.id %></td>
+      <td><%= post.fb_page(post.page_id) %></td>
+      <td><%= l post.post_created_at, :format => :time_date_short %></td>
+      <td class="message"><%= post.message %></td>
+      <td><%= link_to 'X', post, :confirm => 'Are you sure you want to delete this post?', :method => :delete %></td>
+      <td><%= link_to 'Process', new_manual_trip_url(:post_id => post.id), :target => "_blank" %></td>
+    </tr>
+  <% end %>
+  </table>
+<% else %>
+<br/>
+<p>Pavešiu is up to date.<br/>There are no new trips that needs to be processed.</p>
 <% end %>
-</table>
 <br />
 
