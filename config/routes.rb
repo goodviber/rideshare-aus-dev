@@ -5,8 +5,6 @@ Cocoride::Application.routes.draw do
 
   ActionController::Routing::SEPARATORS <<  "-" unless ActionController::Routing::SEPARATORS.include?("-")
 
-  resources :demos
-
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -89,7 +87,7 @@ Cocoride::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'home#index'
+  root :to => 'trips#index'
 
   # See how all your routes lay out with "rake routes"
 

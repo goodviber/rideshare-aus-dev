@@ -18,13 +18,9 @@ class Location < ActiveRecord::Base
   scope :apply_filter, where("feature_class = 'P'")
                       .where("feature_code not in ('PPLX','PPLQ')")
 
-  scope :from_locations_total_row, select("-1 as id, 'All cities (' || count(name) || ')' as name")
-                                  .joins(:trips_from)
-                                  .where("trip_date >= ?", DateTime.now.to_date)
+  scope :from_locations_total_row, select("-1 as id, 'All cities (' || count(name) || ')' as name").joins(:trips_from).where("trip_date >= ?", DateTime.now.to_date)
 
-  scope :to_locations_total_row, select("-1 as id, 'All Cities (' || count(name) || ')' as name")
-                                 .joins(:trips_to)
-                                 .where("trip_date >= ?", DateTime.now.to_date)
+  scope :to_locations_total_row, select("-1 as id, 'All Cities (' || count(name) || ')' as name").joins(:trips_to).where("trip_date >= ?", DateTime.now.to_date)
 
   scope :popular_cities, where("(country_code = 'LT' AND POPULATION > 60000) OR (country_code = 'AU' AND feature_code = 'PPLA')")
 
@@ -46,14 +42,30 @@ class Location < ActiveRecord::Base
   end
 
   def self.from_locations
-    p1 = Location.from_locations_total_row
-    p2 = Location.has_trips_from
+    #p1 = Location.from_locations_total_row
+    #p2 = Location.has_trips_from
+
+    #Attempt to fix cache issue
+    p1 = Location.select("-1 as id, 'All cities (' || count(name) || ')' as name").joins(:trips_from).where("trip_date >= ?", DateTime.now.to_date)
+    p2 = Location.select("locations.id, name || ' (' || count(name) || ')' as name")
+                .joins(:trips_from)
+                .where("trip_date >= ?", DateTime.now.to_date)
+                .group("locations.id, name")
+                .order("name")
     full_list = p1 + p2
   end
 
   def self.to_locations
-    p1 = Location.to_locations_total_row
-    p2 = Location.has_trips_to
+    #p1 = Location.to_locations_total_row
+    #p2 = Location.has_trips_to
+
+    p1 = Location.select("-1 as id, 'All Cities (' || count(name) || ')' as name").joins(:trips_to).where("trip_date >= ?", DateTime.now.to_date)
+    p2 = Location.select("locations.id, name || ' (' || count(name) || ')' as name")
+                .joins(:trips_to)
+                .where("trip_date >= ?", DateTime.now.to_date)
+                .group("locations.id, name")
+                .order("name")
+
     full_list = p1 + p2
   end
 

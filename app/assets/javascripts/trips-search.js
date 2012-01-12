@@ -101,6 +101,7 @@ $(document).ready(function () {
 
 		params = { from_location_id: fromLocationId, to_location_id: toLocationId, date: date, authenticity_token: _token };
 
+		$('#startupContainer').hide();
 		$('#searchResults').hide();
 		$('#searchResultsContainer').show();
 		$('#loading').show();

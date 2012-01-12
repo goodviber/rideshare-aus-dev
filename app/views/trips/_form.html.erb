@@ -15,11 +15,11 @@
   <legend><%= t "headings.when" %></legend>
   <ol>
     <li>
-      <%= f.label :trip_date %>
+      <%= f.label :time_of_day, t(:departing) %>
       <%= date_select("trip","trip_date", { :order => [:day, :month, :year] }) %>
     </li>
     <li>
-      <%= f.label :time_of_day, t(:departing) %>
+      <%= f.label "" %>
       <%= f.radio_button :time_of_day, "E" %>
       <%= t("trip_time.exact") %>
       <%= f.radio_button :time_of_day, "M" %>
