@@ -46,7 +46,12 @@ class Location < ActiveRecord::Base
     #p2 = Location.has_trips_from
 
     #Attempt to fix cache issue
-    p1 = Location.select("-1 as id, 'All cities (' || count(name) || ')' as name").joins(:trips_from).where("trip_date >= ?", DateTime.now.to_date)
+    if I18n.locale == :lt
+      p1 = Location.select("-1 as id, 'Visi miestai (' || count(name) || ')' as name").joins(:trips_from).where("trip_date >= ?", DateTime.now.to_date)
+    else
+      p1 = Location.select("-1 as id, 'All cities (' || count(name) || ')' as name").joins(:trips_from).where("trip_date >= ?", DateTime.now.to_date)
+    end
+
     p2 = Location.select("locations.id, name || ' (' || count(name) || ')' as name")
                 .joins(:trips_from)
                 .where("trip_date >= ?", DateTime.now.to_date)
@@ -58,8 +63,12 @@ class Location < ActiveRecord::Base
   def self.to_locations
     #p1 = Location.to_locations_total_row
     #p2 = Location.has_trips_to
+    if I18n.locale == :lt
+      p1 = Location.select("-1 as id, 'Visi miestai (' || count(name) || ')' as name").joins(:trips_to).where("trip_date >= ?", DateTime.now.to_date)
+    else
+      p1 = Location.select("-1 as id, 'All Cities (' || count(name) || ')' as name").joins(:trips_to).where("trip_date >= ?", DateTime.now.to_date)
+    end
 
-    p1 = Location.select("-1 as id, 'All Cities (' || count(name) || ')' as name").joins(:trips_to).where("trip_date >= ?", DateTime.now.to_date)
     p2 = Location.select("locations.id, name || ' (' || count(name) || ')' as name")
                 .joins(:trips_to)
                 .where("trip_date >= ?", DateTime.now.to_date)

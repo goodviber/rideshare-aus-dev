@@ -34,6 +34,7 @@ en:
   return_sr: "Return to Search Results"
   no_trips_msg: "You have not posted any trips yet."
   fb_post_msg: "Post trip to my facebook wall, so my friends can see it"
+  auth_failed: "Authentication failed. Please try again."
 
   select_list:
     select_city: "Select City"

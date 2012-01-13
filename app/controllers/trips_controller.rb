@@ -4,7 +4,8 @@ class TripsController < ApplicationController
 
   def index
     @selected_tab = "search"
-    @content_for_title = "Ieskoti"
+    @content_for_title = "Visas keliones vienoje vietoje!"
+    @content_for_description = "Vilnius, Klaipeda, Kaunas, Panevezys ir daug daugiau"
     @trips = Trip.all
   end
 

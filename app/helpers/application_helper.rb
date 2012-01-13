@@ -2,10 +2,14 @@ module ApplicationHelper
 
   def page_title
     if @content_for_title
-      'Pavesiu.lt' + (" | " + @content_for_title).to_s
+      'Pavesiu' + (" | " + @content_for_title).to_s
     else
-      'Pavesiu.lt | visas keliones vienoje vietoje'
+      'Pavesiu | visas keliones vienoje vietoje'
     end
+  end
+
+  def page_description
+    @content_for_description
   end
 
   def fb_image_url

@@ -34,6 +34,7 @@ lt:
   return_sr: "Grįžti į paieškos rezultatus"
   no_trips_msg: "Jūs dar nesate paskelbęs kelionių."
   fb_post_msg: "Paviešinti kelionę mano Facebook sienoje, kur ją matys mano draugai"
+  auth_failed: "Nepavyko prisijungti. Prašome pabandyti dar kartą."
 
   select_list:
     select_city: "Pasirinkite miestą"

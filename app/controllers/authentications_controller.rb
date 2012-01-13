@@ -70,7 +70,7 @@ class AuthenticationsController < ApplicationController
   end
 
   def failure
-    redirect_to root_url, notice: 'Authentication failed. Please try again.'
+    redirect_to root_url, notice: t(:auth_failed)
   end
 
 end
