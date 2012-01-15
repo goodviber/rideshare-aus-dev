@@ -6,6 +6,7 @@ gem 'rails-i18n'
 gem 'heroku'
 gem 'taps'
 gem 'activeadmin'
+gem 'will_paginate'
 
 # gem 'blueprint-rails'
 

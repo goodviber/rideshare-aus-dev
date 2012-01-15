@@ -134,6 +134,7 @@ class TripsController < ApplicationController
     fl_id = params[:from_location_id]
     tl_id = params[:to_location_id]
     date = params[:date]
+    p_page = params[:page]
 
     conditions = {}
     conditions[:from_location_id] = fl_id if fl_id != "-1"
@@ -143,6 +144,7 @@ class TripsController < ApplicationController
     @trips = Trip.where(conditions)
                  .where("trip_date >= ?", DateTime.now.to_date)
                  .order("trip_date, trip_time")
+                 .paginate(:page => p_page, :per_page => 20)
 
     @sel_trip_date = date.to_date if date != "-1"
 

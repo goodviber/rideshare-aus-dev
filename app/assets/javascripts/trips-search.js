@@ -3,20 +3,17 @@ var ListOfFullDates;
 var availableDays = new Array();
 var queryProcessing = false;
 
-
 function bindTooltip() {
 
     $(".customTooltip span").tooltip({
         position: "top left",   // place tooltip on the left edge
         offset: [0, 7],           // a little tweaking of the position
-        //effect: "fade",             // use the built-in fadeIn/fadeOut effect
         opacity: 1                  // custom opacity setting
     });
 
     $(".MFcustomTooltip span").tooltip({
         position: "top left",   // place tooltip on the left edge
         offset: [3, 13],         // a little tweaking of the position
-        //effect: "fade",       // use the built-in fadeIn/fadeOut effect
         opacity: 1              // custom opacity setting
     });
 
@@ -25,7 +22,6 @@ function bindTooltip() {
     });
 }
 
-
 $(document).ready(function () {
 
 	bindTooltip();
@@ -33,31 +29,28 @@ $(document).ready(function () {
 	$('#searchResultsContainer').hide();
 
 	$('#filterButton').click(function() {
-		var selectedDate = $('#dateDiv').datepicker("getDate");
-		selectedDate = formatDate(selectedDate,"yy/mm/dd");
-
-		if ($('#trip_all_dates').attr('checked')) {
-			selectedDate = -1;
-		}
-
-		postSearchRequest(selectedDate);
+		postSearchRequest(1);
 	});
+
+	$('.paging_links a').live("click", function(event){
+		href = $(this).attr('href');
+		event.preventDefault();
+
+		//take the last char from the url as this is the page number
+		page = href.substr(href.length - 1);
+
+		postSearchRequest(page);
+  	});
 
 	function createDatepicker() {
 		$('#dateDiv').datepicker({
 		    dateFormat: 'yy/mm/dd',
-		    //constrainInput: false,
 		    onSelect: function (date) {
-		        //submitData(date);
-		        //postSearchRequest(date);
+		        //turn off the 'search all dates' checkbox when a date is selected
 		        $('#trip_all_dates').attr('checked', false);
-
 		    },
 		    beforeShowDay: setScheduledDays,
-		    //beforeShow: test,
 		    numberOfMonths: 1
-		    //gotoCurrent: true,
-		    //showAnim: ''
 		});
     }
 
@@ -70,13 +63,11 @@ $(document).ready(function () {
     }
 
     $('#trip_to_location_id').live('change', function() {
-		//postSearchRequest();
 		getValidTripDates();
 		$('#trip_all_dates').attr('checked', true);
     });
 
     $('#trip_from_location_id').live('change', function() {
-		//postSearchRequest();
 		getValidTripDates();
 		$('#trip_all_dates').attr('checked', true);
 
@@ -94,12 +85,18 @@ $(document).ready(function () {
 		});
 	}
 
-	function postSearchRequest(date) {
+	function postSearchRequest(page) {
 
 		var fromLocationId = $('#trip_from_location_id').val();
 		var toLocationId = $('#trip_to_location_id').val();
 
-		params = { from_location_id: fromLocationId, to_location_id: toLocationId, date: date, authenticity_token: _token };
+		var selectedDate = $('#dateDiv').datepicker("getDate");
+		selectedDate = formatDate(selectedDate,"yy/mm/dd");
+		if ($('#trip_all_dates').attr('checked')) {
+			selectedDate = -1;
+		}
+
+		params = { page: page, from_location_id: fromLocationId, to_location_id: toLocationId, date: selectedDate, authenticity_token: _token };
 
 		$('#startupContainer').hide();
 		$('#searchResults').hide();
@@ -118,7 +115,6 @@ $(document).ready(function () {
 	  $('#searchResults').html(partialHtml);
     }
 
-
 	function getValidTripDates() {
 
 		var fromLocationId = $('#trip_from_location_id').val();
@@ -128,21 +124,12 @@ $(document).ready(function () {
 		$.post("/trips/load_valid_dates", params)
 		  .success(function(validDates) {
 			availableDays = validDates;
-
-			//$('#DateDiv').datepicker('refresh');
 			recreateDatepicker();
 		  });
 	}
 
-
 	function setScheduledDays(date) {
-		//today = new Date();
-		//today.setDate(today.getDate()-2);
-
-		//if (date >= today)
-			return checkDateIsInArray(date, availableDays);
-		//else
-		//	return [false, 'CLOSED', 'There are no trips for this date'];
+		return checkDateIsInArray(date, availableDays);
 	}
 
 	function checkDateIsInArray(date, array) {

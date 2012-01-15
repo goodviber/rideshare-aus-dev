@@ -1,6 +1,11 @@
 # Lithuanian translations for Ruby on Rails. by Laurynas Butkus (laurynas.butkus@gmail.com)
 
 lt:
+  will_paginate:
+    next_label:  kitas →
+    page_gap: ! '&hellip;'
+    previous_label: ← ankstesnis
+
   current_lng: "lt"
   login: "Prisijungti"
   logout: "Atsijungti"

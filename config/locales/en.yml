@@ -1,6 +1,11 @@
 # Australian English translations for Ruby on Rails
 
 en:
+  will_paginate:
+    next_label: Next →
+    page_gap: ! '&hellip;'
+    previous_label: ← Previous
+
   current_lng: "en"
   login: "Log in"
   logout: "Log out"
