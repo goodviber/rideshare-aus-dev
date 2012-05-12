@@ -28,7 +28,7 @@
       <%= render 'tool_tip', :trip => trip %>
     </td>
 
-    <td><%= link_to(t(:more), trip_path(trip)) %></td>
+    <td><%= link_to(t(:more), trip_path(trip), :class => 'load_dialog') %></td>
   </tr>
 <% end %>
 </table>
@@ -37,4 +37,27 @@
 <div class="paging_links digg_pagination" >
   <%= will_paginate @trips %>
 </div>
+
+<script>
+  $('.load_dialog').click(function(e) {
+    var url = $(this).attr('href');
+    var dialog_form = $('<div id="dialog-form">Loading form...</div>').dialog({
+      autoOpen: false,
+      width: 900,
+      modal: true,
+      height: 460,
+      open: function() {
+        return $(this).load(url + ' #show-content');
+      },
+      close: function() {
+        $('#dialog-form').remove();
+      }
+    });
+    
+    dialog_form.dialog('open');
+    e.preventDefault();
+  });
+
+
+</script>
 

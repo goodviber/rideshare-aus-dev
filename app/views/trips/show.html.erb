@@ -1,74 +1,75 @@
+<div id="show-content">
+  <div class="span-8">
 
-<div class="span-8">
-
-<fieldset>
-  <legend><%= t "headings.trip_summary" %></legend>
-  <ol>
-    <li>
-      <label><%= t :from %>:</label>
-      <%= @trip.from_location.name %>
-    </li>
-    <li>
-      <label><%= t :to %>:</label>
-      <%= @trip.to_location.name %>
-    </li>
-    <li>
-      <label><%= t :departing %>:</label>
-      <b><%= departing_time %></b>
-    </li>
-    <li>
-      <label><%= t :arriving %>:</label>
-      <%= arrival_time %>
-    </li>
-    <li>
-      <label><%= t :cost %>:</label>
-      <%= number_to_currency(@trip.cost, :precision => 0) %>
-    </li>
-    <li>
-      <label><%= t :distance %>:</label>
-      <%= trip_distance %>
-    </li>
-    <li>
-      <label><%= t :duration %>:</label>
-      <%= trip_duration %>
-    </li>
-  </ol>
-</fieldset>
-
-
-  <%= link_to t(:return_sr), trips_path %>
-</div>
-<div class="prepend-1 span-13 last">
-
-  <fieldset>
-    <legend><%= t "headings.driver_details" %></legend>
-    <div class="span-7">
+    <fieldset>
+      <legend><%= t "headings.trip_summary" %></legend>
       <ol>
         <li>
-          <label class="long"><%= t :driver_name %>:</label><br/>
-          <%= @trip.driver.full_name %>
+          <label><%= t :from %>:</label>
+          <%= @trip.from_location.name %>
         </li>
-        <br/>
         <li>
-          <label class="long"><%= t :message %>:</label><br/>
-          <%= @trip.trip_details %>
+          <label><%= t :to %>:</label>
+          <%= @trip.to_location.name %>
         </li>
-        <br/>
         <li>
-          <div class="ui-style">
-            <form action="http://www.facebook.com/<%= @trip.driver.fb_id %>" target="_blank">­
-                <input type="Submit" value="<%= t :contact %> <%= @trip.driver.first_name %>">
-            </form>
-          </div>
+          <label><%= t :departing %>:</label>
+          <b><%= departing_time %></b>
+        </li>
+        <li>
+          <label><%= t :arriving %>:</label>
+          <%= arrival_time %>
+        </li>
+        <li>
+          <label><%= t :cost %>:</label>
+          <%= number_to_currency(@trip.cost, :precision => 0) %>
+        </li>
+        <li>
+          <label><%= t :distance %>:</label>
+          <%= trip_distance %>
+        </li>
+        <li>
+          <label><%= t :duration %>:</label>
+          <%= trip_duration %>
         </li>
       </ol>
-    </div>
+    </fieldset>
+
+
+    <%= link_to t(:return_sr), trips_path %>
+  </div>
+  <div class="prepend-1 span-13 last">
+
+    <fieldset>
+      <legend><%= t "headings.driver_details" %></legend>
+      <div class="span-7">
+        <ol>
+          <li>
+            <label class="long"><%= t :driver_name %>:</label><br/>
+            <%= @trip.driver.full_name %>
+          </li>
+          <br/>
+          <li>
+            <label class="long"><%= t :message %>:</label><br/>
+            <%= @trip.trip_details %>
+          </li>
+          <br/>
+          <li>
+            <div class="ui-style">
+              <form action="http://www.facebook.com/<%= @trip.driver.fb_id %>" target="_blank">­
+                <input type="Submit" value="<%= t :contact %> <%= @trip.driver.first_name %>">
+              </form>
+            </div>
+          </li>
+        </ol>
+      </div>
 
 
 
-    <div class="span-5 last">
-      <img src="<%= @trip.driver.fb_pic_large_url %>" />
-    </div>
-  </fieldset>
+      <div class="span-5 last">
+        <img src="<%= @trip.driver.fb_pic_large_url %>" />
+      </div>
+    </fieldset>
+  </div>
+
 </div>
-
