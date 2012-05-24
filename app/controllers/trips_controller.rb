@@ -217,6 +217,11 @@ class TripsController < ApplicationController
       :picture => "http://pavesiu.heroku.com/assets/pavesiu-logo-50x50.png"
     )
   end
+  
+  def load_location_data
+    @locations = Location.from_locations
+    render :json => @locations
+  end
 
 end
 

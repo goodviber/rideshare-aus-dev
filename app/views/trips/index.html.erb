@@ -1,36 +1,47 @@
 <% content_for :header, javascript_include_tag("trips-search") %>
 
 <div class="span-8">
-	<fieldset>
-			<legend><%= t "headings.search_filter" %></legend>
+  <fieldset>
+    <legend><%= t "headings.search_filter" %></legend>
+    <div class="demo">
 
-          <%= label(:trip, :from_location_id, t(:from), :class => 'search_loc_label') %>
-	        <%= collection_select(:trip, :from_location_id, Location.from_locations, :id, :name, {}, :class => 'search_loc_list') %>
+      <div class="ui-widget">
+        <label for="location_from">From :</label>
+        <input id="location_from" />
+      </div>
 
-	        <%= label(:trip, :to_location_id, t(:to), :class => 'search_loc_label') %>
-	        <span id="toLocation">
-            <%= collection_select(:trip, :to_location_id, Location.to_locations, :id, :name, {}, :class => 'search_loc_list') %>
-          </span>
+      
 
-			    <div id="dateDiv"></div>
+    </div><!-- End demo -->
 
-			    <input id="trip_all_dates" type="checkbox" checked="checked" name="vehicle" value="Bike" /> <%= t :search_all_dates %><br />
 
-			    <div class="ui-style">
-  			    <button id="filterButton"><%= t :search %></button>
-			    </div>
-	</fieldset>
+    <%= label(:trip, :from_location_id, t(:from), :class => 'search_loc_label') %>
+    <%= collection_select(:trip, :from_location_id, Location.from_locations, :id, :name, {}, :class => 'search_loc_list') %>
+
+    <%= label(:trip, :to_location_id, t(:to), :class => 'search_loc_label') %>
+    <span id="toLocation">
+      <%= collection_select(:trip, :to_location_id, Location.to_locations, :id, :name, {}, :class => 'search_loc_list') %>
+    </span>
+
+    <div id="dateDiv"></div>
+
+    <input id="trip_all_dates" type="checkbox" checked="checked" name="vehicle" value="Bike" /> <%= t :search_all_dates %><br />
+
+    <div class="ui-style">
+      <button id="filterButton"><%= t :search %></button>
+    </div>
+  </fieldset>
 
 </div>
 
 <div id="searchResultsContainer" class="prepend-1 span-13 last">
 
-	<fieldset>
-			<legend><%= t "headings.search_results" %></legend>
-			<div id="loading"><%= image_tag("ajax-loader.gif", :alt => "Loading...") %> <%= t :loading %></div>
-      <div id="searchResults">
-      </div>
-	</fieldset>
+  <fieldset>
+    <legend><%= t "headings.search_results" %></legend>
+    <div id="loading"><%= image_tag("ajax-loader.gif", :alt => "Loading...") %> <%= t :loading %></div>
+    <div id="searchResults">
+    </div>
+  </fieldset>
 </div>
 
 <div id="startupContainer" class="prepend-1 span-13 last">
@@ -47,3 +58,22 @@
   <p class="bodyFont">Kaip galime pagerinti pavesiu.lt? Pateikite <a href="javascript:UserVoice.showPopupWidget();" title="Open feedback dialog">atsiliepimus čia</a></p>
 </div>
 
+
+<script>
+  $(function() {
+    function log( message ) {
+      $( "<div/>" ).text( message ).prependTo( "#log" );
+      $( "#log" ).scrollTop( 0 );
+    }
+
+    $( "#location_from" ).autocomplete({
+      source: "<%= load_location_data_trips_path %>",
+      minLength: 2,
+      select: function( event, ui ) {
+        log( ui.item ?
+          "Selected: " + ui.item.value + " aka " + ui.item.id :
+          "Nothing selected, input was " + this.value );
+      }
+    });
+  });
+</script>
