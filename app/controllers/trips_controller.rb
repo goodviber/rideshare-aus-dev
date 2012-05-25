@@ -220,7 +220,7 @@ class TripsController < ApplicationController
   
   def load_location_data
     @locations = Location.from_locations
-    render :json => @locations
+    render :json => @locations.collect{ |x| { :label => x.name } }
   end
 
 end
