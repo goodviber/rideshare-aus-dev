@@ -9,7 +9,11 @@
         <label for="location_from">From :</label>
         <input id="location_from" />
       </div>
-
+      
+      <div class="ui-widget">
+        <label for="location_to">To :</label>
+        <input id="location_to" />
+      </div>
       
 
     </div><!-- End demo -->
@@ -67,7 +71,24 @@
     }
 
     $( "#location_from" ).autocomplete({
-      source: "<%= load_location_data_trips_path %>",
+      source: "<%= load_from_location_data_trips_path %>",
+      minLength: 2,
+      select: function( event, ui ) {
+        log( ui.item ?
+          "Selected: " + ui.item.value + " aka " + ui.item.id :
+          "Nothing selected, input was " + this.value );
+      }
+    });
+  });
+  
+  $(function() {
+    function log( message ) {
+      $( "<div/>" ).text( message ).prependTo( "#log" );
+      $( "#log" ).scrollTop( 0 );
+    }
+
+    $( "#location_to" ).autocomplete({
+      source: "<%= load_to_location_data_trips_path %>",
       minLength: 2,
       select: function( event, ui ) {
         log( ui.item ?

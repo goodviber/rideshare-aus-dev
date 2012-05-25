@@ -218,8 +218,13 @@ class TripsController < ApplicationController
     )
   end
   
-  def load_location_data
-    @locations = Location.from_locations
+  def load_from_location_data
+    @locations = Location.from_locations_for_autocomplete(params[:term])
+    render :json => @locations.collect{ |x| { :label => x.name } }
+  end
+  
+  def load_to_location_data
+    @locations = Location.to_locations_for_autocomplete(params[:term])
     render :json => @locations.collect{ |x| { :label => x.name } }
   end
 

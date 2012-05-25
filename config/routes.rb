@@ -30,7 +30,8 @@ Cocoride::Application.routes.draw do
     match '/trips/manual_new' => 'trips#manual_new', :as => :new_manual_trip
 
     resources :trips do
-      get 'load_location_data', :on => :collection
+      get 'load_from_location_data', :on => :collection
+      get 'load_to_location_data', :on => :collection
     end
     resources :queued_posts
 

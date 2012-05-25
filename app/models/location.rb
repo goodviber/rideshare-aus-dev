@@ -59,6 +59,21 @@ class Location < ActiveRecord::Base
                 .order("name")
     full_list = p1 + p2
   end
+  
+  def self.from_locations_for_autocomplete(term)
+    if I18n.locale == :lt
+      p1 = Location.select("-1 as id, 'Visi miestai (' || count(name) || ')' as name").joins(:trips_from).where("trip_date >= ? and name LIKE ?", DateTime.now.to_date, "%#{term}%")
+    else
+      p1 = Location.select("-1 as id, 'All cities (' || count(name) || ')' as name").joins(:trips_from).where("trip_date >= ? and name LIKE ?", DateTime.now.to_date, "%#{term}%")
+    end
+
+    p2 = Location.select("locations.id, name || ' (' || count(name) || ')' as name")
+                .joins(:trips_from)
+                .where("trip_date >= ? and name LIKE ?", DateTime.now.to_date, "%#{term}%")
+                .group("locations.id, name")
+                .order("name")
+    full_list = p1 + p2
+  end
 
   def self.to_locations
     #p1 = Location.to_locations_total_row
@@ -72,6 +87,24 @@ class Location < ActiveRecord::Base
     p2 = Location.select("locations.id, name || ' (' || count(name) || ')' as name")
                 .joins(:trips_to)
                 .where("trip_date >= ?", DateTime.now.to_date)
+                .group("locations.id, name")
+                .order("name")
+
+    full_list = p1 + p2
+  end
+  
+  def self.to_locations_for_autocomplete(term)
+    #p1 = Location.to_locations_total_row
+    #p2 = Location.has_trips_to
+    if I18n.locale == :lt
+      p1 = Location.select("-1 as id, 'Visi miestai (' || count(name) || ')' as name").joins(:trips_to).where("trip_date >= ? AND name LIKE ?", DateTime.now.to_date, "%#{term}%")
+    else
+      p1 = Location.select("-1 as id, 'All Cities (' || count(name) || ')' as name").joins(:trips_to).where("trip_date >= ? AND name LIKE ?", DateTime.now.to_date, "%#{term}%")
+    end
+
+    p2 = Location.select("locations.id, name || ' (' || count(name) || ')' as name")
+                .joins(:trips_to)
+                .where("trip_date >= ? AND name LIKE ?", DateTime.now.to_date, "%#{term}%")
                 .group("locations.id, name")
                 .order("name")
 
