@@ -130,6 +130,8 @@ class TripsController < ApplicationController
   end
 
   def load_search_results
+    
+    #render :text => '<pre>'+params.to_yaml and return
 
     fl_id = params[:from_location_id]
     tl_id = params[:to_location_id]
@@ -220,12 +222,12 @@ class TripsController < ApplicationController
   
   def load_from_location_data
     @locations = Location.from_locations_for_autocomplete(params[:term])
-    render :json => @locations.collect{ |x| { :label => x.name } }
+    render :json => @locations.collect{ |x| { :label => x.name, :id => x.id } }
   end
   
   def load_to_location_data
     @locations = Location.to_locations_for_autocomplete(params[:term])
-    render :json => @locations.collect{ |x| { :label => x.name } }
+    render :json => @locations.collect{ |x| { :label => x.name, :id => x.id } }
   end
 
 end

@@ -3,29 +3,14 @@
 <div class="span-8">
   <fieldset>
     <legend><%= t "headings.search_filter" %></legend>
-    <div class="demo">
-
-      <div class="ui-widget">
-        <label for="location_from">From :</label>
-        <input id="location_from" />
-      </div>
-      
-      <div class="ui-widget">
-        <label for="location_to">To :</label>
-        <input id="location_to" />
-      </div>
-      
-
-    </div><!-- End demo -->
-
 
     <%= label(:trip, :from_location_id, t(:from), :class => 'search_loc_label') %>
-    <%= collection_select(:trip, :from_location_id, Location.from_locations, :id, :name, {}, :class => 'search_loc_list') %>
+    <input id="location_from" type="text" name="from_autocomplete" />
+    <input id="trip_from_location_id" type="hidden" value ="" name="trip_from_location_id" />
 
     <%= label(:trip, :to_location_id, t(:to), :class => 'search_loc_label') %>
-    <span id="toLocation">
-      <%= collection_select(:trip, :to_location_id, Location.to_locations, :id, :name, {}, :class => 'search_loc_list') %>
-    </span>
+    <input id="location_to" type="text" name="to_autocomplete"/>
+    <input id="trip_to_location_id" type="hidden" value ="" name="trip_to_location_id" />
 
     <div id="dateDiv"></div>
 
@@ -74,9 +59,10 @@
       source: "<%= load_from_location_data_trips_path %>",
       minLength: 2,
       select: function( event, ui ) {
-        log( ui.item ?
+        console.log( ui.item ?
           "Selected: " + ui.item.value + " aka " + ui.item.id :
           "Nothing selected, input was " + this.value );
+        $('#trip_from_location_id').val(ui.item.id);
       }
     });
   });
@@ -91,9 +77,10 @@
       source: "<%= load_to_location_data_trips_path %>",
       minLength: 2,
       select: function( event, ui ) {
-        log( ui.item ?
+        console.log( ui.item ?
           "Selected: " + ui.item.value + " aka " + ui.item.id :
           "Nothing selected, input was " + this.value );
+        $('#trip_to_location_id').val(ui.item.id);
       }
     });
   });
