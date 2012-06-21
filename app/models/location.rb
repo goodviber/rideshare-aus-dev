@@ -74,7 +74,7 @@ class Location < ActiveRecord::Base
 #    full_list = p1 + p2
     
     p1 = Location.select("id, name")
-                .where("name LIKE ?", "%#{term}%")
+                .where("name ILIKE ?", "#{term}%")
                 .group("locations.id, name")
                 .order("name")
 
@@ -116,7 +116,7 @@ class Location < ActiveRecord::Base
 #
 #    full_list = p1 + p2
     p1 = Location.select("id, name")
-                .where("name LIKE ?", "%#{term}%")
+                .where("name ILIKE ?", "#{term}%")
                 .group("locations.id, name")
                 .order("name")
   end
