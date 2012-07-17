@@ -15,8 +15,10 @@ class HomeController < ApplicationController
 
     csv_text = File.read(filename)
     
-    csv = CSV.parse(csv_text, :headers => true)
+    csv = CSV.parse(csv_text, :headers => true, :col_sep =>";")
     csv.each do |row|
+      
+      puts "#{row[0]} ----- #{row[1]}"
 
       Location.create(
         :id=>row[0], 
