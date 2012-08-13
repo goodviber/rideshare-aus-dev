@@ -3,11 +3,15 @@
   <ol>
     <li>
       <%= f.label :from_location_id, t(:from), :class => 'span-3' %>
-      <%= collection_select(:trip, :from_location_id, Location.all_cities, :id, :name, {:prompt => t("select_list.select_city")}) %>
+      <input id="location_from" type="text" name="from_autocomplete" />
+      <input id="trip_from_location_id" type="hidden" value ="" name="trip_from_location_id" /><br/>
+<%#= collection_select(:trip, :from_location_id, Location.all_cities, :id, :name, {:prompt => t("select_list.select_city")}) %>
     </li>
     <li>
       <%= f.label :to_location_id, t(:to), :class => 'span-3' %>
-      <%= collection_select(:trip, :to_location_id, Location.all_cities, :id, :name, {:prompt => t("select_list.select_city")}) %>
+<%#= collection_select(:trip, :to_location_id, Location.all_cities, :id, :name, {:prompt => t("select_list.select_city")}) %>
+      <input id="location_to" type="text" name="to_autocomplete"/>
+      <input id="trip_to_location_id" type="hidden" value ="" name="trip_to_location_id" />
     </li>
   </ol>
 </fieldset>
@@ -37,13 +41,13 @@
   <legend><%= t "headings.other_details" %></legend>
   <ol>
     <li>
-    <%= label :trip, t(:driver) %>
-    <%= text_field :trip, :driver, :disabled => true, :class => "text", :value => driver_name %>
+      <%= label :trip, t(:driver) %>
+      <%= text_field :trip, :driver, :disabled => true, :class => "text", :value => driver_name %>
     </li>
     <!--
     <li>
-      <%= f.label :seats, "Seats Avail" %>
-      <%= select(:trip, :seats, seat_options) %>
+    <%= f.label :seats, "Seats Avail" %>
+    <%= select(:trip, :seats, seat_options) %>
     </li>
     -->
     <li>
@@ -61,7 +65,7 @@
 
   <!-- used when manually creating trips from queued_posts -->
   <% if post_id %>
-  <input id="hid_post_id" name="hid[post_id]" type="hidden" value="<%= post_id %>" />
+    <input id="hid_post_id" name="hid[post_id]" type="hidden" value="<%= post_id %>" />
   <% end %>
 </fieldset>
 
@@ -72,4 +76,42 @@
 <div class="actions ui-style">
   <%= f.submit t("buttons.post_trip") %>
 </div>
+
+<script>
+  $(function() {
+    function log( message ) {
+      $( "<div/>" ).text( message ).prependTo( "#log" );
+      $( "#log" ).scrollTop( 0 );
+    }
+
+    $( "#location_from" ).autocomplete({
+      source: "<%= load_from_location_data_trips_path %>",
+      minLength: 2,
+      select: function( event, ui ) {
+        console.log( ui.item ?
+          "Selected: " + ui.item.value + " aka " + ui.item.id :
+          "Nothing selected, input was " + this.value );
+        $('#trip_from_location_id').val(ui.item.id);
+      }
+    });
+  });
+  
+  $(function() {
+    function log( message ) {
+      $( "<div/>" ).text( message ).prependTo( "#log" );
+      $( "#log" ).scrollTop( 0 );
+    }
+
+    $( "#location_to" ).autocomplete({
+      source: "<%= load_to_location_data_trips_path %>",
+      minLength: 2,
+      select: function( event, ui ) {
+        console.log( ui.item ?
+          "Selected: " + ui.item.value + " aka " + ui.item.id :
+          "Nothing selected, input was " + this.value );
+        $('#trip_to_location_id').val(ui.item.id);
+      }
+    });
+  });
+</script>
 

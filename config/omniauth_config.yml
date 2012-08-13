@@ -1,12 +1,23 @@
+#development:
+#  app_id: 119073948160554
+#  app_secret: f96ca2df959982257ff65cee4c5be74d
+
+#local development localhost:3000
 development:
-  app_id: 119073948160554
-  app_secret: f96ca2df959982257ff65cee4c5be74d
+  app_id: 355650677848562
+  app_secret: 62ff45d4cc9375fe7d1782536f1f2910  
 
 test:
   app_id: 160944414007085
   app_secret: 7f753f629ffebc36c28879c560805429
 
+#LIVE pavesiu.lt
+#production:
+#  app_id: 163188793727561
+#  app_secret: 824d2398c1e4a61e092c574dfec08989
+
+#http://pavesiu-odesk.heroku.com
 production:
-  app_id: 163188793727561
-  app_secret: 824d2398c1e4a61e092c574dfec08989
+  app_id: 477682525575488
+  app_secret: ae775a14829b62fdb7e08a360911f8be  
 
