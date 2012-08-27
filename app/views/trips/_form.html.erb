@@ -92,6 +92,7 @@
           "Selected: " + ui.item.value + " aka " + ui.item.id :
           "Nothing selected, input was " + this.value );
         $('#trip_from_location_id').val(ui.item.id);
+        setLatLng('trip_from_location_id', ui.item.id);
       }
     });
   });
@@ -110,6 +111,7 @@
           "Selected: " + ui.item.value + " aka " + ui.item.id :
           "Nothing selected, input was " + this.value );
         $('#trip_to_location_id').val(ui.item.id);
+        setLatLng('trip_to_location_id', ui.item.id);
       }
     });
   });
