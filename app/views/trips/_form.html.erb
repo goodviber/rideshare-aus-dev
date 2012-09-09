@@ -4,14 +4,14 @@
     <li>
       <%= f.label :from_location_id, t(:from), :class => 'span-3' %>
       <input id="location_from" type="text" name="from_autocomplete" />
-      <input id="trip_from_location_id" type="hidden" value ="" name="trip_from_location_id" /><br/>
+      <input id="trip_from_location_id" type="hidden" value ="" name="trip[from_location_id]" /><br/>
 <%#= collection_select(:trip, :from_location_id, Location.all_cities, :id, :name, {:prompt => t("select_list.select_city")}) %>
     </li>
     <li>
       <%= f.label :to_location_id, t(:to), :class => 'span-3' %>
 <%#= collection_select(:trip, :to_location_id, Location.all_cities, :id, :name, {:prompt => t("select_list.select_city")}) %>
       <input id="location_to" type="text" name="to_autocomplete"/>
-      <input id="trip_to_location_id" type="hidden" value ="" name="trip_to_location_id" />
+      <input id="trip_to_location_id" type="hidden" value ="" name="trip[to_location_id]" />
     </li>
   </ol>
 </fieldset>
