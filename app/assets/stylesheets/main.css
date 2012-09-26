@@ -451,3 +451,6 @@ padding-left:15px;
 cursor:pointer;
 }
 
+/* paypal button */
+#paypal input[type='image'] { border:none;margin-right:-5px; }
+
