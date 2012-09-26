@@ -66,7 +66,7 @@
             <div id="user_nav">
               <% if user_signed_in? %>
                 <span class="fbName"><%= current_user.full_name %></span>
-                <br/>
+
                   <%= link_to(t("logout"), destroy_user_session_path, :method => :delete) %>
               <% else %>
                 <%= link_to(t("login"), new_user_session_path) %>
