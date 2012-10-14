@@ -1,5 +1,5 @@
 
-<table class="dataTable">
+<table class="dataTable" style="width:100%">
   <tr>
     <th></th>
     <th><%= t :leaving %></th>
@@ -21,9 +21,7 @@
 
     <td>
       <div class="customTooltip">
-        <span>
-          <img style="width:25px;" src="<%= trip.driver.fb_pic_url %>">
-        </span>
+        <span><%= image_tag trip.driver.fb_pic_url, :style => "width:25px" %></span>
       </div>
       <%= render 'tool_tip', :trip => trip %>
     </td>

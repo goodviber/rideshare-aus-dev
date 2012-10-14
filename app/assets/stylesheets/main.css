@@ -15,15 +15,27 @@ width: 60px;
 width: 250px;
 }
 
-.search_loc_label {
-width: 40px;
-margin-left: 15px;
+.search_bar fieldset legend{
+padding:0;
 }
 
-.search_loc_list {
-width: 205px;
-margin-bottom: 7px;
+.search_bar #filterButton {
+margin-left:5px;
+width:130px;
 }
+
+.search_bar .search_loc_label {
+width: auto;
+margin-right: 5px;
+vertical-align:middle;
+}
+
+.search_bar .search_loc_list {
+width: 200px;
+margin-bottom: 7px;
+margin-right:10px;
+}
+
 
 #trip_all_dates {
 margin-left: 15px;

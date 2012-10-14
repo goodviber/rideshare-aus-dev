@@ -139,8 +139,8 @@ class TripsController < ApplicationController
     p_page = params[:page]
 
     conditions = {}
-    conditions[:from_location_id] = fl_id if fl_id != "-1"
-    conditions[:to_location_id] = tl_id   if tl_id != "-1"
+    conditions[:from_location_id] = fl_id if !fl_id.blank?
+    conditions[:to_location_id]   = tl_id if !tl_id.blank?
     conditions[:trip_date] = date         if date != "-1"
 
     @trips = Trip.where(conditions)
@@ -170,8 +170,8 @@ class TripsController < ApplicationController
 
   def load_valid_dates
     conditions = {}
-    conditions[:from_location_id] = params[:from_location_id] if params[:from_location_id] != "-1"
-    conditions[:to_location_id] = params[:to_location_id]     if params[:to_location_id] != "-1"
+    conditions[:from_location_id] = params[:from_location_id] if !params[:from_location_id].blank?
+    conditions[:to_location_id] = params[:to_location_id]     if !params[:to_location_id].blank?
 
     valid_dates = Trip.where(conditions)
                       .where("trip_date >= ?", DateTime.now.to_date)

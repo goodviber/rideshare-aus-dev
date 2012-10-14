@@ -1,29 +1,26 @@
 <% content_for :header, javascript_include_tag("trips-search") %>
 
-<div class="span-8">
+<div class="search_bar">
   <fieldset>
     <legend><%= t "headings.search_filter" %></legend>
 
     <%= label(:trip, :from_location_id, t(:from), :class => 'search_loc_label') %>
     <input id="location_from" type="text" name="from_autocomplete" />
-    <input id="trip_from_location_id" type="hidden" value ="" name="trip_from_location_id" /><br/>
+    <input id="trip_from_location_id" type="hidden" value ="" name="trip_from_location_id" />
 
     <%= label(:trip, :to_location_id, t(:to), :class => 'search_loc_label') %>
     <input id="location_to" type="text" name="to_autocomplete"/>
     <input id="trip_to_location_id" type="hidden" value ="" name="trip_to_location_id" />
 
-    <div id="dateDiv"></div>
+    <input id="dateDiv" type="hidden" />
 
-    <input id="trip_all_dates" type="checkbox" checked="checked" name="vehicle" value="Bike" /> <%= t :search_all_dates %><br />
+    <input id="trip_all_dates" type="checkbox" checked="checked" name="vehicle" value="Bike" /> <%= t :search_all_dates %>
 
-    <div class="ui-style">
-      <button id="filterButton"><%= t :search %></button>
-    </div>
+    <button id="filterButton"><%= t :search %></button>
   </fieldset>
-
 </div>
 
-<div id="searchResultsContainer" class="prepend-1 span-13 last">
+<div id="searchResultsContainer">
 
   <fieldset>
     <legend><%= t "headings.search_results" %></legend>

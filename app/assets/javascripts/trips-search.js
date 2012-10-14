@@ -45,6 +45,9 @@ $(document).ready(function () {
 	function createDatepicker() {
 		$('#dateDiv').datepicker({
 		    dateFormat: 'yy/mm/dd',
+                    showOn: "button",
+                    buttonImage: "/assets/calendar.gif",
+                    buttonImageOnly: true,
 		    onSelect: function (date) {
 		        //turn off the 'search all dates' checkbox when a date is selected
 		        $('#trip_all_dates').attr('checked', false);
@@ -86,12 +89,14 @@ $(document).ready(function () {
 	}
 
 	function postSearchRequest(page) {
-
 		var fromLocationId = $('#trip_from_location_id').val();
 		var toLocationId = $('#trip_to_location_id').val();
-
 		var selectedDate = $('#dateDiv').datepicker("getDate");
-		selectedDate = formatDate(selectedDate,"yy/mm/dd");
+
+                if (selectedDate != null) {
+  		  selectedDate = formatDate(selectedDate,"yy/mm/dd");
+                }
+
 		if ($('#trip_all_dates').attr('checked')) {
 			selectedDate = -1;
 		}
@@ -102,6 +107,7 @@ $(document).ready(function () {
 		$('#searchResults').hide();
 		$('#searchResultsContainer').show();
 		$('#loading').show();
+
 		$.post("/" + locale + "/trips/load_search_results", params)
 		  .success(function(partialHtml) {
 		  	$('#loading').hide();
@@ -116,7 +122,6 @@ $(document).ready(function () {
     }
 
 	function getValidTripDates() {
-
 		var fromLocationId = $('#trip_from_location_id').val();
 		var toLocationId = $('#trip_to_location_id').val();
 

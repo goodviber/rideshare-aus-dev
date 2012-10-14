@@ -76,7 +76,7 @@ class Location < ActiveRecord::Base
 #    full_list = p1 + p2
     
     p1 = Location.select("id, name")
-                .where("name ILIKE ? and population > 100", "#{term}%")
+                .where("lower(name) LIKE lower(?) and population > 100", "#{term}%")
                 .group("locations.id, name")
                 .order("name")
 
@@ -118,7 +118,7 @@ class Location < ActiveRecord::Base
 #
 #    full_list = p1 + p2
     p1 = Location.select("id, name")
-                .where("name ILIKE ? and population > 100", "#{term}%")
+                .where("lower(name) LIKE lower(?) and population > 100", "#{term}%")
                 .group("locations.id, name")
                 .order("name")
   end
