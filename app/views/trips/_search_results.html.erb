@@ -32,10 +32,11 @@
 </table>
 
 <br/>
+<div class="pagination_bar">
 <div class="paging_links digg_pagination" >
   <%= will_paginate @trips %>
 </div>
-
+</div>
 <script>
   $('.load_dialog').click(function(e) {
     var url = $(this).attr('href');
