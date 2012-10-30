@@ -1,0 +1,17 @@
+<div id="tooltipDiv" class="tooltip">
+<table class="minStyle">
+  <tbody>
+    <tr>
+      <td><img id="tooltipImage" src="<%= event.driver.fb_pic_url %>"></td>
+      <td width="100%" align="left">
+        <a class="fbName" target="_blank" href="<%= event.driver.fb_link_url %>"><b><%= event.driver.full_name %></b></a><br>
+        <a class="fbLink" target="_blank" href="<%= event.driver.fb_link_url %>"><%= t :contact_only %></a>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">"<%= event.description %>"</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+

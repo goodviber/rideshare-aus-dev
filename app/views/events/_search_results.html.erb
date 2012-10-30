@@ -1,0 +1,57 @@
+
+<table class="dataTable" style="width:100%">
+  <tr>
+    <th><%= t :ddate %></th>
+    <th><%= t :ttime %></th>
+    <th><%= t :name %></th>
+    <th><%= t :location %></th>
+    <th><%= t :website %></th>
+    <th></th>
+  </tr>
+
+<% @events.each do |event| %>
+  <tr>
+    <td class="col1" style="width:10%"><%= l event.event_date, :format => :very_short %></td>
+    <td class="deptime col2" style="width:10%"><%= event.event_time_format %></td>
+    <td style="width:15%"><%= event.name %></td>
+    <td class="col3" style="width:15%"><%= event.location.name %></td>
+    <td class="col4" style="width:20%"><%= event.website %></td>
+
+    <td style="width:20%">
+      <div class="customTooltip">
+        <span><%= image_tag event.driver.fb_pic_url, :style => "width:25px" %></span>
+      </div>
+      <%= render 'tool_tip', :event => event %>
+    </td>
+
+    <td style="width:10%"><%= link_to(t(:more), event_path(event), :class => 'load_dialog') %></td>
+  </tr>
+<% end %>
+</table>
+
+<br/>
+<div class="paging_links digg_pagination" >
+  <%= will_paginate @events %>
+</div>
+
+<script>
+  $('.load_dialog').click(function(e) {
+    var url = $(this).attr('href');
+    var dialog_form = $('<div id="dialog-form">Loading form...</div>').dialog({
+      autoOpen: false,
+      width: 900,
+      modal: true,
+      height: 460,
+      open: function() {
+        return $(this).load(url + ' #show-content');
+      },
+      close: function() {
+        $('#dialog-form').remove();
+      }
+    });
+    
+    dialog_form.dialog('open');
+    e.preventDefault();
+  });
+</script>
+

@@ -1,0 +1,67 @@
+<div id="show-content">
+  <div class="span-8">
+
+    <fieldset>
+      <legend><%= t "headings.trip_summary" %></legend>
+      <ol>
+        <li>
+          <label><%= t :name %>:</label>
+          <%= @event.name %>
+        </li>
+        <li>
+          <label><%= t :ddate %>:</label>
+          <b><%= l @event.event_date, :format => :very_short %></b>
+        </li>
+        <li>
+          <label><%= t :ttime %>:</label>
+          <b><%= @event.event_time_format %></b>
+        </li>
+        <li>
+          <label><%= t :location %>:</label>
+          <%= @event.location.name %>
+        </li>
+        <li>
+          <label><%= t :website %>:</label>
+          <%= link_to @event.website, @event.website %>
+        </li>
+      </ol>
+    </fieldset>
+
+
+    <%= link_to t(:return_sr), events_path %>
+  </div>
+  <div class="prepend-1 span-13 last">
+
+    <fieldset>
+      <legend><%= t "headings.driver_details" %></legend>
+      <div class="span-7">
+        <ol>
+          <li>
+            <label class="long"><%= t :driver_name %>:</label><br/>
+            <%= @event.driver.full_name %>
+          </li>
+          <br/>
+          <li>
+            <label class="long"><%= t :message %>:</label><br/>
+            <%= @event.description %>
+          </li>
+          <br/>
+          <li>
+            <div class="ui-style">
+              <form action="http://www.facebook.com/<%= @event.driver.fb_id %>" target="_blank">­
+                <input type="Submit" value="<%= t :contact %> <%= @event.driver.first_name %>">
+              </form>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+
+
+      <div class="span-5 last">
+        <img src="<%= @event.driver.fb_pic_large_url %>" />
+      </div>
+    </fieldset>
+  </div>
+
+</div>

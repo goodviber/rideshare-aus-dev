@@ -28,6 +28,10 @@ lt:
   driver: "Vairuotojas"
   message: "Kelionės detalės"
   ttime: "Laikas"
+  when: "Kai"
+  ddate: "Data"
+  location: "Vieta"
+  event: "įvykis"
 
   search_all_dates: "Ieškoti visų datų"
   search: "Ieškoti"
@@ -70,6 +74,7 @@ lt:
     post: "Skelbti"
     my_trips: "Kelionės"
     about: "Apie"
+    events: "Renginiai"
 
   number:
     format:

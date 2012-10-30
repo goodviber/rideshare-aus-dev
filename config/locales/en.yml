@@ -28,6 +28,10 @@ en:
   driver: "Driver"
   message: "Message"
   ttime: "Time"
+  when: "When"
+  ddate: "Date"
+  location: "Location"
+  event: "Event"
 
   search_all_dates: "Search all dates"
   search: "Search"
@@ -70,6 +74,7 @@ en:
     post: "Post"
     my_trips: "My Trips"
     about: "About"
+    events: "Events"
 
   date:
     formats:

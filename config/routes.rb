@@ -34,6 +34,10 @@ Cocoride::Application.routes.draw do
       get 'load_to_location_data', :on => :collection
     end
     resources :queued_posts
+    resources :events do
+      get 'load_locations', :on => :collection
+      post 'search',  	    :on => :collection
+    end
 
     match '/trips/load_search_results' => 'trips#load_search_results'
     match '/trips/load_valid_dates' => 'trips#load_valid_dates'
