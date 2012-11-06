@@ -3,10 +3,6 @@
 
 $(document).ready( function() {
 
-  $('.calendar').datepicker({
-    dateFormat: "yy-mm-dd"
-  });
-
   bindTooltip();
  
   $('#searchResultsContainer').hide();
@@ -62,6 +58,7 @@ function createDatepicker() {
     }
 
 function postSearchRequest(page) {
+  var locationFrom = $('#location_from').val();
   var locationId = $('#trip_from_location_id').val();
   var selectedDate = $('#dateDiv').datepicker("getDate");
 
@@ -73,7 +70,7 @@ function postSearchRequest(page) {
     selectedDate = -1;
   }
 
-  params = { page: page, location_id: locationId, event_date: selectedDate, authenticity_token: _token };
+  params = { page: page, location_id: locationId, location_from: locationFrom, event_date: selectedDate, authenticity_token: _token };
 
   $('#startupContainer').hide();
   $('#searchResults').hide();
@@ -134,9 +131,6 @@ function formatDate(date, format) {
   else if (format == "yy-mm-dd")
     return year + "-" + month + "-" + day;
 }
-
-
-
 
 var selectedDate;
 var ListOfFullDates;

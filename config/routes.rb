@@ -36,6 +36,7 @@ Cocoride::Application.routes.draw do
     resources :queued_posts
     resources :events do
       get 'load_locations', :on => :collection
+      get 'load_locations_and_events', :on => :collection
       post 'search',  	    :on => :collection
     end
 

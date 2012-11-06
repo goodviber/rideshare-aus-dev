@@ -1,0 +1,35 @@
+<% content_for :header, javascript_include_tag("events") %>
+
+<div style="padding:20px 0 10px;">
+
+<%= form_for @event do |e| %>
+  <%= e.label :name %> <%= e.text_field :name %><br/>
+  <%= e.label :location %> <%= text_field_tag :event_location, '', :size => 30 %><br/>
+  <%= e.hidden_field :location_id %>
+  <%= e.label :event_date %> <%= e.text_field :event_date, :class => 'calendar' %><br/>
+  <%= e.label :event_time %> <%= e.text_field :event_time %><br/>
+  <%= e.label :website %> <%= e.text_field :website %><br/>
+  <%= e.label :description %> <%= e.text_area :description, :rows => 10, :cols => 39 %><br/>
+  <%= e.submit %>
+<% end %>
+
+</div>
+
+<script>
+
+  $('.calendar').datepicker({
+    dateFormat: "yy-mm-dd"
+  });
+
+  $("#event_location" ).autocomplete({
+    source: "/events/load_locations",
+    minLength: 2,
+    select: function( event, ui ) {
+      console.log( ui.item ?
+        "Selected: " + ui.item.value + " aka " + ui.item.id :
+        "Nothing selected, input was " + this.value );
+      $('#event_location_id').val(ui.item.id);
+    }
+  });
+
+</script>
