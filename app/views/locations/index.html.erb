@@ -1,0 +1,48 @@
+<table>
+  <thead>
+    <th>Name</th>
+    <th>ASCII Name</th>
+    <th>Alternate Names</th>
+    <th>Latitude</th>
+    <th>Longitude</th>
+    <th>Feature Class</th>
+    <th>Feature Code</th>
+    <th>Country Code</th>
+    <th>CC2</th>
+    <th>Admin1 Code</th>
+    <th>Admin2 Code</th>
+    <th>Admin3 Code</th>
+    <th>Admin4 Code</th>
+    <th>Population</th>
+    <th>Elevation</th>
+    <th>Gtopo30</th>
+    <th>Timezone</th>
+    <th>Trip From Count</th>
+    <th>Trip To Count</th>
+  </thead>
+  <tbody>
+    <% @locations.each do |l| %>
+      <tr>
+        <td><%= l.name %></td>
+        <td><%= l.ascii_name %></td>
+        <td><%= l.alternate_names %></td>
+        <td><%= l.latitude %></td>
+        <td><%= l.longitude %></td>
+        <td><%= l.feature_class %></td>
+        <td><%= l.feature_code %></td>
+        <td><%= l.country_code %></td>
+        <td><%= l.cc2 %></td>
+        <td><%= l.admin1_code %></td>
+        <td><%= l.admin2_code %></td>
+        <td><%= l.admin3_code %></td>
+        <td><%= l.admin4_code %></td>
+        <td><%= l.population %></td>
+        <td><%= l.elevation %></td>
+        <td><%= l.gtopo30 %></td>
+        <td><%= l.timezone %></td>
+        <td><%= l.trip_from_count %></td>
+        <td><%= l.trip_to_count %></td>
+      </tr>
+    <% end%>
+  </tbody>
+</table
