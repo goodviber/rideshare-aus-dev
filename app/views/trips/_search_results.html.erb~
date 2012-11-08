@@ -11,7 +11,7 @@
   </tr>
 
 <% @trips.each do |trip| %>
-  <% unless trip.nil? || trip.from_location.nil? || trip.to_location.nil? %>
+  <% unless trip.nil? %>
   <tr>
     <td class="col1"><%= l trip.trip_date, :format => :very_short %></td>
     <td class="deptime col2"><%= trip.dis_trip_time %></td>

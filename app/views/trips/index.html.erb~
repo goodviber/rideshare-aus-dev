@@ -31,7 +31,14 @@
 </div>
 
 <div id="startupContainer" class="prepend-1 span-13 last">
-  <%= render "home/intro_text" %>
+  <br/>
+  <br/>
+  <h2><%= t(:Welcome_Header)%></h2>
+  <p class="bodyFont">
+<%t= t(:Welcome_Message)%>
+  </p>
+  <p class="bodyFont"><%t= t(:Search_Instructions)%></p>
+  <p class="bodyFont"></p>
 </div>
 
 
