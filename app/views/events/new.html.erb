@@ -2,7 +2,11 @@
 
 <div style="padding:20px 0 10px;">
 
-<%= form_for @event do |e| %>
+<%= form_for @event, :url => events_path, :html => { :multipart => true } do |e| %>
+  <div class="span-22">
+    <%= render 'error_message' %>
+  </div>
+
   <%= e.label :name %> <%= e.text_field :name %><br/>
   <%= e.label :location %> <%= text_field_tag :event_location, '', :size => 30 %><br/>
   <%= e.hidden_field :location_id %>
@@ -10,7 +14,14 @@
   <%= e.label :event_time %> <%= e.text_field :event_time %><br/>
   <%= e.label :website %> <%= e.text_field :website %><br/>
   <%= e.label :description %> <%= e.text_area :description, :rows => 10, :cols => 39 %><br/>
-  <%= e.submit %>
+  
+  <%= label_tag :photos %>
+
+  <%= e.fields_for :photos do |p| %>
+    <%= p.file_field :photo %><br/><%= label_tag '' %>
+  <% end %>
+
+  <br/><%= e.submit %>
 <% end %>
 
 </div>

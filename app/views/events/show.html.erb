@@ -26,12 +26,10 @@
         </li>
       </ol>
     </fieldset>
-
-
     <%= link_to t(:return_sr), events_path %>
   </div>
-  <div class="prepend-1 span-13 last">
 
+  <div class="prepend-1 span-13 last" id="event_details">
     <fieldset>
       <legend><%= t "headings.driver_details" %></legend>
       <div class="span-7">
@@ -56,12 +54,22 @@
         </ol>
       </div>
 
-
-
       <div class="span-5 last">
         <img src="<%= @event.driver.fb_pic_large_url %>" />
       </div>
     </fieldset>
+
+ <fieldset>
+      <legend><%= t :photos %></legend>
+          <% @event.photos.each do |p| %>
+            <ol>
+              <li><%= image_tag p.photo.url(:thumb), :id => "event_photo" %></a>
+              </li>
+      	    </ol>
+          <% end %>
+   </fieldset>
+
   </div>
+
 
 </div>

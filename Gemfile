@@ -7,6 +7,7 @@ gem 'heroku'
 gem 'taps'
 gem 'activeadmin'
 gem 'will_paginate'
+gem 'paperclip', '~> 3.0'
 
 # gem 'blueprint-rails'
 

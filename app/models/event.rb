@@ -2,9 +2,9 @@ class Event < ActiveRecord::Base
 
   belongs_to :location
   belongs_to :driver, :foreign_key => :driver_id, :class_name => "User"
-  accepts_nested_attributes_for :driver
-
-  validates_presence_of :name, :location_id, :event_date, :event_time, :driver_id
+  has_many   :photos
+  accepts_nested_attributes_for :photos
+  validates_presence_of :name, :location_id, :event_date, :event_time
 
   before_create :set_driver_id
 

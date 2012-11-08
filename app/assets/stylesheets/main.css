@@ -534,3 +534,6 @@ h1 {  font-size: 2rem; /* 32px */ }
    body { font: 60% } 
 }
 
+/* event#show */
+#event_details { width:auto!important; padding-left:35px!important; }
+#event_photo { margin-right:5px; float:left; }

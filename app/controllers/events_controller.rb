@@ -26,6 +26,7 @@
  
   def new
     @event = Event.new
+    5.times { @event.photos.build }
   end
 
   def create
