@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :set_locale
+  before_filter :set_current_user
 
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale
@@ -19,6 +20,9 @@ class ApplicationController < ActionController::Base
 
   include Devise::Controllers::Helpers
   helper_method :current_user
-
+  
+  def set_current_user
+    User.current_user = current_user
+  end
 end
 
