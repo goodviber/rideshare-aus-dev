@@ -4,8 +4,8 @@
 
 #local development localhost:3000
 development:
-  app_id: 355650677848562
-  app_secret: 62ff45d4cc9375fe7d1782536f1f2910  
+  app_id: 381109558639935
+  app_secret: 1e377c846eb7b22be9549a4cb0300cac  
 
 test:
   app_id: 160944414007085

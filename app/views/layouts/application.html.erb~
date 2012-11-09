@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
-  <title><%= page_title %></title>
+  <title><%= t(:site_name) %></title>
   <meta name="description" content="<%= page_description %>" />
   <!--[if lte IE 9]><%= stylesheet_link_tag 'ie' %><![endif]-->
   <%= stylesheet_link_tag    "application", "pagination" %>
