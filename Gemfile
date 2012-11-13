@@ -28,7 +28,7 @@ gem "less"
 
 gem "capybara", :group => [:development, :test]
 gem "rspec-rails", ">= 2.0.1", :group => [:development, :test]
-gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache',:group => [:development, :test]
+#gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache',:group => [:development, :test]
 
 group :testing do
 
@@ -37,12 +37,12 @@ end
 group :development, :test do
   gem "cheat"
   if RUBY_VERSION =~ /1.9/ 
-    gem 'ruby-debug19' 
+    #gem 'ruby-debug19' 
   else 
     gem 'ruby-debug' 
   end 
   
-  gem 'ruby-debug-base19x', '~> 0.11.30.pre4'
+  #gem 'ruby-debug-base19x', '~> 0.11.30.pre4'
 end
 
 gem 'factory_girl_rails'
