@@ -1,4 +1,4 @@
-class AddAttachmentPhotoToEvent < ActiveRecord::Migration
+class CreatePhotos < ActiveRecord::Migration
   def self.up
     create_table :photos do |t|
       t.integer :event_id, :null => false
