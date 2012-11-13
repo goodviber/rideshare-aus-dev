@@ -79,6 +79,14 @@
           <div id="loginDetails" class="two columns">
 		        <div id="loginDetailsImage">
 			        <%= fb_image_url %>
+               <% if user_signed_in? %>
+                  <span class="fbName"><%= current_user.full_name %></span>
+
+                    <%= link_to(t("logout"), destroy_user_session_path, :method => :delete) %>
+                <% else %>
+                  <%= link_to(t("login"), new_user_session_path) %>
+                  or <%= link_to "sign up", new_user_registration_path %>-->
+                <% end %>
 		        </div>
 		      </div>        
           <div id="paypal" class="three columns">
@@ -95,14 +103,7 @@
         <div id="midPan" class="six columns omega">
           <div id="loginDetailsText" class="two columns">
               <div id="user_nav">
-                <% if user_signed_in? %>
-                  <span class="fbName"><%= current_user.full_name %></span>
-
-                    <%= link_to(t("logout"), destroy_user_session_path, :method => :delete) %>
-                <% else %>
-                  <%= link_to(t("login"), new_user_session_path) %>
-                  or <%= link_to "sign up", new_user_registration_path %>-->
-                <% end %>
+               
               </div>
 	        </div>          
           <div id="lan" class="two columns omega">
