@@ -194,7 +194,7 @@ padding: 10px;
 
 #logo img { max-width: 90%; width: auto; height: auto;}
 
-#loginDetailsImage {max-width: 200px; height: auto; margin-left: -80px; margin-top: 10px;}
+#loginDetailsImage {max-width: 200px; height: auto; margin-left: -80px; margin-top: 20px;}
 
 @media \0screen {
   img { 
@@ -496,6 +496,7 @@ border:none;
 }
 
 #lan {
+  margin-left: 40px;
 }
 
 #searchResultsContainer {
