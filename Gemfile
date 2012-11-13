@@ -22,6 +22,7 @@ gem 'coffee-script'
 gem 'uglifier'
 gem "devise", "~> 1.5.2"
 gem 'omniauth'
+gem 'omniauth-facebook'
 gem 'fb_graph'
 gem "jquery-rails"
 gem "less"
@@ -52,7 +53,3 @@ gem 'factory_girl_rails'
 
 # Deploy with Capistrano
 # gem 'capistrano'
-
-
-
-
