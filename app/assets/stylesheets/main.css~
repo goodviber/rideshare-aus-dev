@@ -186,7 +186,7 @@ margin-top:15%;
 }
 
 .container {
-width: 75%;
+width: 95%;
 height: 90%;
 background-color: white;
 padding: 10px;
@@ -518,11 +518,6 @@ border:none;
 body { font: 100%; /* 16px */  }
 h1 {  font-size: 2rem; /* 32px */ }
  
-@media (min-width: 600px) {
-    body { font: 82.5%; /* 18px */  }
-    h1 {    /* Do nothing! I'll automatically be 36px */ }
-}
-
 
 /*responsive design*/
 /*Responsive design*/
@@ -530,9 +525,11 @@ h1 {  font-size: 2rem; /* 32px */ }
    #uvTab {
       display: none;
    }
+   
+   body { font: 80% }
 }
 
 @media screen and (max-width: 780px){
-
+   body { font: 60% } 
 }
 

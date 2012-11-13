@@ -186,7 +186,7 @@ margin-top:15%;
 }
 
 .container {
-width: 75%;
+width: 95%;
 height: 90%;
 background-color: white;
 padding: 10px;
@@ -194,7 +194,7 @@ padding: 10px;
 
 #logo img { max-width: 90%; width: auto; height: auto;}
 
-#loginDetailsImage img {max-width: 200px; height: auto; margin-left: -50px; margin-top: 30px;}
+#loginDetailsImage img {max-width: 200px; height: auto; margin-left: -80px; margin-top: 30px;}
 
 @media \0screen {
   img { 
