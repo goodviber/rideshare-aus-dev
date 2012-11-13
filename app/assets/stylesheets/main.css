@@ -194,7 +194,7 @@ padding: 10px;
 
 #logo img { max-width: 90%; width: auto; height: auto;}
 
-#loginDetailsImage img {max-width: 200px; height: auto; margin-left: -80px; margin-top: 30px;}
+#loginDetailsImage {max-width: 200px; height: auto; margin-left: -80px; margin-top: 10px;}
 
 @media \0screen {
   img { 
