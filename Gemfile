@@ -25,6 +25,7 @@ gem 'omniauth'
 gem 'fb_graph'
 gem "jquery-rails"
 gem "less"
+gem "therubyracer"
 
 gem "capybara", :group => [:development, :test]
 gem "rspec-rails", ">= 2.0.1", :group => [:development, :test]
