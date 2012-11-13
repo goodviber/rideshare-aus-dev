@@ -44,10 +44,12 @@
       if (window.innerWidth < 500){
         //move paypal and language icons to bottom
         //$("#loginDetails").hide();
+        $("#loginDetails").css({'margin-left':'-150px','margin-top' : '-30px', 'margin-bottom' : '-50px'});
         $("#paypal").insertAfter($('#main_content'));
         $("#lan").insertAfter($('#main_content'));
       }
       else if (window.innerWidth > 960){
+        $("#loginDetails").css({'margin-left':'-80px'});
         $("#topPan").show();
         $("#midPan").show();
         $("#uvTab").show();
