@@ -27,7 +27,34 @@
 
 		  $("#topPan ul li").removeClass("selected");
 		  $("#<%= @selected_tab %>").addClass("selected");
+      
+      fitToDevice();
 	  });
+    
+    $(window).resize(function () { 
+      fitToDevice();
+    });
+    
+    function fitToDevice()
+    {
+      if (window.innerWidth < 960){
+        $("#uvTab").hide();
+      }
+
+      if (window.innerWidth < 500){
+        //move paypal and language icons to bottom
+        //$("#loginDetails").hide();
+        $("#paypal").insertAfter($('#main_content'));
+        $("#lan").insertAfter($('#main_content'));
+      }
+      else if (window.innerWidth > 960){
+        $("#topPan").show();
+        $("#midPan").show();
+        $("#uvTab").show();
+      }
+    }
+
+    
   </script>
 
   <link rel="shortcut icon" href="/assets/favicon.ico" />
@@ -38,89 +65,94 @@
 </head>
 <body <%= yield(:body_attr) %>>
 
-  <div class="container corner-top corner-bottom">
+  <div class="container corner-top corner-bottom sixteen columns">
+     <div class="sixteen columns" id="main container">
+	    <div class="row" id="header top">
+		    <div class="nine columns alpha" id="logo">        
+			    <a href="/">
+			      <%= image_tag("#{I18n.locale}/logo.png", :alt => "#{t(:site_name)} logo") %>
+			    </a>
+		    </div>
+        <div id="topPan" class="six columns omega">   
+          <div id="loginDetails" class="two columns">
+		        <div id="loginDetailsImage">
+			        <%= fb_image_url %>
+		        </div>
+		      </div>        
+          <div id="paypal" class="three columns">
+	          <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+	            <input type="hidden" name="cmd" value="_s-xclick">
+	            <input type="hidden" name="hosted_button_id" value="CHRABNN4QVHJL">
+	            <input type="image" src="https://www.paypalobjects.com/en_AU/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal � The safer, easier way to pay online.">
+	            <img alt="" border="0" src="https://www.paypalobjects.com/en_AU/i/scr/pixel.gif" width="1" height="1">
+	          </form>
+	        </div>
+          
+          	
+	      </div>
+        <div id="midPan" class="six columns omega">
+          <div id="loginDetailsText" class="one columns">
+              <div id="user_nav">
+                <% if user_signed_in? %>
+                  <span class="fbName"><%= current_user.full_name %></span>
 
-      <div class="span-24 prepend-top">
-		  <div class="prepend-1 span-10">
-        <a href="/">
-          <%= image_tag("#{I18n.locale}/logo.png", :alt => "#{t(:site_name)} logo", :class => "round") %>
-        </a>
-      </div>
-
-		  <div class="span-13 last">
-		    <div id="loginDetails" class="append-1 span-12 last">
-
-	        <div id="loginDetailsImage">
-            <%= fb_image_url %>
-          </div>
-
-          <div id="paypal">
-            <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-              <input type="hidden" name="cmd" value="_s-xclick">
-              <input type="hidden" name="hosted_button_id" value="CHRABNN4QVHJL">
-              <input type="image" src="https://www.paypalobjects.com/en_AU/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal � The safer, easier way to pay online.">
-              <img alt="" border="0" src="https://www.paypalobjects.com/en_AU/i/scr/pixel.gif" width="1" height="1">
-            </form>
-          </div>  
-
-          <div id="loginDetailsText">
-            <div id="user_nav">
-              <% if user_signed_in? %>
-                <span class="fbName"><%= current_user.full_name %></span>
-
-                  <%= link_to(t("logout"), destroy_user_session_path, :method => :delete) %>
-              <% else %>
-                <%= link_to(t("login"), new_user_session_path) %>
-                <!-- DISABLE NON-FACEBOOK
-                or <%= link_to "sign up", new_user_registration_path %>
-                <!-->
-              <% end %>
-            </div>
-          </div>
+                    <%= link_to(t("logout"), destroy_user_session_path, :method => :delete) %>
+                <%-# else -%>
+                  <%= link_to(t("login"), new_user_session_path) %>
+                  or <%= link_to "sign up", new_user_registration_path %>-->
+                <% end %>
+              </div>
+	        </div>          
+          <div id="lan" class="two columns omega">
+		         <%= link_to(image_tag("lt_flag.png", :alt => "English", :title => "Versti į lietuvių"),root_url(:locale => :lt)) %> Lithuanian
+		         <br/>
+		         <%= link_to(image_tag("en_flag.png", :alt => "English", :title => "Translate to English"),root_url(:locale => :en)) %> English
+          </div>	
+          
         </div>
-
-        <div class="append-1 span-12 last">
-
-		      <div id="topPan" class="span-9">
-		        <ul>
-              <!--  <li id="home" class="selected"><%= link_to(t("tabs.home"), root_url) %></li> -->
+      </div>
+      <div class="row" id="bottom header">
+        <div id="topPan" class="ten columns">
+            <ul>
+	            <!--  <li id="home" class="selected"><%= link_to(t("tabs.home"), root_url) %></li> -->
 		          <li id="search"><%= link_to(t("tabs.search"), trips_url) %></li>
 		          <li id="post"><%= link_to(t("tabs.post"), new_trip_url)%></li>
 		          <li id="my_trips"><%= link_to(t("tabs.my_trips"), my_trips_url)%></li>
-                          <li id="events"><%= link_to(t("tabs.events"), events_url) %></li> 
+		          <li id="events"><%= link_to(t("tabs.events"), events_url) %></li> 
 		          <!-- <li id="about"><a href="#"><%= t("tabs.about") %></a></li> -->
-            </ul>
-           </div>
+		        </ul>
+        </div>
+        <div id="right hand corner" class="four columns omega">   
+          
+          
+          
+        </div> <!--right hand corner-->
+	    </div> <!--bottom header-->
+      <div class="row" id="header middle">
+        
+        <div class="one columns omega">
+          
+        </div>
+      </div> <!--header middle-->	
+      <div id="main_content" class="row">
 
-           <div id="lan" class="span-3">
-           <%= link_to(image_tag("lt_flag.png", :alt => "English", :title => "Versti į lietuvių"),root_url(:locale => :lt)) %> Lithuanian
-           <br/>
-           <%= link_to(image_tag("en_flag.png", :alt => "English", :title => "Translate to English"),root_url(:locale => :en)) %> English
-           </div>
+          <% if notice %>
+            <p class="notice"><%= notice %></p>
+          <% end %>
 
-		    </div>
+          <% if alert %>
+            <p class="alert"><%= alert %></p>
+          <% end %>
 
+          <%= yield %>
+      </div>
+      
+      <div class="sixteen columns" id="footer">
+         <br/>
+		    <p id="footerText"><a href="http://ourdisclaimer.com/?i=Pavesiu.lt" target="_blank">Privacy</a> | <a href="http://ourdisclaimer.com/?i=Pavesiu.lt" target="_blank">Terms & Conditions</a></p>
       </div>
 
-      <div class="prepend-1 span-22 append-1">
-
-        <% if notice %>
-          <p class="notice"><%= notice %></p>
-        <% end %>
-
-        <% if alert %>
-          <p class="alert"><%= alert %></p>
-        <% end %>
-
-        <%= yield %>
-      </div>
-
-	  <div class="span-24" >
-	  <br/>
-			  <p id="footerText"><a href="http://ourdisclaimer.com/?i=Pavesiu.lt" target="_blank">Privacy</a> | <a href="http://ourdisclaimer.com/?i=Pavesiu.lt" target="_blank">Terms & Conditions</a></p>
-	  </div>
-
-  </div><!--end outer-->
+  </div><!--end container-->
 
 </body>
 </html>

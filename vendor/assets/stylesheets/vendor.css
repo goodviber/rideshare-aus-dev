@@ -1,5 +1,7 @@
  /*
- *= require blueprint/screen
+ *= require skeleton/skeleton
+ *= require skeleton/base
+ *= require skeleton/layout
  *= require jquery-ui/jquery-ui-1.8.11.custom
  *
  */

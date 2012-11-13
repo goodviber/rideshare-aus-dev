@@ -1,18 +1,22 @@
 /* individual styling */
 #trip_driver {
-width: 250px;
+width: 25%;
 }
 
 #trip_seats {
-width: 60px;
+width: 6%;
 }
 
 #trip_cost {
-width: 60px;
+width: 6%;
 }
 
 #trip_trip_details {
-width: 250px;
+width: 25%;
+}
+
+.search_bar{
+  width: 95%;	
 }
 
 .search_bar fieldset legend{
@@ -21,7 +25,7 @@ padding:0;
 
 .search_bar #filterButton {
 margin-left:5px;
-width:130px;
+width:13%;
 }
 
 .search_bar .search_loc_label {
@@ -31,9 +35,9 @@ vertical-align:middle;
 }
 
 .search_bar .search_loc_list {
-width: 200px;
+width: 20%;
 margin-bottom: 7px;
-margin-right:10px;
+margin-right:1%;
 }
 
 
@@ -44,7 +48,7 @@ margin-top: 2px;
 
 #dateDiv {
 margin-left: 15px;
-margin-top: 10px;
+margin-top: 1%;
 }
 
 #filterButton {
@@ -57,7 +61,7 @@ p.extralarge {
 font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;
 font-size: 3em;
 vertical-align: center;
-margin-top: 110px;
+margin-top: 11%;
 }
 
 .notice, .alert{
@@ -71,23 +75,23 @@ overflow: hidden;
 }
 
 table.dataTable td.col1 {
-width:40px;
-max-width:40px;
+width:4%;
+max-width:4%;
 }
 
 table.dataTable td.col2 {
-width:45px;
+width:45px;span
 max-width:45px;
 }
 
 table.dataTable td.col3 {
-width:120px;
-max-width:120px;
+width:12%;
+max-width:12%;
 }
 
 table.dataTable td.col4 {
-width:120px;
-max-width:120px;
+width:12%;
+max-width:12%;
 }
 
 table.dataTable td.col5 {
@@ -136,7 +140,7 @@ display: none;
 }
 
 img.tooltipImage{
-margin-right:10px
+margin-right:1%
 }
 
 div.customTooltip {
@@ -147,8 +151,8 @@ height: 25px;
 .tooltip {
 background-color:#E8E8E8;
 border:1px solid #fff;
-padding:5px 10px;
-width:230px;
+padding:5px 1%;
+width:23%;
 height: auto;
 display:none;
 color:#000;
@@ -157,8 +161,8 @@ font-size:12px;
 z-index:2;
 
 /* outline radius for mozilla/firefox only */
--moz-box-shadow:0 0 10px #000;
--webkit-box-shadow:0 0 10px #000;
+-moz-box-shadow:0 0 1% #000;
+-webkit-box-shadow:0 0 1% #000;
 }
 
 /* jquery ui additions */
@@ -178,36 +182,47 @@ background-image: url(images/background.jpg);
 }
 
 .tabs-container {
-margin-top:70px;
+margin-top:15%;
 }
 
 .container {
+width: 75%;
+height: 90%;
 background-color: white;
+padding: 10px;
 }
 
-#logo { height: 106px; width:333px}
+#logo img { max-width: 90%; width: auto; height: auto;}
+
+#loginDetailsImage img {max-width: 200px; height: auto; margin-left: -50px; margin-top: 30px;}
+
+@media \0screen {
+  img { 
+  	width: auto; /* for ie 8 */
+  }
+}
 
 .corner-bottom {
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    -moz-border-radius-bottomleft: 20px;
-    -moz-border-radius-bottomright: 20px;
+    border-bottom-left-radius: 2%;
+    border-bottom-right-radius: 2%;
+    -moz-border-radius-bottomleft: 2%;
+    -moz-border-radius-bottomright: 2%;
 }
 
 .corner-top {
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    -moz-border-radius-topleft: 20px;
-    -moz-border-radius-topright: 20px;
+    border-top-left-radius: 2%;
+    border-top-right-radius: 2%;
+    -moz-border-radius-topleft: 2%;
+    -moz-border-radius-topright: 2%;
 }
 
 /*----TOP PANEL---- changed from 778px to 647px*/
-#topPan{width:440; height:auto; position:relative; margin:0;}
-#topPan #ImgPan{width:auto; height:auto; background:#fff; color:#666; position:absolute; top:0px; left:0px; padding:0 0 0 30px;}
+#topPan{margin:10px; position: relative;}
+#topPan #ImgPan{ background:#fff; color:#666; position:absolute; top:%; left:%; padding:0 0 0 3%;}
 #topPan #ImgPan img{width:auto; height:auto;}
 
 #topPan ul li{width:78px; height:32px; float:left;}
-#topPan ul li a{width:76px; height:35px; display:block; background:url(images/topmenu-normal.jpg) 0 0 no-repeat #F5F4F4; color:#666; text-decoration:none; font-size:12px; font-weight:bold; text-align:center; line-height:32px; margin:0 2px 0 0;}
+#topPan ul li a{width:76px; height:35px; display:block; background:url(images/topmenu-normal.jpg) 0 0 no-repeat #F5F4F4; color:#666; text-decoration:none; font-size:12px; font-weight:bold; text-align:center; line-height:32px; margin:0 2px 0 0; float: left;}
 #topPan ul li a:hover{background:url(images/topmenu-hover.jpg) 0 0 no-repeat #F5F4F4; color:#fff; text-decoration:none;}
 
 #topPan ul li.selected a{background:url(images/topmenu-hover.jpg) 0 0 no-repeat #F5F4F4; color:#fff; text-decoration:none;}
@@ -218,13 +233,13 @@ background-color: white;
 
 /*----TOP PANEL LONG (Modified for staff) ---- changed from 778px to 647px*/
 #topPanLong{width:auto; height:auto; position:relative; margin:0;}
-#topPanLong #ImgPan{width:auto; height:auto; background:#fff; color:#666; position:absolute; top:0px; left:0px; padding:0 0 0 30px;}
+#topPanLong #ImgPan{width:auto; height:auto; background:#fff; color:#666; position:absolute; top:%; left:%; padding:0 0 0 3%;}
 #topPanLong #ImgPan img{width:auto; height:auto;}
 
 
-#topPanLong ul{width:900px; height:32px; position:absolute; top:12px; right:10px;}
+#topPanLong ul{width:90%; height:32px; position:absolute; top:12px; right:1%;}
 #topPanLong ul li{width:182px; height:32px; float:left;}
-#topPanLong ul li a{width:180px; height:35px; display:block; background:url(images/topmenu-normal-long.jpg) 0 0 no-repeat #F5F4F4; color:#666; text-decoration:none; font-size:12px; font-weight:bold; text-align:center; line-height:32px; margin:0 2px 0 0;}
+#topPanLong ul li a{width:18%; height:35px; display:block; background:url(images/topmenu-normal-long.jpg) 0 0 no-repeat #F5F4F4; color:#666; text-decoration:none; font-size:12px; font-weight:bold; text-align:center; line-height:32px; margin:0 2px 0 0;}
 #topPanLong ul li a:hover{background:url(images/topmenu-hover-long.jpg) 0 0 no-repeat #F5F4F4; color:#fff; text-decoration:none;}
 
 #topPanLong ul li.selected a{background:url(images/topmenu-hover-long.jpg) 0 0 no-repeat #F5F4F4; color:#fff; text-decoration:none;}
@@ -240,11 +255,16 @@ padding-left: 25px;
 
 }
 
+#main_content {
+  margin-top:-60px;
+}
+
 /* ===== Form Sytling (using unorded lists) ===== */
 fieldset {
-margin: 1em 0px;
+margin: 0px;
 padding: 1em;
 border: 1px solid #ccc;
+
 }
 
 fieldset legend
@@ -258,7 +278,7 @@ color: grey;
 
 fieldset ol {
 margin: 0;
-margin-top: -10px;
+margin-top: -1%;
 padding: 0;
 }
 
@@ -273,11 +293,11 @@ label {
 display: inline-block;
 line-height: 1.9;
 vertical-align: top;
-width: 120px;
+width: 12%;
 }
 
 label.long {
-width: 160px;
+width: 16%;
 }
 
 .ui-dialog .ui-state-error {
@@ -290,13 +310,13 @@ margin: 0;
 }
 
 form ul li {
-margin-bottom: 10px;
+margin-bottom: 1%;
 }
 
 form ul li label {
 display: block;
 float: left;
-width: 150px;
+width: 15%;
 line-height: 24px;
 }
 
@@ -307,16 +327,16 @@ margin-right: 7px;
 
 /* ===== data table ===== */
 table.dataTable {
-margin-top: 0px;
+margin-top: %;
 text-align: center;
 font-family: Verdana, Geneva, Arial, Helvetica, sans-serif ;
 font-weight: normal;
 font-size: 0.8em;
 color: #fff;
 background-color: #666;
-border: 0px;
+border: %;
 border-collapse: collapse;
-border-spacing: 0px;
+border-spacing: %;
 }
 
 table.dataTable td {
@@ -341,7 +361,7 @@ border-bottom: 2px #fff solid;
 border: 1px #ccc solid;
 text-align: center;
 font-family: Arial, Helvetica, sans-serif;
-font-size: 1.2em;
+font-size: 1.2em;96
 font-weight: bold;
 }
 
@@ -377,30 +397,29 @@ padding-left: 4px;
 padding-right: 4px;
 font-size: 0.8em;
 font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
-margin: 0px;
+margin: %;
 }
 
 .fbLink:hover {
 text-decoration: underline;
 }
 
-div#fbLogin {
-margin-top: 10px;
+div#fbLogin {h1 {
+  font-size: 5.9vw;
+}
+
+margin-top: 1%;
 text-align: center;
 }
 
 /* ===== Login ===== */
 #loginDetailsText {
-float: right;
 margin-right: 0px;
 margin-top: -5px;
-clear: both;
 }
 
 #loginDetailsImage {
-/*height: 50px;
-width: 50px;*/
-float: right;
+
 }
 
 
@@ -413,18 +432,18 @@ height: 65px;
 }
 
 div#staffMenu {
-height: 60px;
+height: 6%;
 }
 
 #logo {
-margin-left:20px;
+margin-left:2%;
 }
 
 #footerText {
 text-align: center;
 color: #999;
 font-size: .9em;
-margin-bottom: 20px;
+margin-bottom: 2%;
 }
 
 div.row {
@@ -436,13 +455,13 @@ background-color: white;
 /*
 .text {
 text-align:center;
-margin-top:40px;
-padding-bottom:40px;
+margin-top:4%;
+padding-bottom:4%;
 border-bottom:1px solid #000000;
 }
 .text h2 {
 font-family:Georgia, "Times New Roman", Times, serif;
-font-size:30px;
+font-size:3%;
 color:#e5e5e5;
 font-style:normal;
 font-variant:normal;
@@ -453,7 +472,7 @@ letter-spacing:2px;
 
 .details {
 border-top:1px solid #666666;
-height:120px;
+height:12%;
 }
 
 }
@@ -466,5 +485,51 @@ cursor:pointer;
 }
 
 /* paypal button */
-#paypal input[type='image'] { border:none;margin-right:-5px; }
+#paypal input[type='image'] { 
+margin-right: 5px;
+margin-top: 5px;
+border:none;
+}
+
+#paypal {
+  margin-bottom: -30px;
+}
+
+#lan {
+}
+
+#searchResultsContainer {
+  margin-top:30px;
+}
+
+#search_box {
+  margin-top:-30px;
+
+}
+
+#search_box li{
+  display: inline-block;
+}
+
+#search_box input{
+  display: inline-block;
+}
+
+body { font: 100%; /* 16px */  }
+h1 {  font-size: 2rem; /* 32px */ }
+ 
+
+/*responsive design*/
+/*Responsive design*/
+@media screen and (max-width: 980px){
+   #uvTab {
+      display: none;
+   }
+   
+   body { font: 80% }
+}
+
+@media screen and (max-width: 780px){
+   body { font: 60% } 
+}
 

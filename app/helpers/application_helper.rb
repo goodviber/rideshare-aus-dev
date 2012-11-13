@@ -23,7 +23,11 @@ module ApplicationHelper
       else
         image_tag("default_profile_image.png", :alt => "Profile Image")
       end
+    
+    else
+      link_to image_tag('fb-login-button.png'), './users/sign_in/'
     end
+    
   end
 
 end

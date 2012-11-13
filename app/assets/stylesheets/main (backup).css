@@ -1,0 +1,470 @@
+/* individual styling */
+#trip_driver {
+width: 250px;
+}
+
+#trip_seats {
+width: 60px;
+}
+
+#trip_cost {
+width: 60px;
+}
+
+#trip_trip_details {
+width: 250px;
+}
+
+.search_bar fieldset legend{
+padding:0;
+}
+
+.search_bar #filterButton {
+margin-left:5px;
+width:130px;
+}
+
+.search_bar .search_loc_label {
+width: auto;
+margin-right: 5px;
+vertical-align:middle;
+}
+
+.search_bar .search_loc_list {
+width: 200px;
+margin-bottom: 7px;
+margin-right:10px;
+}
+
+
+#trip_all_dates {
+margin-left: 15px;
+margin-top: 2px;
+}
+
+#dateDiv {
+margin-left: 15px;
+margin-top: 10px;
+}
+
+#filterButton {
+margin-top: 15px;
+margin-left: 15px;
+margin-bottom: 5px;
+}
+
+p.extralarge {
+font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;
+font-size: 3em;
+vertical-align: center;
+margin-top: 110px;
+}
+
+.notice, .alert{
+margin-top: 5px;
+}
+
+
+/* column sizes */
+table.dataTable td {
+overflow: hidden;
+}
+
+table.dataTable td.col1 {
+width:40px;
+max-width:40px;
+}
+
+table.dataTable td.col2 {
+width:45px;
+max-width:45px;
+}
+
+table.dataTable td.col3 {
+width:120px;
+max-width:120px;
+}
+
+table.dataTable td.col4 {
+width:120px;
+max-width:120px;
+}
+
+table.dataTable td.col5 {
+width:28px;
+max-width:28px;
+}
+
+table.dataTable td.col6 {
+width:25px;
+max-width:25px;
+}
+
+table.dataTable td.col7 {
+width:45px;
+max-width:45px;
+}
+
+table.dataTable td.message {
+
+
+text-wrap:normal;
+white-space:normal;
+}
+
+textarea {
+resize: none;
+}
+
+
+.bodyFont {
+font-size: 1.3em;
+font-family: Arial, Helvetica, sans-serif;
+color: #666;
+text-align:left;
+}
+
+
+
+/* ------ Tool tip --------*/
+div.tooltipDiv {
+white-space: normal;
+position: absolute;
+top: 137.383px;
+left: 409.5px;
+display: none;
+}
+
+img.tooltipImage{
+margin-right:10px
+}
+
+div.customTooltip {
+width: 25px;
+height: 25px;
+}
+
+.tooltip {
+background-color:#E8E8E8;
+border:1px solid #fff;
+padding:5px 10px;
+width:230px;
+height: auto;
+display:none;
+color:#000;
+text-align:left;
+font-size:12px;
+z-index:2;
+
+/* outline radius for mozilla/firefox only */
+-moz-box-shadow:0 0 10px #000;
+-webkit-box-shadow:0 0 10px #000;
+}
+
+/* jquery ui additions */
+select.ui-widget-content {
+padding: 2px;
+}
+
+body {
+font-family:Arial, Helvetica, Verdana, Tahoma, sans-serif;
+margin:0;
+padding:0;
+border: 0;
+outline: 0;
+background: transparent;
+/*background-color: #D6D6DE; */
+background-image: url(images/background.jpg);
+}
+
+.tabs-container {
+margin-top:70px;
+}
+
+.container {
+background-color: white;
+}
+
+#logo { height: 106px; width:333px}
+
+.corner-bottom {
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    -moz-border-radius-bottomleft: 20px;
+    -moz-border-radius-bottomright: 20px;
+}
+
+.corner-top {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    -moz-border-radius-topleft: 20px;
+    -moz-border-radius-topright: 20px;
+}
+
+/*----TOP PANEL---- changed from 778px to 647px*/
+#topPan{width:440; height:auto; position:relative; margin:0;}
+#topPan #ImgPan{width:auto; height:auto; background:#fff; color:#666; position:absolute; top:0px; left:0px; padding:0 0 0 30px;}
+#topPan #ImgPan img{width:auto; height:auto;}
+
+#topPan ul li{width:78px; height:32px; float:left;}
+#topPan ul li a{width:76px; height:35px; display:block; background:url(images/topmenu-normal.jpg) 0 0 no-repeat #F5F4F4; color:#666; text-decoration:none; font-size:12px; font-weight:bold; text-align:center; line-height:32px; margin:0 2px 0 0;}
+#topPan ul li a:hover{background:url(images/topmenu-hover.jpg) 0 0 no-repeat #F5F4F4; color:#fff; text-decoration:none;}
+
+#topPan ul li.selected a{background:url(images/topmenu-hover.jpg) 0 0 no-repeat #F5F4F4; color:#fff; text-decoration:none;}
+
+#topPan ul li.home{background:url(images/topmenu-hover.jpg) 0 0 no-repeat #F5F4F4; color:#fff; text-decoration:none; font-size:12px; font-weight:bold; text-align:center; line-height:32px;}
+
+/*----/TOP PANEL----*/
+
+/*----TOP PANEL LONG (Modified for staff) ---- changed from 778px to 647px*/
+#topPanLong{width:auto; height:auto; position:relative; margin:0;}
+#topPanLong #ImgPan{width:auto; height:auto; background:#fff; color:#666; position:absolute; top:0px; left:0px; padding:0 0 0 30px;}
+#topPanLong #ImgPan img{width:auto; height:auto;}
+
+
+#topPanLong ul{width:900px; height:32px; position:absolute; top:12px; right:10px;}
+#topPanLong ul li{width:182px; height:32px; float:left;}
+#topPanLong ul li a{width:180px; height:35px; display:block; background:url(images/topmenu-normal-long.jpg) 0 0 no-repeat #F5F4F4; color:#666; text-decoration:none; font-size:12px; font-weight:bold; text-align:center; line-height:32px; margin:0 2px 0 0;}
+#topPanLong ul li a:hover{background:url(images/topmenu-hover-long.jpg) 0 0 no-repeat #F5F4F4; color:#fff; text-decoration:none;}
+
+#topPanLong ul li.selected a{background:url(images/topmenu-hover-long.jpg) 0 0 no-repeat #F5F4F4; color:#fff; text-decoration:none;}
+
+#topPanLong ul li.home{background:url(images/topmenu-hover-long.jpg) 0 0 no-repeat #F5F4F4; color:#fff; text-decoration:none; font-size:12px; font-weight:bold; text-align:center; line-height:32px;}
+
+/*----/TOP PANEL----*/
+
+/* DIV LEFT/RIGHT */
+
+div.left{
+padding-left: 25px;
+
+}
+
+/* ===== Form Sytling (using unorded lists) ===== */
+fieldset {
+margin: 1em 0px;
+padding: 1em;
+border: 1px solid #ccc;
+}
+
+fieldset legend
+{
+padding: 6px;
+font-weight: normal;
+font-family: Trebuchet MS;
+font-size: 1.3em;
+color: grey;
+}
+
+fieldset ol {
+margin: 0;
+margin-top: -10px;
+padding: 0;
+}
+
+fieldset li {
+list-style: none;
+padding: 2px;
+margin: 0;
+}
+
+
+label {
+display: inline-block;
+line-height: 1.9;
+vertical-align: top;
+width: 120px;
+}
+
+label.long {
+width: 160px;
+}
+
+.ui-dialog .ui-state-error {
+padding: .1em;
+}
+
+ul {
+list-style: none;
+margin: 0;
+}
+
+form ul li {
+margin-bottom: 10px;
+}
+
+form ul li label {
+display: block;
+float: left;
+width: 150px;
+line-height: 24px;
+}
+
+div.left {
+float: left;
+margin-right: 7px;
+}
+
+/* ===== data table ===== */
+table.dataTable {
+margin-top: 0px;
+text-align: center;
+font-family: Verdana, Geneva, Arial, Helvetica, sans-serif ;
+font-weight: normal;
+font-size: 0.8em;
+color: #fff;
+background-color: #666;
+border: 0px;
+border-collapse: collapse;
+border-spacing: 0px;
+}
+
+table.dataTable td {
+background-color: rgb(247, 246, 243);
+color: #000;
+padding: 4px;
+text-align: left;
+border: 1px #ccc solid;
+white-space: nowrap;
+}
+
+table.dataTable td.deptime {
+font-weight: bold;
+}
+
+table.dataTable th
+{
+background-color: #666;
+color: #fff;
+padding: 4px;
+border-bottom: 2px #fff solid;
+border: 1px #ccc solid;
+text-align: center;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 1.2em;
+font-weight: bold;
+}
+
+table.minStyle td {
+background-color: transparent;
+color: #000;
+padding: 4px;
+text-align: left;
+border: none;
+white-space: normal;
+}
+
+
+/* ===== Facebook ===== */
+.fbName {
+color: #3B5998 !important;
+cursor: pointer;
+text-decoration: none;
+font-weight: bold;
+font-size: 0.9em;
+font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+}
+
+.fbName a {
+text-decoration: underline;
+}
+
+.fbLink {
+color: #3B5998;
+cursor: pointer;
+text-decoration: none;
+padding-left: 4px;
+padding-right: 4px;
+font-size: 0.8em;
+font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+margin: 0px;
+}
+
+.fbLink:hover {
+text-decoration: underline;
+}
+
+div#fbLogin {
+margin-top: 10px;
+text-align: center;
+}
+
+/* ===== Login ===== */
+#loginDetailsText {
+float: right;
+margin-right: 0px;
+margin-top: -5px;
+clear: both;
+}
+
+#loginDetailsImage {
+/*height: 50px;
+width: 50px;*/
+float: right;
+}
+
+
+
+
+/* ===== Template ===== */
+div#loginDetails {
+text-align: right;
+height: 65px;
+}
+
+div#staffMenu {
+height: 60px;
+}
+
+#logo {
+margin-left:20px;
+}
+
+#footerText {
+text-align: center;
+color: #999;
+font-size: .9em;
+margin-bottom: 20px;
+}
+
+div.row {
+background-color: white;
+}
+
+
+
+/*
+.text {
+text-align:center;
+margin-top:40px;
+padding-bottom:40px;
+border-bottom:1px solid #000000;
+}
+.text h2 {
+font-family:Georgia, "Times New Roman", Times, serif;
+font-size:30px;
+color:#e5e5e5;
+font-style:normal;
+font-variant:normal;
+font-weight:lighter;
+letter-spacing:2px;
+}
+*/
+
+.details {
+border-top:1px solid #666666;
+height:120px;
+}
+
+}
+#submit_button {
+text-decoration:none;
+background:none;
+border:none;
+padding-left:15px;
+cursor:pointer;
+}
+
+/* paypal button */
+#paypal input[type='image'] { border:none;margin-right:-5px; }
+

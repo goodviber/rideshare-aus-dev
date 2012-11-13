@@ -1,0 +1,53 @@
+<% content_for :header, javascript_include_tag("events") %>
+
+<div id="events_search">
+
+<div class="search_bar sixteen columns">
+  <fieldset>
+    <legend><%= t "headings.search_filter" %></legend>
+
+    <%= label(:trip, :location, t(:location), :class => 'search_loc_label') %>
+    <input id="location_from" type="text" name="from_autocomplete" />
+    <input id="trip_from_location_id" type="hidden" value ="" name="trip_from_location_id" />
+
+    <input id="dateDiv" type="hidden" />
+
+    <input id="trip_all_dates" type="checkbox" checked="checked" name="vehicle" value="Bike" /> <%= t :search_all_dates %>
+
+    <button id="filterButton"><%= t :search %></button>
+
+    <%= link_to "+ #{t(:event)}", new_event_url if user_signed_in? %>
+      
+  </fieldset>
+</div>
+
+<div id="searchResultsContainer" style="display:none" class="sixteen columns">
+  <fieldset>
+    <legend><%= t "headings.search_results" %></legend>
+    <div id="loading"><%= image_tag("ajax-loader.gif", :alt => "Loading...") %> <%= t :loading %></div>
+    <div id="searchResults">
+      <%= render :partial => 'events/search_results' %>
+    </div>
+  </fieldset>
+</div>
+
+<div id="startupContainer" class="prepend-1 span-13 last">
+
+</div>
+
+</div>
+
+<div id="event_form" style="display:none;"></div>
+
+<script>
+  $("#location_from" ).autocomplete({
+    source: "<%= load_locations_and_events_events_path %>",
+    minLength: 2,
+    select: function( event, ui ) {
+      console.log( ui.item ?
+        "Selected: " + ui.item.value + " aka " + ui.item.id :
+        "Nothing selected, input was " + this.value );
+      $('#trip_from_location_id').val(ui.item.id);
+    }
+  });
+</script>

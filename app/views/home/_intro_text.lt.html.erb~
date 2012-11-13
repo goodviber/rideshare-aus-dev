@@ -7,13 +7,8 @@
     - <a href="<%= new_trip_url %>">Paskelbkite</a> savo kelionę ir ją pamatys visi<br/>
     - Paprasta ir lengvai suprantama kelionių paieška<br />
   </p>
-  <p class="bodyFont">Paspauskite 'Ieškoti' mygtuką tam, kad pradėti!</p>
-  <p class="bodyFont">Kaip galime pagerinti pavesiu.lt? Pateikite <a href="javascript:UserVoice.showPopupWidget();" title="Open feedback dialog">atsiliepimus čia</a></p>
+  <!--<p class="bodyFont">Paspauskite 'Ieškoti' mygtuką tam, kad pradėti!</p>
+  <p class="bodyFont">Kaip galime pagerinti pavesiu.lt? Pateikite <a href="javascript:UserVoice.showPopupWidget();" title="Open feedback dialog">atsiliepimus čia</a></p>-->
 </div>
 
-<div class="span-8 prepend-top last">
-
-  <!-- image_tag("carpooling_people.jpg", :alt => "carpooling people", :class => "round") -->
-
-</div>
 
