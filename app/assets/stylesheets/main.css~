@@ -1,18 +1,18 @@
 /* individual styling */
 #trip_driver {
-width: 25%;
+max-width: 250px;
 }
 
 #trip_seats {
-width: 6%;
+max-width: 60px;
 }
 
 #trip_cost {
-width: 6%;
+max-width: 60px;
 }
 
 #trip_trip_details {
-width: 25%;
+max-width: 250px;
 }
 
 .search_bar{
@@ -194,7 +194,7 @@ padding: 10px;
 
 #logo img { max-width: 90%; width: auto; height: auto;}
 
-#loginDetailsImage img {max-width: 200px; height: auto; margin-left: -50px; margin-top: 30px;}
+#loginDetailsImage img {max-width: 200px; height: auto; margin-left: -80px; margin-top: 30px;}
 
 @media \0screen {
   img { 
