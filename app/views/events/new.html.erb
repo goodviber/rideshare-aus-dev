@@ -15,11 +15,11 @@
   <%= e.label :website %> <%= e.text_field :website %><br/>
   <%= e.label :description %> <%= e.text_area :description, :rows => 10, :cols => 39 %><br/>
   
-  <%= label_tag :photos %>
+  <%#= label_tag :photos %>
 
-  <%= e.fields_for :photos do |p| %>
-    <%= p.file_field :photo %><br/><%= label_tag '' %>
-  <% end %>
+  <%#= e.fields_for :photos do |p| %>
+    <%#= p.file_field :photo %><br/><%= label_tag '' %>
+  <%# end %>
 
   <br/><%= e.submit %>
 <% end %>
