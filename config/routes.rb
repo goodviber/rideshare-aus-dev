@@ -46,6 +46,7 @@ Cocoride::Application.routes.draw do
     #match '/trips/load_location_data' => 'trips#load_location_data'
 
     match '/import_locations' => 'home#import_locations'
+    match '/import_australian_cities' => 'home#import_australian_cities'
 
     resources :locations
 
