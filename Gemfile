@@ -28,8 +28,7 @@ gem "jquery-rails"
 #gem "less", :platforms => :ruby
 #gem 'therubyracer', :platforms => :ruby
 
-gem "less"
-gem 'therubyracer'
+gem 'execjs'
 
 gem "capybara", :group => [:development, :test]
 gem "rspec-rails", ">= 2.0.1", :group => [:development, :test]
@@ -56,3 +55,7 @@ gem 'factory_girl_rails'
 
 # Deploy with Capistrano
 # gem 'capistrano'
+
+group :production do
+  gem 'therubyracer-heroku', '0.8.1.pre3'
+end
