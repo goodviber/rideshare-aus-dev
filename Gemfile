@@ -25,6 +25,9 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'fb_graph'
 gem "jquery-rails"
+#gem "less", :platforms => :ruby
+#gem 'therubyracer', :platforms => :ruby
+
 gem "less", :platforms => :ruby
 gem 'therubyracer', :platforms => :ruby
 
