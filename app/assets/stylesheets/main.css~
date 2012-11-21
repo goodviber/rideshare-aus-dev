@@ -196,6 +196,10 @@ padding: 10px;
 
 #loginDetailsImage {max-width: 200px; height: auto; margin-left: -80px; margin-top: 20px;}
 
+#lan {
+  margin-left: 40px;
+}
+
 @media \0screen {
   img { 
   	width: auto; /* for ie 8 */
@@ -495,10 +499,6 @@ border:none;
   margin-bottom: -30px;
 }
 
-#lan {
-  margin-left: 20px;
-}
-
 #searchResultsContainer {
   margin-top:30px;
 }
@@ -534,3 +534,6 @@ h1 {  font-size: 2rem; /* 32px */ }
    body { font: 60% } 
 }
 
+/* event#show */
+#event_details { width:auto!important; padding-left:35px!important; }
+#event_photo { margin-right:5px; float:left; }

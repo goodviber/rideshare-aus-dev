@@ -1,5 +1,5 @@
-<div id="show-content">
-  <div class="span-8">
+<div id="show-content" class="sixteen columns">
+  <div class="eight columns">
 
     <fieldset>
       <legend><%= t "headings.trip_summary" %></legend>
@@ -35,10 +35,8 @@
       </ol>
     </fieldset>
 
-
-    <%= link_to t(:return_sr), trips_path %>
   </div>
-  <div class="prepend-1 span-13 last">
+  <div class="eight columns">
 
     <fieldset>
       <legend><%= t "headings.driver_details" %></legend>
@@ -66,10 +64,10 @@
 
 
 
-      <div class="span-5 last">
+      <div class="two columns">
         <img src="<%= @trip.driver.fb_pic_large_url %>" />
       </div>
     </fieldset>
   </div>
-
+  <!--<%= link_to t(:return_sr), trips_path %>-->
 </div>

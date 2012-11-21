@@ -1,13 +1,13 @@
 
-<table class="dataTable" style="width:100%">
+<table class="dataTable">
   <tr>
     <th></th>
-    <th><%= t :leaving %></th>
+    <th class="col2"><%= t :leaving %></th>
     <th><%= t :from %></th>
     <th><%= t :to %></th>
     <th><%= t :cost %></th>
     <th></th>
-    <th></th>
+    <!--<th></th>-->
   </tr>
 
 <% @trips.each do |trip| %>
@@ -25,9 +25,10 @@
         <span><%= image_tag trip.driver.fb_pic_url, :style => "width:25px" %></span>
       </div>
       <%= render 'tool_tip', :trip => trip %>
+      <%= link_to(t(:more), trip_path(trip), :class => 'load_dialog') %>
     </td>
 
-    <td><%= link_to(t(:more), trip_path(trip), :class => 'load_dialog') %></td>
+    <!--<td><%= link_to(t(:more), trip_path(trip), :class => 'load_dialog') %></td>-->
   </tr>
 <% end
 end %>
@@ -42,18 +43,35 @@ end %>
 <script>
   $('.load_dialog').click(function(e) {
     var url = $(this).attr('href');
-    var dialog_form = $('<div id="dialog-form">Loading form...</div>').dialog({
-      autoOpen: false,
-      width: 900,
-      modal: true,
-      height: 460,
-      open: function() {
-        return $(this).load(url + ' #show-content');
-      },
-      close: function() {
-        $('#dialog-form').remove();
-      }
-    });
+    if (window.innerWidth > 900)
+    {
+	    var dialog_form = $('<div id="dialog-form">Loading form...</div>').dialog({
+	      autoOpen: false,
+	      width: 900,
+	      modal: true,
+	      height: 460,
+	      open: function() {
+	        return $(this).load(url + ' #show-content');
+	      },
+	      close: function() {
+	        $('#dialog-form').remove();
+	      }
+	    });
+    }
+    else{
+    	var dialog_form = $('<div id="dialog-form">Loading form...</div>').dialog({
+	      autoOpen: false,
+	      width: 300,
+	      modal: true,
+	      height: 460,
+	      open: function() {
+	        return $(this).load(url + ' #show-content');
+	      },
+	      close: function() {
+	        $('#dialog-form').remove();
+	      }
+	    });
+    }
     
     dialog_form.dialog('open');
     e.preventDefault();

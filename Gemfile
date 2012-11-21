@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.1.3'
-gem 'pg'
+gem "pg", "~> 0.14.1"
 gem 'rails-i18n'
 gem 'heroku'
 gem 'taps'
@@ -25,8 +25,8 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'fb_graph'
 gem "jquery-rails"
-gem "less"
-gem "therubyracer"
+gem "less", :platforms => :ruby
+gem 'therubyracer', :platforms => :ruby
 
 gem "capybara", :group => [:development, :test]
 gem "rspec-rails", ">= 2.0.1", :group => [:development, :test]

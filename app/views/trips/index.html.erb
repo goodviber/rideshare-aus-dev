@@ -7,14 +7,16 @@
       <li><%= label(:trip, :from_location_id, t(:from), :class => 'search_loc_label') %></li>
       <li><input id="location_from" type="text" name="from_autocomplete" /></li>
       <li><input id="trip_from_location_id" type="hidden" value ="" name="trip_from_location_id" /></li>
-
+      </br>	
       <li><%= label(:trip, :to_location_id, t(:to), :class => 'search_loc_label') %></li>
       <li><input id="location_to" type="text" name="to_autocomplete"/></li>
       <li><input id="trip_to_location_id" type="hidden" value ="" name="trip_to_location_id" /></li>
-
-      <input id="dateDiv" type="hidden" />
-
+       </br>	
       <li><input id="trip_all_dates" type="checkbox" checked="checked" name="vehicle" value="Bike" /> <%= t :search_all_dates %></li>
+      
+      <input id="dateDiv" type="hidden" />
+      
+      
 
       <li><button id="filterButton"><%= t :search %></button></li>
   </fieldset>
