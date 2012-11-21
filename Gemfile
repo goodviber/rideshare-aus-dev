@@ -57,5 +57,5 @@ gem 'factory_girl_rails'
 # gem 'capistrano'
 
 group :production do
-  gem 'therubyracer-heroku', '0.8.1.pre3'
+  gem 'therubyracer-heroku', '0.8.1.pre3', :platforms => :ruby
 end

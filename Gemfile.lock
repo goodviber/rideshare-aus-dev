@@ -67,7 +67,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.4.0)
-    commonjs (0.2.6)
     devise (1.5.3)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
@@ -122,8 +121,6 @@ GEM
       activesupport (>= 3.0.0)
     launchy (2.1.2)
       addressable (~> 2.3)
-    less (2.2.2)
-      commonjs (~> 0.2.6)
     libwebsocket (0.1.5)
       addressable
     mail (2.3.3)
@@ -267,11 +264,11 @@ DEPENDENCIES
   cheat
   coffee-script
   devise (~> 1.5.2)
+  execjs
   factory_girl_rails
   fb_graph
   heroku
   jquery-rails
-  less
   omniauth
   omniauth-facebook
   paperclip (~> 3.0)
@@ -281,6 +278,6 @@ DEPENDENCIES
   rspec-rails (>= 2.0.1)
   sass-rails (~> 3.1.0)
   taps
-  therubyracer
+  therubyracer-heroku (= 0.8.1.pre3)
   uglifier
   will_paginate
