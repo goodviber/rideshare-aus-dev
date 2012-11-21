@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.1.3'
-gem "pg", "~> 0.14.1"
+gem "pg"
 gem 'rails-i18n'
 gem 'heroku'
 gem 'taps'

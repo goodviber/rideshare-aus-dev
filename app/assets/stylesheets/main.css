@@ -19,13 +19,17 @@ max-width: 250px;
   width: 95%;	
 }
 
+.search_bar fieldset {
+   margin: -20px 10px 10px -5px;
+}
+
 .search_bar fieldset legend{
 padding:0;
 }
 
 .search_bar #filterButton {
 margin-left:5px;
-width:13%;
+width:130px;
 }
 
 .search_bar .search_loc_label {
@@ -557,6 +561,11 @@ h1 {  font-size: 2rem; /* 32px */ }
 	top: 137.383px;
 	left: 109.5px;
 	display: none;
+   }
+   #loginDetailsImage {
+   	margin-left: 25px;
+   	margin-top : 30px;
+   	margin-bottom : -50px;
    }
 }
 
