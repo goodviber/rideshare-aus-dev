@@ -51,5 +51,27 @@ class HomeController < ApplicationController
 
   end
 
+  def import_australian_cities
+    require 'csv'  
+        
+    filename = Rails.root + "db/australian-locations.csv"
+        
+    conn = ActiveRecord::Base.connection
+    
+    csv_text = File.read(filename)
+    
+    csv = CSV.parse(csv_text, :headers => true, :col_sep =>",")
+    csv.each do |row|
+
+      Location.create(
+        :name=>row[0], 
+        :latitude=>row[2], 
+        :longitude=>row[3], 
+        :population=>row[2]
+      )
+
+    end    
+  end
+
 end
 
