@@ -28,8 +28,8 @@ gem "jquery-rails"
 #gem "less", :platforms => :ruby
 #gem 'therubyracer', :platforms => :ruby
 
-gem "less", :platforms => :ruby
-gem 'therubyracer', :platforms => :ruby
+gem "less"
+gem 'therubyracer'
 
 gem "capybara", :group => [:development, :test]
 gem "rspec-rails", ">= 2.0.1", :group => [:development, :test]
