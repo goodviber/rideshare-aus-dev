@@ -43,7 +43,7 @@
       if (window.innerWidth < 600){
         //move paypal and language icons to bottom
         //$("#loginDetails").hide();
-        $("#loginDetailsImage").css({'margin-left':'25px','margin-top' : '30px', 'margin-bottom' : '-50px'});
+        $("#loginDetailsImage").css({'margin-left':'55px','margin-top' : '30px', 'margin-bottom' : '-50px'});
         $("#lan").insertAfter($('#main_content'));
       }
       else if (window.innerWidth > 960){
@@ -76,7 +76,7 @@
         <div id="topPan" class="six columns omega">   
           <div id="loginDetails" class="three columns">
             <div id="loginDetailsImage">
-	       <%= fb_image_url %>
+	              <%= fb_image_url %>
                 </br>
                 <% if user_signed_in? %>
                   <br/>

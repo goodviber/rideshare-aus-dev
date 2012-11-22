@@ -16,8 +16,8 @@ test:
 #  app_id: 163188793727561
 #  app_secret: 824d2398c1e4a61e092c574dfec08989
 
-#http://pavesiu-development.heroku.com
+#http://rideshare-aus-dev.heroku.com
 production:
   app_id: 308853575849049
-  app_secret: 871bef4d3c1c63890d374ee2ad199e61
+  app_secret: 4afdead0b27ff1d819362ac240ec40f6
 

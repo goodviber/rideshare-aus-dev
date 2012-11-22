@@ -29,6 +29,19 @@ module ApplicationHelper
     end
     
   end
+  
+  #Returns the hosted button ID for the donate button
+  def paypal_hosted_button_id
+  
+     if (I18n.locale == :en)
+     	#use Rideshare Australia button
+  	return "LGC3NXBCVLMVL" 
+     elsif (I18n.locale == :lt)
+     	#Pavesiu.Lt button
+  	return "C9BAH2FSK9E7J" 
+     else	
+     	return I18n.locale; 
+     end
+  end
 
 end
-
