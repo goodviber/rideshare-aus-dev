@@ -76,7 +76,7 @@
         <div id="topPan" class="six columns omega">   
           <div id="loginDetails" class="three columns">
             <div id="loginDetailsImage">
-              <% if !request.fullpath.include? "sign_in" 	              
+              <% if !(request.fullpath).include? "sign_in" %>	              
                 <%= fb_image_url %>
                 </br>
                 <% if user_signed_in? %>
