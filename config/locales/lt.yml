@@ -38,6 +38,8 @@ lt:
   search_all_dates: "Ieškoti visų datų"
   search: "Ieškoti"
   more: "Dar"
+  more_details: "Informacija"
+  show_more_details: "Išsamiau"
   loading: "Pakrovimas..."
   contact: "susisiekite su"
   contact_only: "susisiekti"
