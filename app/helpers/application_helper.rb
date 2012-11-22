@@ -25,7 +25,7 @@ module ApplicationHelper
       end
     
     else
-      link_to image_tag('fb-login-button.png'), './sign_in/'
+      link_to image_tag('fb-login-button.png'), './user/sign_in/'
     end
     
   end

@@ -76,7 +76,8 @@
         <div id="topPan" class="six columns omega">   
           <div id="loginDetails" class="three columns">
             <div id="loginDetailsImage">
-	              <%= fb_image_url %>
+              <% if !request.fullpath.include? "sign_in" 	              
+                <%= fb_image_url %>
                 </br>
                 <% if user_signed_in? %>
                   <br/>
@@ -86,6 +87,7 @@
                   <%= link_to(t("login"), new_user_session_path) %>
                   or <%= link_to "sign up", new_user_registration_path %>
                 <% end %>
+              <% end %>
 	    </div>
 	  </div>                 	
 	</div>

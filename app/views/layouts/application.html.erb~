@@ -76,7 +76,7 @@
         <div id="topPan" class="six columns omega">   
           <div id="loginDetails" class="three columns">
             <div id="loginDetailsImage">
-	       <%= fb_image_url %>
+	              <%= fb_image_url %>
                 </br>
                 <% if user_signed_in? %>
                   <br/>
