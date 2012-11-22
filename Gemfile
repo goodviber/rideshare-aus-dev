@@ -28,9 +28,6 @@ gem "jquery-rails"
 #gem "less", :platforms => :ruby
 #gem 'therubyracer', :platforms => :ruby
 
-gem 'nodejs'
-gem 'execjs'
-
 gem "capybara", :group => [:development, :test]
 gem "rspec-rails", ">= 2.0.1", :group => [:development, :test]
 #gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache',:group => [:development, :test]
@@ -59,4 +56,5 @@ gem 'factory_girl_rails'
 
 group :production, :staging do
   gem 'therubyracer', '~> 0.9.3.beta1'
+  gem "less", :platforms => :ruby
 end
