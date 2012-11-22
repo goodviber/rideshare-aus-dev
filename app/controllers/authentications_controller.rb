@@ -29,7 +29,7 @@ class AuthenticationsController < ApplicationController
       current_user.authentications.create!(:provider => omniauth['provider'], :uid => omniauth['uid'])
       redirect_to authentications_url, notice: 'Authentication successfull.'
     else                #user signing in directly with 3rd party provider (ie facebook)
-      email = omniauth['user_info']['email']
+      email = omniauth['user_info']['email'] if omniauth['user_info']['email']
       existing_user = User.find_by_email(email) if email
 
       if !existing_user
