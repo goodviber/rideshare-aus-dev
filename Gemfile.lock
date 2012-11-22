@@ -278,6 +278,6 @@ DEPENDENCIES
   rspec-rails (>= 2.0.1)
   sass-rails (~> 3.1.0)
   taps
-  therubyracer-heroku (= 0.8.1.pre3)
+  therubyracer-heroku (= 0.9.3.beta1)
   uglifier
   will_paginate
