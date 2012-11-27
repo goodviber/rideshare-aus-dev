@@ -48,6 +48,22 @@
           </li>
           <br/>
           <li>
+            <label class="long"><%= t :gender %>:</label><br/>
+            <%= @trip.driver.gender %>
+          </li>
+          <br/>
+          <li>
+            <label class="long"><%= t :birthdate %>:</label><br/>
+            <%= @trip.driver.dob %>
+          </li>
+          <br/>
+          <li>
+            <label class="long"><%= t :location %>:</label><br/>
+            <%= @trip.driver.city %>
+          </li>
+          <br/>
+
+          <li>
             <label class="long"><%= t :message %>:</label><br/>
             <%= @trip.trip_details %>
           </li>

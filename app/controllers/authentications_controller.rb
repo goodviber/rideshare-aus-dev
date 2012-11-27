@@ -35,9 +35,12 @@ class AuthenticationsController < ApplicationController
       if !existing_user
         user = User.new
         user.first_name = omniauth['info']['first_name']   if omniauth['info']['first_name']
-        user.last_name = omniauth['info']['last_name']     if omniauth['info']['last_name']
-        user.email = omniauth['info']['email']             if omniauth['info']['email']
-        user.password = "123456"  #!! DEV ONLY !!
+        user.last_name  = omniauth['info']['last_name']    if omniauth['info']['last_name']
+        user.email      = omniauth['info']['email']        if omniauth['info']['email']
+        user.password   = "123456"  #!! DEV ONLY !!
+        user.city       = omniauth['info']['location']     if omniauth['info']['location']
+        user.dob        = omniauth['extra']['raw_info']['birthday'] if omniauth['extra']['raw_info']['birthday']
+        user.gender     = omniauth['extra']['raw_info']['gender']   if omniauth['extra']['raw_info']['gender']
 
         user.authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
         user.save!

@@ -33,6 +33,8 @@ en:
   ddate: "Date"
   location: "Location"
   event: "Event"
+  gender: "Gender"
+  birthdate: "Birthdate"
 
   search_all_dates: "Search all dates"
   search: "Search"
