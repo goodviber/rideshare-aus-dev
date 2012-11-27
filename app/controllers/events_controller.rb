@@ -79,7 +79,7 @@
     events    = Event.find(:all, :conditions => ["lower(name) LIKE lower(?)", params[:term]+ '%'])
 
     @results  = locations + events
-    render :json => @results.collect{ |x| { :label => x.name, :id => x.name } }.uniq!
+    render :json => @results.collect{ |x| { :label => x.name, :id => x.name } }.uniq
   end
 
 end
