@@ -10,6 +10,7 @@ class AuthenticationsController < ApplicationController
     #render :text => request.env["omniauth.auth"].to_yaml
 
     omniauth = request.env["omniauth.auth"]
+puts "!!!!!!!!#{omniauth.inspect}"
     session['token'] = omniauth['credentials']['token']
 
     authentication = Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
