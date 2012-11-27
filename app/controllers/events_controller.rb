@@ -1,7 +1,6 @@
  class EventsController < ApplicationController
 
   before_filter :authenticate_user!, :only => [:new, :create]
-  before_filter :initialize_new_event, :only => 'index'
 
   def index
     page = params[:page] || 1
@@ -26,7 +25,7 @@
  
   def new
     @event = Event.new
-    5.times { @event.photos.build }
+    #5.times { @event.photos.build }
   end
 
   def create
@@ -72,10 +71,6 @@
   def load_locations
     @locations = Event.all_locations(params[:term])
     render :json => @locations.collect{ |x| { :label => x.name, :id => x.id } }
-  end
-
-  def initialize_new_event
-    @new_event = Event.new
   end
 
   # for events search - search for events as well as cities
