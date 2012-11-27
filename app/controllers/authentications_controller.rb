@@ -10,7 +10,6 @@ class AuthenticationsController < ApplicationController
     #render :text => request.env["omniauth.auth"].to_yaml
 
     omniauth = request.env["omniauth.auth"]
-puts "!!!!!!!!#{omniauth.inspect}"
     session['token'] = omniauth['credentials']['token']
 
     authentication = Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
@@ -30,14 +29,14 @@ puts "!!!!!!!!#{omniauth.inspect}"
       current_user.authentications.create!(:provider => omniauth['provider'], :uid => omniauth['uid'])
       redirect_to authentications_url, notice: 'Authentication successfull.'
     else                #user signing in directly with 3rd party provider (ie facebook)
-      email = omniauth['user_info']['email'] if omniauth['user_info']['email']
+      email = omniauth['info']['email'] if omniauth['info']['email']
       existing_user = User.find_by_email(email) if email
 
       if !existing_user
         user = User.new
-        user.first_name = omniauth['user_info']['first_name']   if omniauth['user_info']['first_name']
-        user.last_name = omniauth['user_info']['last_name']     if omniauth['user_info']['last_name']
-        user.email = omniauth['user_info']['email']             if omniauth['user_info']['email']
+        user.first_name = omniauth['info']['first_name']   if omniauth['info']['first_name']
+        user.last_name = omniauth['info']['last_name']     if omniauth['info']['last_name']
+        user.email = omniauth['info']['email']             if omniauth['info']['email']
         user.password = "123456"  #!! DEV ONLY !!
 
         user.authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
