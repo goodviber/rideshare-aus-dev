@@ -4,14 +4,14 @@
     <li>
       <%= f.label :from_location_id, t(:from), :class => 'span-3' %>
       <input id="location_from" type="text" name="from_autocomplete" />
-      <input id="trip_startable_id" type="" value="" name="trip[startable_id]" />
-      <input id="trip_startable_type" type="" value="" name="trip[startable_type]" />
+      <input id="trip_startable_id" type="hidden" value="" name="trip[startable_id]" />
+      <input id="trip_startable_type" type="hidden" value="" name="trip[startable_type]" />
     </li>
     <li>
       <%= f.label :to_location_id, t(:to), :class => 'span-3' %>
       <input id="location_to" type="text" name="to_autocomplete"/>
-      <input id="trip_endable_id" type="" value="" name="trip[endable_id]" />
-      <input id="trip_endable_type" type="" value="" name="trip[endable_type]" />
+      <input id="trip_endable_id" type="hidden" value="" name="trip[endable_id]" />
+      <input id="trip_endable_type" type="hidden" value="" name="trip[endable_type]" />
     </li>
   </ol>
 </fieldset>
@@ -93,7 +93,7 @@
           "Nothing selected, input was " + this.value );
         $('#trip_startable_id').val(ui.item.id);
         $('#trip_startable_type').val(ui.item.type);
-        //setLatLng('trip_from_location_id', ui.item.id);
+        setLatLng('start', ui.item.id, ui.item.type)
       }
     });
   });
@@ -113,7 +113,7 @@
           "Nothing selected, input was " + this.value );
         $('#trip_endable_id').val(ui.item.id);
         $('#trip_endable_type').val(ui.item.type);
-        //setLatLng('trip_to_location_id', ui.item.id);
+        setLatLng('end', ui.item.id, ui.item.type);
       }
     });
   });

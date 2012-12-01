@@ -121,11 +121,19 @@ class TripsController < ApplicationController
     end
   end
 
+  #def get_lat_lng
+  #  lat_lng = Location.select("latitude, longitude").where(:id => params[:location_id])
+  #
+  #  respond_to do |format|
+  #    format.json { render :json => lat_lng }
+  #  end
+  #end
+
   def get_lat_lng
-    lat_lng = Location.select("latitude, longitude").where(:id => params[:location_id])
+    lat_lng = eval(params[:trip_type]).find(params[:trip_id])
 
     respond_to do |format|
-      format.json { render :json => lat_lng }
+      format.json { render :json => lat_lng}
     end
   end
 
@@ -232,7 +240,7 @@ class TripsController < ApplicationController
 
   # search events and cities
   def load_locations_and_events
-    locations = Event.all_locations(params[:term])
+    locations = Location.from_locations_for_autocomplete(params[:term])
     events    = Event.find(:all, :conditions => ["lower(name) LIKE lower(?)", params[:term]+ '%'])
 
     @results  = locations + events

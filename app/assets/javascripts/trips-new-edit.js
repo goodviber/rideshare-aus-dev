@@ -40,18 +40,18 @@ $().ready(function () {
 	}
 });
 
-function setLatLng(selListId, selListValue) {
-  $.post("/trips/get_lat_lng.json", { location_id: selListValue, authenticity_token: _token })
+function setLatLng(start_or_end, trip_id, trip_type) {
+  $.post("/trips/get_lat_lng.json", { trip_id: trip_id, trip_type: trip_type, authenticity_token: _token })
   .success(function(data) {
-    if (selListId == "trip_from_location_id")
+    if (start_or_end == "start")
     {
-      fromLocationLat = data[0].latitude;
-      fromLocationLng = data[0].longitude;
+      fromLocationLat = data.latitude;
+      fromLocationLng = data.longitude;
     }
-    else if (selListId == "trip_to_location_id")
+    else if (start_or_end == "end")
     {
-      toLocationLat = data[0].latitude;
-      toLocationLng = data[0].longitude;
+      toLocationLat = data.latitude;
+      toLocationLng = data.longitude;
     }
     //Redraw the route
     calcRoute();
@@ -59,10 +59,10 @@ function setLatLng(selListId, selListValue) {
 }
 
 function setDefaultLatLngOnEdit() {
-	if($('#trip_from_location_id').val() != "")
-//		setLatLng($('#trip_from_location_id')[0].id, $('#trip_from_location_id').val());
-	if($('#trip_to_location_id').val() != "")
-//		setLatLng($('#trip_to_location_id')[0].id, $('#trip_to_location_id').val());
+  if($('#trip_startable_id').val() != "" && $('#trip_startable_type').val() != "")
+    setLatLng('start', $('#trip_startable_id').val(), $('#trip_startable_type').val());
+  if($('#trip_endable_id').val() != "" && $('#trip_endable_type').val() != "")
+    setLatLng('end', $('#trip_endable_id').val(), $('#trip_endable_type').val());
 }
 
 function initializeMap() {
