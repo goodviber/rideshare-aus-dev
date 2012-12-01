@@ -75,7 +75,7 @@
 
   # for events search - search for events as well as cities
   def load_locations_and_events
-    locations = Event.all_locations(params[:term])
+    locations = Location.from_locations_for_autocomplete(params[:term])
     events    = Event.find(:all, :conditions => ["lower(name) LIKE lower(?)", params[:term]+ '%'])
   
     @results  = locations + events
