@@ -194,7 +194,7 @@ class TripsController < ApplicationController
 
   def post_to_users_wall(trip)
     me = FbGraph::User.me(session['token'])
-    message = trip.from_location.name + " - " + trip.to_location.name + " [" + trip.trip_date.to_s(:short) + "]"
+    message = trip.startable.to_s + " - " + trip.endable.to_s + " [" + trip.trip_date.to_s(:short) + "]"
     me.feed!(
       :message => trip.trip_details,
       :link => 'www.pavesiu.lt',
@@ -208,7 +208,7 @@ class TripsController < ApplicationController
   def post_to_fanpage_wall(trip)
     fb_page_id = ENV['FB_PAGE_ID'] || '116697818393412' #default: ridesurfing fan page
     page = FbGraph::Page.new(fb_page_id)
-    message = trip.from_location.name + " - " + trip.to_location.name + " [" + l(trip.trip_date, :format => :very_short) + "]"
+    message = trip.startable.to_s + " - " + trip.endable.to_s + " [" + l(trip.trip_date, :format => :very_short) + "]"
 
     page.feed!(
       :access_token => session['token'],
@@ -228,6 +228,15 @@ class TripsController < ApplicationController
   def load_to_location_data
     @locations = Location.to_locations_for_autocomplete(params[:term])
     render :json => @locations.collect{ |x| { :label => x.name, :id => x.id } }
+  end
+
+  # search events and cities
+  def load_locations_and_events
+    locations = Event.all_locations(params[:term])
+    events    = Event.find(:all, :conditions => ["lower(name) LIKE lower(?)", params[:term]+ '%'])
+
+    @results  = locations + events
+    render :json => @results.collect{ |x| { :label => x.name, :id => x.id, :type => x.class.to_s } }.uniq
   end
 
 end

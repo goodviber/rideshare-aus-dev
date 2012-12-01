@@ -32,6 +32,7 @@ Cocoride::Application.routes.draw do
     resources :trips do
       get 'load_from_location_data', :on => :collection
       get 'load_to_location_data', :on => :collection
+      get 'load_locations_and_events', :on => :collection
     end
     resources :queued_posts
     resources :events do

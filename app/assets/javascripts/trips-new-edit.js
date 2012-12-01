@@ -60,9 +60,9 @@ function setLatLng(selListId, selListValue) {
 
 function setDefaultLatLngOnEdit() {
 	if($('#trip_from_location_id').val() != "")
-		setLatLng($('#trip_from_location_id')[0].id, $('#trip_from_location_id').val());
+//		setLatLng($('#trip_from_location_id')[0].id, $('#trip_from_location_id').val());
 	if($('#trip_to_location_id').val() != "")
-		setLatLng($('#trip_to_location_id')[0].id, $('#trip_to_location_id').val());
+//		setLatLng($('#trip_to_location_id')[0].id, $('#trip_to_location_id').val());
 }
 
 function initializeMap() {
