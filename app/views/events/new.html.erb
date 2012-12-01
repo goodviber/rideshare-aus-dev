@@ -10,6 +10,8 @@
   <%= e.label :name %> <%= e.text_field :name %><br/>
   <%= e.label :location %> <%= text_field_tag :event_location, '', :size => 30 %><br/>
   <%= e.hidden_field :location_id %>
+  <%= e.hidden_field :latitude %>
+  <%= e.hidden_field :longitude %>
   <%= e.label :event_date %> <%= e.text_field :event_date, :class => 'calendar' %><br/>
   <%= e.label :event_time %> <%= e.text_field :event_time %><br/>
   <%= e.label :website %> <%= e.text_field :website %><br/>
@@ -40,6 +42,8 @@
         "Selected: " + ui.item.value + " aka " + ui.item.id :
         "Nothing selected, input was " + this.value );
       $('#event_location_id').val(ui.item.id);
+      $('#event_latitude').val(ui.item.lat);
+      $('#event_longitude').val(ui.item.long);
     }
   });
 

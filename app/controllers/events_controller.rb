@@ -67,17 +67,17 @@
 
   end
 
-  # for original search
+  # for events#new location field
   def load_locations
-    @locations = Event.all_locations(params[:term])
-    render :json => @locations.collect{ |x| { :label => x.name, :id => x.id } }
+    @locations = Location.all_with_coordinates(params[:term])
+    render :json => @locations.collect{ |x| { :label => x.name, :id => x.id, :lat => x.latitude, :long => x.longitude } }
   end
 
   # for events search - search for events as well as cities
   def load_locations_and_events
     locations = Event.all_locations(params[:term])
     events    = Event.find(:all, :conditions => ["lower(name) LIKE lower(?)", params[:term]+ '%'])
-
+  
     @results  = locations + events
     render :json => @results.collect{ |x| { :label => x.name, :id => x.name } }.uniq
   end

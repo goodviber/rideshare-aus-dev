@@ -146,6 +146,21 @@ class Location < ActiveRecord::Base
       puts exc.to_s
   end
 
+  # events#new location autocomplete
+  def self.all_with_coordinates(term)
+    if term.blank?
+      Location.select("locations.name, locations.id, locations.latitude, locations.longitude")
+    else
+      #sql = "Select distinct locations.name, locations.id
+      #         From locations, events
+      #        Where locations.id = events.location_id and
+      #              lower(locations.name) like lower('#{term}%')"
+      #Location.find_by_sql(sql)
+
+      Location.select("locations.name, locations.id, locations.latitude, locations.longitude").where("lower(locations.name) like lower(?)", term+'%').order("name")
+    end
+  end
+
   def to_s
     name
   end

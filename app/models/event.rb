@@ -13,20 +13,6 @@ class Event < ActiveRecord::Base
 
   before_create :set_driver_id
 
-  def self.all_locations(term)
-    if term.blank?
-      Location.select("locations.name, locations.id")
-    else
-      #sql = "Select distinct locations.name, locations.id
-      #         From locations, events
-      #        Where locations.id = events.location_id and
-      #              lower(locations.name) like lower('#{term}%')"
-      #Location.find_by_sql(sql)
-
-      Location.select("locations.name, locations.id").where("lower(locations.name) like lower(?)", term+'%').order("name")
-    end
-  end
-
   def to_s
     name
   end
