@@ -138,17 +138,19 @@ class TripsController < ApplicationController
   end
 
   def load_search_results
-    
-    #render :text => '<pre>'+params.to_yaml and return
-
-    fl_id = params[:from_location_id]
-    tl_id = params[:to_location_id]
+    start_id   = params[:start_id]
+    start_type = params[:start_type]
+    end_id     = params[:end_id]
+    end_type   = params[:end_type]
+  
     date = params[:date]
     p_page = params[:page]
 
     conditions = {}
-    conditions[:from_location_id] = fl_id if !fl_id.blank?
-    conditions[:to_location_id]   = tl_id if !tl_id.blank?
+    conditions[:startable_id]   = start_id   if !start_id.blank?
+    conditions[:startable_type] = start_type if !start_type.blank?
+    conditions[:endable_id]     = end_id     if !end_id.blank?
+    conditions[:endable_type]   = end_type   if !end_type.blank?
     conditions[:trip_date] = date         if date != "-1"
 
     @trips = Trip.where(conditions)

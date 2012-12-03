@@ -89,8 +89,12 @@ $(document).ready(function () {
 	}
 
 	function postSearchRequest(page) {
-		var fromLocationId = $('#trip_from_location_id').val();
-		var toLocationId = $('#trip_to_location_id').val();
+                var startId = $('#trip_startable_id').val();
+                var startType = $('#trip_startable_type').val();
+
+                var endId = $('#trip_endable_id').val();
+                var endType = $('#trip_endable_type').val();
+
 		var selectedDate = $('#dateDiv').datepicker("getDate");
 
                 if (selectedDate != null) {
@@ -101,7 +105,7 @@ $(document).ready(function () {
 			selectedDate = -1;
 		}
 
-		params = { page: page, from_location_id: fromLocationId, to_location_id: toLocationId, date: selectedDate, authenticity_token: _token };
+                params = { page: page, start_id: startId, start_type: startType, end_id: endId, end_type: endType, date: selectedDate, authenticity_token: _token };
 
 		$('#startupContainer').hide();
 		$('#searchResults').hide();
