@@ -82,4 +82,11 @@
     render :json => @results.collect{ |x| { :label => x.name, :id => x.name } }.uniq
   end
 
+  # for trips#new in case an event - set event date in trip_date
+  def get_event_date
+    event = Event.find_by_id(params[:id])
+
+    render :json => event.event_date
+  end
+
 end

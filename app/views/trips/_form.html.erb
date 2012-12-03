@@ -20,7 +20,7 @@
   <ol>
     <li>
       <%= f.label :time_of_day, t(:departing) %>
-      <%= date_select("trip","trip_date", { :order => [:day, :month, :year] }) %>
+      <%= f.text_field :trip_date, :class => 'calendar' %>
     </li>
     <li>
       <%= f.label "" %>
@@ -78,6 +78,11 @@
 </div>
 
 <script>
+
+  $('.calendar').datepicker({
+    dateFormat: "yy-mm-dd"
+  });
+
   $(function() {
     function log( message ) {
       $( "<div/>" ).text( message ).prependTo( "#log" );
@@ -94,9 +99,19 @@
         $('#trip_startable_id').val(ui.item.id);
         $('#trip_startable_type').val(ui.item.type);
         setLatLng('start', ui.item.id, ui.item.type)
+        if (ui.item.type = 'Event') {
+          event_date = getEventDate(ui.item.id);
+        }
       }
     });
   });
+
+  function getEventDate(event_id) {
+    $.post("/events/get_event_date", { id: event_id, authenticity_token: _token })
+      .success(function(data) {
+        $('#trip_trip_date').val(data);
+    });
+  }
   
   $(function() {
     function log( message ) {
@@ -114,6 +129,10 @@
         $('#trip_endable_id').val(ui.item.id);
         $('#trip_endable_type').val(ui.item.type);
         setLatLng('end', ui.item.id, ui.item.type);
+        if (ui.item.type = 'Event') {
+          event_date = getEventDate(ui.item.id);
+        }
+
       }
     });
   });
