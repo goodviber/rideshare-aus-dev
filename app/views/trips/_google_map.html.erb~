@@ -1,4 +1,4 @@
-<fieldset id="gmap">
+<fieldset>
   <legend><%= t "headings.route_details" %></legend>
   <ol>
     <li>

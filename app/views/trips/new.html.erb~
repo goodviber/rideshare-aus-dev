@@ -7,7 +7,7 @@
   </div>
 
   <div class="sixteen columns">
-    <div class="eight columns alpha">
+    <div class="eight columns">
       <% if @post %>
         <%= render 'form', :f => f, :post_id => @post.id %>
       <% else %>
@@ -15,7 +15,7 @@
       <% end %>
     </div>
 
-    <div class="eight columns omega">
+    <div class="eight columns">
       <%= render 'google_map' %>
     </div>
   </div>

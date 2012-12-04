@@ -22,7 +22,6 @@
       <%= f.label :time_of_day, t(:departing) %>
       <%= f.text_field :trip_date, :class => 'calendar' %>
     </li>
-    </br>
     <li>
       <%= f.label "" %>
       <%= f.radio_button :time_of_day, "E" %>

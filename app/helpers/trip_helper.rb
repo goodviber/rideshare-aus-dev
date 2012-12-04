@@ -62,6 +62,7 @@ module TripHelper
   end
 
   def arrival_time
+    return "N/A" if @trip.trip_duration.nil?
     if @trip.trip_time
       d = @trip.trip_date
       t = @trip.trip_time

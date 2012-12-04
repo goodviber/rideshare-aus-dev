@@ -57,6 +57,6 @@ gem 'factory_girl_rails'
 # gem 'capistrano'
 
 group :production, :staging do
-  gem 'therubyracer', '~> 0.9.3.beta1'
+  gem 'therubyracer', '~> 0.9.3.beta1', :platforms => :ruby
 
 end

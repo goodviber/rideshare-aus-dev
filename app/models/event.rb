@@ -2,24 +2,19 @@ class Event < ActiveRecord::Base
 
   belongs_to :location
   belongs_to :driver, :foreign_key => :driver_id, :class_name => "User"
+
   has_many   :photos
   accepts_nested_attributes_for :photos
+
+  has_many   :trips, :as => :startable
+  has_many   :trips, :as => :endable
+
   validates_presence_of :name, :location_id, :event_date, :event_time
 
   before_create :set_driver_id
 
-  def self.all_locations(term)
-    if term.blank?
-      Location.select("locations.name, locations.id")
-    else
-      #sql = "Select distinct locations.name, locations.id
-      #         From locations, events
-      #        Where locations.id = events.location_id and
-      #              lower(locations.name) like lower('#{term}%')"
-      #Location.find_by_sql(sql)
-
-      Location.select("locations.name, locations.id").where("lower(locations.name) like lower(?)", term+'%').order("name")
-    end
+  def to_s
+    name
   end
 
   def event_time_format
@@ -29,7 +24,6 @@ class Event < ActiveRecord::Base
       I18n.l(self[:event_time], :format => :time_only)
     end
   end
-
 
   def set_driver_id
     self.driver_id = User.current_user.id

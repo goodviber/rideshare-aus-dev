@@ -121,26 +121,36 @@ class TripsController < ApplicationController
     end
   end
 
+  #def get_lat_lng
+  #  lat_lng = Location.select("latitude, longitude").where(:id => params[:location_id])
+  #
+  #  respond_to do |format|
+  #    format.json { render :json => lat_lng }
+  #  end
+  #end
+
   def get_lat_lng
-    lat_lng = Location.select("latitude, longitude").where(:id => params[:location_id])
+    lat_lng = eval(params[:trip_type]).find(params[:trip_id])
 
     respond_to do |format|
-      format.json { render :json => lat_lng }
+      format.json { render :json => lat_lng}
     end
   end
 
   def load_search_results
-    
-    #render :text => '<pre>'+params.to_yaml and return
-
-    fl_id = params[:from_location_id]
-    tl_id = params[:to_location_id]
+    start_id   = params[:start_id]
+    start_type = params[:start_type]
+    end_id     = params[:end_id]
+    end_type   = params[:end_type]
+  
     date = params[:date]
     p_page = params[:page]
 
     conditions = {}
-    conditions[:from_location_id] = fl_id if !fl_id.blank?
-    conditions[:to_location_id]   = tl_id if !tl_id.blank?
+    conditions[:startable_id]   = start_id   if !start_id.blank?
+    conditions[:startable_type] = start_type if !start_type.blank?
+    conditions[:endable_id]     = end_id     if !end_id.blank?
+    conditions[:endable_type]   = end_type   if !end_type.blank?
     conditions[:trip_date] = date         if date != "-1"
 
     @trips = Trip.where(conditions)
@@ -194,7 +204,7 @@ class TripsController < ApplicationController
 
   def post_to_users_wall(trip)
     me = FbGraph::User.me(session['token'])
-    message = trip.from_location.name + " - " + trip.to_location.name + " [" + trip.trip_date.to_s(:short) + "]"
+    message = trip.startable.to_s + " - " + trip.endable.to_s + " [" + trip.trip_date.to_s(:short) + "]"
     me.feed!(
       :message => trip.trip_details,
       :link => 'www.pavesiu.lt',
@@ -208,7 +218,7 @@ class TripsController < ApplicationController
   def post_to_fanpage_wall(trip)
     fb_page_id = ENV['FB_PAGE_ID'] || '116697818393412' #default: ridesurfing fan page
     page = FbGraph::Page.new(fb_page_id)
-    message = trip.from_location.name + " - " + trip.to_location.name + " [" + l(trip.trip_date, :format => :very_short) + "]"
+    message = trip.startable.to_s + " - " + trip.endable.to_s + " [" + l(trip.trip_date, :format => :very_short) + "]"
 
     page.feed!(
       :access_token => session['token'],
@@ -228,6 +238,15 @@ class TripsController < ApplicationController
   def load_to_location_data
     @locations = Location.to_locations_for_autocomplete(params[:term])
     render :json => @locations.collect{ |x| { :label => x.name, :id => x.id } }
+  end
+
+  # search events and cities
+  def load_locations_and_events
+    locations = Location.from_locations_for_autocomplete(params[:term])
+    events    = Event.find(:all, :conditions => ["lower(name) LIKE lower(?)", params[:term]+ '%'])
+
+    @results  = locations + events
+    render :json => @results.collect{ |x| { :label => x.name, :id => x.id, :type => x.class.to_s } }.uniq
   end
 
 end

@@ -32,7 +32,7 @@
 	  });
     
     $(window).resize(function () { 
-      fitToDevice();
+      //fitToDevice();
     });
     
     function fitToDevice()
@@ -43,7 +43,7 @@
       if (window.innerWidth < 600){
         //move paypal and language icons to bottom
         //$("#loginDetails").hide();
-        $("#loginDetailsImage").css({'margin-left':'55px','margin-top' : '30px', 'margin-bottom' : '-50px'});
+        $("#loginDetailsImage").css({'margin-left':'35px','margin-top' : '30px', 'margin-bottom' : '-50px'});
         $("#lan").insertAfter($('#main_content'));
       }
       else if (window.innerWidth > 960){
@@ -73,19 +73,26 @@
 			      <%= image_tag("#{I18n.locale}/logo.png", :alt => "#{t(:site_name)} logo") %>
 			    </a>
 		    </div>
-        <div id="topPan" class="six columns omega">   
+        <div class="six columns omega">   
           <div id="loginDetails" class="three columns">
             <div id="loginDetailsImage">
-              <% if !(request.fullpath).include? "sign_in" 	              
-                <%= fb_image_url %>
-                </br>
+              <ul>
+              <% if !(request.fullpath).include? "sign_in" %>	              
+                <li>
+                  <%= fb_image_url %>
+                </li>
                 <% if user_signed_in? %>
-                  <br/>
+                  <li>
                   <span class="fbName"><%= current_user.full_name %></span>
+                  <li/>
+                  <li id="noDec">
                   <%= link_to(t("logout"), destroy_user_session_path, :method => :delete) %>
+                  </li>
                 <% else %>
+                  <li>
                   <%= link_to(t("login"), new_user_session_path) %>
                   or <%= link_to "sign up", new_user_registration_path %>
+                  </li>
                 <% end %>
               <% end %>
 	    </div>

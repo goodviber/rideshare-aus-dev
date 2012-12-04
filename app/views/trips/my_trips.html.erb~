@@ -1,5 +1,5 @@
 
-<div class="sixteen columns">
+<div class="span-22">
 	<fieldset>
 			<legend><%= t "headings.my_trips" %></legend>
 

@@ -1,16 +1,22 @@
 <% content_for :header, javascript_include_tag("trips-search") %>
 
-<div class="sixteen columns" id="search_box">
+<div class="sixteen columns" id="search_box" class="form">
   <fieldset>
     <legend><%= t "headings.search_filter" %></legend>
     <ul>
-      <li><%= label(:trip, :from_location_id, t(:from), :class => 'search_loc_label') %>
-      <input id="location_from" type="text" name="from_autocomplete" class="textField"/>
-      <input id="trip_from_location_id" type="hidden" value ="" name="trip_from_location_id" /></li>
+      <li>
+        <%= label(:trip, :from_location_id, t(:from), :class => 'search_loc_label') %>
+        <input id="location_from" type="text" name="from_autocomplete" class="textField"/>
+        <input id="trip_startable_id" type="hidden" value="" name="trip_startable_id" />
+        <input id="trip_startable_type" type="hidden" value="" name="trip_startable_type" />
+      </li>
       
-      <li><%= label(:trip, :to_location_id, t(:to), :class => 'search_loc_label') %>
-      <input id="location_to" type="text" name="to_autocomplete" class="textField"/>
-      <input id="trip_to_location_id" type="hidden" value ="" name="trip_to_location_id" /></li>
+      <li>
+        <%= label(:trip, :to_location_id, t(:to), :class => 'search_loc_label') %>
+        <input id="location_to" type="text" name="to_autocomplete" class="textField"/>
+        <input id="trip_endable_id" type="hidden" value="" name="trip_endable_id" />
+        <input id="trip_endable_type" type="hidden" value="" name="trip_endable_type" />
+      </li>
       
       <li><input id="dateDiv" type="hidden" />
       <input id="trip_all_dates" type="checkbox" checked="checked" name="vehicle" value="Bike" /> <%= t :search_all_dates %>
@@ -41,13 +47,14 @@
     }
 
     $( "#location_from" ).autocomplete({
-      source: "<%= load_from_location_data_trips_path %>",
+      source: "<%= load_locations_and_events_trips_path %>",
       minLength: 2,
       select: function( event, ui ) {
         console.log( ui.item ?
           "Selected: " + ui.item.value + " aka " + ui.item.id :
           "Nothing selected, input was " + this.value );
-        $('#trip_from_location_id').val(ui.item.id);
+        $('#trip_startable_id').val(ui.item.id);
+        $('#trip_startable_type').val(ui.item.type);
       }
     });
   });
@@ -59,13 +66,14 @@
     }
 
     $( "#location_to" ).autocomplete({
-      source: "<%= load_to_location_data_trips_path %>",
+      source: "<%= load_locations_and_events_trips_path %>",
       minLength: 2,
       select: function( event, ui ) {
         console.log( ui.item ?
           "Selected: " + ui.item.value + " aka " + ui.item.id :
           "Nothing selected, input was " + this.value );
-        $('#trip_to_location_id').val(ui.item.id);
+        $('#trip_endable_id').val(ui.item.id);
+        $('#trip_endable_type').val(ui.item.type);
       }
     });
   });
