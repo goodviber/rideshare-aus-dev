@@ -1,8 +1,12 @@
 class Location < ActiveRecord::Base
   
   #attr_accessible :name, :ascii_name, :alternate_names, :latitude, :longitude, :feature_class, :feature_code, :country_code, :cc2, :admin1_code, :admin2_code, :admin3_code, :admin4_code, :population, :elevation, :gtopo30, :timezone, :created_at, :updated_at, :trips_from_count, :trips_to_count
-  has_many :trips_from, :class_name => "Trip", :foreign_key => "from_location_id"
-  has_many :trips_to, :class_name => "Trip", :foreign_key => "to_location_id"
+  #has_many :trips_from, :class_name => "Trip", :foreign_key => "from_location_id"
+  #has_many :trips_to, :class_name => "Trip", :foreign_key => "to_location_id"
+
+  has_many :trips, :as => :startable
+  has_many :trips, :as => :endable
+  
   has_many :events
 
   scope :has_trips_from, select("locations.id, name || ' (' || count(name) || ')' as name")
@@ -140,6 +144,25 @@ class Location < ActiveRecord::Base
     nil #return nil if no matches
     rescue Exception => exc
       puts exc.to_s
+  end
+
+  # events#new location autocomplete
+  def self.all_with_coordinates(term)
+    if term.blank?
+      Location.select("locations.name, locations.id, locations.latitude, locations.longitude")
+    else
+      #sql = "Select distinct locations.name, locations.id
+      #         From locations, events
+      #        Where locations.id = events.location_id and
+      #              lower(locations.name) like lower('#{term}%')"
+      #Location.find_by_sql(sql)
+
+      Location.select("locations.name, locations.id, locations.latitude, locations.longitude").where("lower(locations.name) like lower(?)", term+'%').order("name")
+    end
+  end
+
+  def to_s
+    name
   end
 
   @@alternate_names = nil

@@ -6,11 +6,11 @@
       <ol>
         <li>
           <label><%= t :from %>:</label>
-          <%= @trip.from_location.name %>
+          <%= @trip.startable.to_s %>
         </li>
         <li>
           <label><%= t :to %>:</label>
-          <%= @trip.to_location.name %>
+          <%= @trip.endable.to_s %>
         </li>
         <li>
           <label><%= t :departing %>:</label>
