@@ -217,12 +217,7 @@ padding: 10px;
 
 #logo img { max-width: 90%; width: auto; height: auto;}
 
-#loginDetailsImage {max-width: 200px; height: auto; margin-left: 220px; margin-top: 20px;}
-
-#loginDetailsImage li{
-  line-height: 15px;
-  margin-bottom: 5px;
-}
+#loginDetailsImage {max-width: 200px; height: auto; margin-left: -80px; margin-top: 20px;}
 
 #lan {
   /*margin-left: 40px;*/
@@ -247,19 +242,6 @@ padding: 10px;
     border-top-right-radius: 2%;
     -moz-border-radius-topleft: 2%;
     -moz-border-radius-topright: 2%;
-}
-
-.noDec a
-{
-  width: auto;
-  height: auto;
-  background: none;
-  
-}
-
-#gmap
-{
-  margin-left: -20px;
 }
 
 /*----TOP PANEL---- changed from 778px to 647px*/
@@ -471,6 +453,9 @@ margin-right: 0px;
 margin-top: -5px;
 }
 
+#loginDetailsImage {
+
+}
 
 
 
@@ -573,31 +558,6 @@ border:none;
   clear: right;
 }
 
-.form li{
-  display: inline-block;
-}
-
-.form input{
-  display: inline-block;
-  max-width: 180px;
-  clear: right;
-}
-
-.form {
-  margin-bottom:10px;
-  margin-right: 10px;
-  margin-left: -15px;
-
-  margin-top: 10px;	
-  max-width:90%;
-}
-
-#liTripTime select{
-  max-width: 50px;
-  display: inline-block;
-  clear: right;
-}
-
 body { font: 100%; /* 16px */  }
 h1 {  font-size: 2rem; /* 32px */ }
  
@@ -629,27 +589,20 @@ h1 {  font-size: 2rem; /* 32px */ }
    body { font: 60% } 
    .col2 { display : none; } /*hide leaving column on small devices*/
    .col5 { display : none; } /*hide More Details column on small devices*/
-   
+   #loginDetailsImage { margin-left: 85px;}
    div.tooltipDiv {
-	  white-space: normal;
-	  position: absolute;
-	  top: 137.383px;
-	  left: 109.5px;
-	  display: none;
+	white-space: normal;
+	position: absolute;
+	top: 137.383px;
+	left: 109.5px;
+	display: none;
    }
    #loginDetailsImage {
+   	margin-left: 25px;
    	margin-top : 30px;
    	margin-bottom : -50px;
-    max-width: 300px;
    }
    
-  #loginDetailsImage li{
-    display: inline-block;
-    line-height: 1.9;
-    margin-right: 5px;
-  }
-
-  
    table.dataTable td.colFbImg img{
      max-width:25px;
    }
@@ -660,7 +613,6 @@ h1 {  font-size: 2rem; /* 32px */ }
      width:90%;
      max-width:90%;
    }
-  
 }
 
 /* event#show */

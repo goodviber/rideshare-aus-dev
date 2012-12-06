@@ -22,7 +22,6 @@
       <%= f.label :time_of_day, t(:departing) %>
       <%= f.text_field :trip_date, :class => 'calendar' %>
     </li>
-    </br>
     <li>
       <%= f.label "" %>
       <%= f.radio_button :time_of_day, "E" %>
@@ -33,7 +32,6 @@
       <%= t("trip_time.afternoon") %>
     </li>
     </br>
-    <br/>
     <li id="liTripTime">
       <%= f.label :trip_time, t(:ttime) %>
       <%= time_select("trip","trip_time", {:minute_step => 15}) %>
