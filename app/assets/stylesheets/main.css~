@@ -110,8 +110,8 @@ max-width:120px;
 }
 
 table.dataTable td.col5 {
-width:28px;
-max-width:28px;
+
+max-width:78px;
 }
 
 table.dataTable td.col6 {
@@ -200,8 +200,8 @@ padding:0;
 border: 0;
 outline: 0;
 background: transparent;
-/*background-color: #D6D6DE; */
-background-image: url(images/background.jpg);
+background-color: #D6D6DE; 
+/*background-image: url(images/background.jpg);*/
 }
 
 .tabs-container {
@@ -217,7 +217,7 @@ padding: 10px;
 
 #logo img { max-width: 90%; width: auto; height: auto;}
 
-#loginDetailsImage {max-width: 200px; height: auto; margin-left: -80px; margin-top: 20px;}
+#loginDetailsImage {max-width: 200px; height: auto; margin-left: -30px; margin-top: 0px;}
 
 #lan {
   /*margin-left: 40px;*/
@@ -264,10 +264,9 @@ padding: 10px;
 #topPanLong #ImgPan{width:auto; height:auto; background:#fff; color:#666; position:absolute; top:%; left:%; padding:0 0 0 3%;}
 #topPanLong #ImgPan img{width:auto; height:auto;}
 
-
-#topPanLong ul{width:90%; height:32px; position:absolute; top:12px; right:1%;}
-#topPanLong ul li{max-width:68px; height:32px; float:left;}
-#topPanLong ul li a{width:18%; height:35px; display:block; background:url(images/topmenu-normal-long.jpg) 0 0 no-repeat #F5F4F4; color:#666; text-decoration:none; font-size:12px; font-weight:bold; text-align:center; line-height:32px; margin:0 2px 0 0;}
+#topPanLong ul{width:900px; height:32px; position:absolute; top:12px; right:10px;}
+#topPanLong ul li{width:182px; height:32px; float:left;}
+#topPanLong ul li a{width:180px; height:35px; display:block; background:url(images/topmenu-normal-long.jpg) 0 0 no-repeat #F5F4F4; color:#666; text-decoration:none; font-size:12px; font-weight:bold; text-align:center; line-height:32px; margin:0 2px 0 0;}
 #topPanLong ul li a:hover{background:url(images/topmenu-hover-long.jpg) 0 0 no-repeat #F5F4F4; color:#fff; text-decoration:none;}
 
 #topPanLong ul li.selected a{background:url(images/topmenu-hover-long.jpg) 0 0 no-repeat #F5F4F4; color:#fff; text-decoration:none;}
@@ -558,6 +557,37 @@ border:none;
   clear: right;
 }
 
+.form li{
+  display: inline-block;
+}
+
+.form input{
+  display: inline-block;
+  max-width: 180px;
+  clear: right;
+}
+
+.form fieldset{
+  margin-bottom:10px;
+  margin-right: 10px;
+  margin-left: -5px;
+
+  margin-top: -30px;	
+  max-width:90%;
+}
+
+#map_canvas
+{
+  width: 365px; 
+  height: 300px;
+}
+
+#liTripTime select
+{
+  max-width:50px;
+  display: inline-block;
+}
+
 body { font: 100%; /* 16px */  }
 h1 {  font-size: 2rem; /* 32px */ }
  
@@ -612,6 +642,12 @@ h1 {  font-size: 2rem; /* 32px */ }
    #search_box .textField {
      width:90%;
      max-width:90%;
+   }
+
+   #map_canvas
+   {
+    max-width: 250px; 
+    height: 205.5px;
    }
 }
 

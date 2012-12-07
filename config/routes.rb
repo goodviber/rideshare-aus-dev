@@ -103,7 +103,7 @@ Cocoride::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'trips#index'
+  root :to => 'trips#index' 
 
   # See how all your routes lay out with "rake routes"
 

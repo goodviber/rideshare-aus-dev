@@ -28,9 +28,9 @@
 </head>
 <body <%= yield(:body_attr) %>>
 
-  <div class="container corner-top corner-bottom">
+  <div class="container">
 
-      <div class="span-24 prepend-top">
+      <div class="sixteen columns">
           <div id="staffMenu">
 
 		        <div id="topPanLong" >
@@ -44,8 +44,12 @@
             </div>
          </div>
       </div>
-
-      <div class="prepend-1 span-22 append-1">
+      </br>
+      </br>
+      </br>
+      </br>
+      </br>
+      <div class="sixteen columns">
 
         <% if notice %>
           <p class="notice"><%= notice %></p>
@@ -58,7 +62,7 @@
         <%= yield %>
       </div>
 
-	  <div class="span-24" >
+	  <div class="sixteen columns" >
 			  <p id="footerText">Privacy | Terms & Conditions | FAQ's | Contact Us</p>
 	  </div>
 

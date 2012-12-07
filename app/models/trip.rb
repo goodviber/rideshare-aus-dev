@@ -15,18 +15,27 @@ class Trip < ActiveRecord::Base
 
   belongs_to :related_trip, :foreign_key => "rel_trip_id", :class_name => "Trip"
 
-  validates_presence_of :startable_id, :startable_type, :endable_id, :endable_type, :driver_id, :trip_date, :trip_details, :cost
+  validates_presence_of :startable_id, :startable_type, :endable_id, :endable_type
+  validates_presence_of :driver_id, :trip_date, :trip_details, :cost
 
-  validate :future_date?
+  #validate :future_date?
 
   @@load_count = 0
-
+  
   def future_date?
     unless self[:trip_date] >= DateTime.now.to_date
       errors.add(:trip_date, "must not be in the past.")
     end
   end
+  
+  def from_loc_name
+    Location.find(self[:from_location_id]) unless !self[:from_location_id]
+  end
 
+  def to_loc_name
+    Location.find(self[:to_location_id]) unless !self[:to_location_id]
+  end
+  
   #def valid_from_locations?
   #  unless self[:from_location_id] != -1
   #    errors.add(:from_location_id, "must be a valid location")
@@ -66,6 +75,8 @@ class Trip < ActiveRecord::Base
     end
   end
 
+  
+
   def self.load_from_fb_page(page_id)
     #TO DO - setup using app_id and secret in config file
     #see https://github.com/iliu/mysite-examples/blob/fb_graph_cache/config/facebook.yml for example
@@ -78,10 +89,11 @@ class Trip < ActiveRecord::Base
     #TO DO - create config table that stores, fb page name, id and last imported date
     #the current code is incorrect as the records that contain max(date) are deleted when processed successfully
     most_recent_post_created_at = '01-01-2000'
-    most_recent_post_created_at = QueuedPost.where(:page_id => page.identifier).maximum(:post_created_at) if QueuedPost.where(:page_id => page.identifier).maximum(:post_created_at)
+    #most_recent_post_created_at = QueuedPost.where(:page_id => page.identifier).maximum(:post_created_at) if QueuedPost.where(:page_id => page.identifier).maximum(:post_created_at)
 
     #load pages 1-4 of fan page posts
-    continue = fetch_fb_first_page(page, most_recent_post_created_at)
+    #continue = fetch_fb_first_page(page, most_recent_post_created_at)
+    continue = fetch_fb_feed(page, 0, most_recent_post_created_at)
     continue = fetch_fb_second_page(page, most_recent_post_created_at) if continue
     continue = fetch_fb_third_page(page, most_recent_post_created_at)  if continue
     fetch_fb_fourth_page(page, most_recent_post_created_at)            if continue
@@ -108,6 +120,22 @@ class Trip < ActiveRecord::Base
 
     rescue Exception => exc
 
+  end 
+
+  #TO DO: refactor to store "page.feed" in array variable depending on page_num [eg 1-4] (new paramater)
+  private
+  def self.fetch_fb_feed(fb_page, feed_page, load_after_datetime) #0-25
+    continue = true
+    fb_page.feed.fetch(feed_page) do |post|
+      if post.created_time > load_after_datetime
+        add_post(page.identifier, post)
+        @@load_count+=1
+      else
+        continue = false
+        break
+      end
+    end
+    continue
   end
 
   #TO DO: refactor to store "page.feed" in array variable depending on page_num [eg 1-4] (new paramater)
@@ -200,8 +228,8 @@ class Trip < ActiveRecord::Base
   end
 
   def self.transform_and_load(post)
+    begin
 
-    #create user/driver if doesn't exist
     auth_user = Authentication.find_by_uid(post.fb_id)
     if auth_user
       driver_id = auth_user.user_id
@@ -222,16 +250,19 @@ class Trip < ActiveRecord::Base
     begin
       trip.trip_date = Date.strptime("{#{trip_day_of_month}}", "{%d}") if trip_day_of_month && trip_date
     rescue Exception => e
+      
     end
 
     #Dates: next try this format - (05.31)
     if !trip_date
       trip_date = post.message.match(/\d(0?[1-9]|1[012])[- .](0?[1-9]|[12][0-9]|3[01])\d/)
       trip_date_arr = trip_date[0].split(/[.-]/) if trip_date
-
+      
       begin
+
         trip.trip_date = Date.strptime("{#{trip_date_arr[0]} #{trip_date_arr[1]}}", "{%m %d}") if trip_date_arr
       rescue Exception => e
+        puts "Error during processing: #{trip_date} \t #{$!}"
       end
     end
 
@@ -266,14 +297,20 @@ class Trip < ActiveRecord::Base
             location = Location.find_by_alternate_names(city.capitalize)
           end
           if location
+            #puts "Found a location: #{location}"
             location_ids << location.id if location.id && !location_ids.include?(location.id)
           end
         end
       end
     }
 
-    trip.from_location_id = location_ids[0] if location_ids[0]
-    trip.to_location_id = location_ids[1]   if location_ids[1]
+    trip.startable_id = location_ids[0] if location_ids[0]
+    trip.startable_type = "Location"
+    trip.endable_id = location_ids[1]   if location_ids[1]
+    trip.endable_type = "Location"    
+    
+    #puts "Trip processed: #{trip.from_location_id} to #{trip.to_location_id}: #{trip.trip_details}"
+    
     trip.trip_time = "8:00" if !trip_time
     trip.time_of_day = trip_time.to_s
     #if no date could be found, then use the date that the trip was posted on
@@ -301,7 +338,7 @@ class Trip < ActiveRecord::Base
         qp.trip_id = trip.id
         qp.error_msg = trip.errors.full_messages[0]
         qp.save
-
+        puts "Couldn't save trip: #{qp} #{trip.errors.full_messages[0]}"
         false
       end
     else
@@ -310,21 +347,22 @@ class Trip < ActiveRecord::Base
         qp.deleted_at = DateTime.now
         qp.deleted_msg = "User already has trip on this day"
         qp.save
-
+        puts "User already has trip on this day: #{qp}"
         false
     end
 
-    rescue Exception => exc
-      #debugger
-      puts "Error occured processing queued_posts id #{post.id}\n-" + exc.to_s
+    rescue => e
+      puts "Error during processing: #{$!}"
+      puts "Backtrace:\n\t#{e.backtrace.join("\n\t")}"
+    end
   end
 
   private
   def self.check_trip_exists(trip)
     #Users should only be allowed to post one trip, per day to the same destination.
     #If a trip has already been posted to the destination city for that particular user, do not post any more, as these are duplicated trips.
-    t = Trip.where(:to_location_id => trip.to_location,
-                  :from_location_id => trip.from_location_id,
+    t = Trip.where(:endable_id => trip.endable_id,
+                  :startable_id => trip.startable_id,
                   :driver_id => trip.driver_id,
                   :trip_date => trip.trip_date)
     t.exists?

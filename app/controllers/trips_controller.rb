@@ -156,9 +156,11 @@ class TripsController < ApplicationController
     @trips = Trip.where(conditions)
                  .where("trip_date >= ?", DateTime.now.to_date)
                  .order("trip_date, trip_time")
-                 .paginate(:page => p_page, :per_page => 20)
-
-    @sel_trip_date = date.to_date if date != "-1"
+                 .paginate(:page => p_page, :per_page => 10)
+    
+    if (!date.nil?)
+      @sel_trip_date = date.to_date if date != "-1" 
+    end
 
     respond_to do |format|
       format.html { render partial: "search_results"}

@@ -1,35 +1,36 @@
 
-<table class="dataTable" style="width:100%">
+<table class="dataTable">
   <tr>
     <th></th>
-    <th><%= t :leaving %></th>
+    <th class="col2"><%= t :leaving %></th>
     <th><%= t :from %></th>
     <th><%= t :to %></th>
     <th><%= t :cost %></th>
-    <th></th>
-    <th></th>
+    <th><%=t(:more)%></th>
+    <th class="col5"><%=t(:more_details)%></th>
   </tr>
 
 <% @trips.each do |trip| %>
-  <% unless trip.nil? %>
   <tr>
     <td class="col1"><%= l trip.trip_date, :format => :very_short %></td>
     <td class="deptime col2"><%= trip.dis_trip_time %></td>
-    <td class="col3"><%= trip.from_location.name %></td>
-    <td class="col4"><%= trip.to_location.name %></td>
+    <td class="col3"><%= trip.startable.to_s %></td>
+    <td class="col4"><%= trip.endable.to_s %></td>
     <td><%= number_to_currency(trip.cost, :precision => 0) if trip.cost != 0 %></td>
     <!-- <td><%= link_to 'Destroy', trip, :confirm => 'Are you sure?', :method => :delete %></td> -->
 
-    <td>
+    <td class="colFbImg">
       <div class="customTooltip">
-        <span><%= image_tag trip.driver.fb_pic_url, :style => "width:25px" %></span>
+        <span class="search_fbImg"><%= image_tag trip.driver.fb_pic_url %></span>
       </div>
       <%= render 'tool_tip', :trip => trip %>
+      </br>
+      <span class="more_details"><%= link_to(t(:more), trip_path(trip), :class => 'load_dialog') %></span>
     </td>
 
-    <td><%= link_to(t(:more), trip_path(trip), :class => 'load_dialog') %></td>
+    <td class="col5"><%= link_to(t(:show_more_details), trip_path(trip), :class => 'load_dialog') %></td>
   </tr>
-<% end
+<% 
 end %>
 </table>
 
@@ -42,18 +43,35 @@ end %>
 <script>
   $('.load_dialog').click(function(e) {
     var url = $(this).attr('href');
-    var dialog_form = $('<div id="dialog-form">Loading form...</div>').dialog({
-      autoOpen: false,
-      width: 900,
-      modal: true,
-      height: 460,
-      open: function() {
-        return $(this).load(url + ' #show-content');
-      },
-      close: function() {
-        $('#dialog-form').remove();
-      }
-    });
+    if (window.innerWidth > 900)
+    {
+	    var dialog_form = $('<div id="dialog-form">Loading form...</div>').dialog({
+	      autoOpen: false,
+	      width: 900,
+	      modal: true,
+	      height: 460,
+	      open: function() {
+	        return $(this).load(url + ' #show-content');
+	      },
+	      close: function() {
+	        $('#dialog-form').remove();
+	      }
+	    });
+    }
+    else{
+    	var dialog_form = $('<div id="dialog-form">Loading form...</div>').dialog({
+	      autoOpen: false,
+	      width: 300,
+	      modal: true,
+	      height: 460,
+	      open: function() {
+	        return $(this).load(url + ' #show-content');
+	      },
+	      close: function() {
+	        $('#dialog-form').remove();
+	      }
+	    });
+    }
     
     dialog_form.dialog('open');
     e.preventDefault();

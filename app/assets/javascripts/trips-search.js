@@ -27,7 +27,8 @@ $(document).ready(function () {
 	bindTooltip();
 
 	$('#searchResultsContainer').hide();
-
+  postSearchRequest(1);  
+  
 	$('#filterButton').click(function() {
 		postSearchRequest(1);
 	});
@@ -40,7 +41,7 @@ $(document).ready(function () {
 		page = href.substr(href.length - 1);
 
 		postSearchRequest(page);
-  	});
+	});
 
 	function createDatepicker() {
 		$('#dateDiv').datepicker({
@@ -55,7 +56,7 @@ $(document).ready(function () {
 		    beforeShowDay: setScheduledDays,
 		    numberOfMonths: 1
 		});
-    }
+  }
 
 	createDatepicker();
 	getValidTripDates();
@@ -89,23 +90,23 @@ $(document).ready(function () {
 	}
 
 	function postSearchRequest(page) {
-                var startId = $('#trip_startable_id').val();
-                var startType = $('#trip_startable_type').val();
+    var startId = $('#trip_startable_id').val();
+    var startType = $('#trip_startable_type').val();
 
-                var endId = $('#trip_endable_id').val();
-                var endType = $('#trip_endable_type').val();
+    var endId = $('#trip_endable_id').val();
+    var endType = $('#trip_endable_type').val();
 
 		var selectedDate = $('#dateDiv').datepicker("getDate");
 
-                if (selectedDate != null) {
-  		  selectedDate = formatDate(selectedDate,"yy/mm/dd");
-                }
+    if (selectedDate != null) {
+		  selectedDate = formatDate(selectedDate,"yy/mm/dd");
+    }
 
 		if ($('#trip_all_dates').attr('checked')) {
 			selectedDate = -1;
 		}
 
-                params = { page: page, start_id: startId, start_type: startType, end_id: endId, end_type: endType, date: selectedDate, authenticity_token: _token };
+    params = { page: page, start_id: startId, start_type: startType, end_id: endId, end_type: endType, date: selectedDate, authenticity_token: _token };
 
 		$('#startupContainer').hide();
 		$('#searchResults').hide();
@@ -120,7 +121,7 @@ $(document).ready(function () {
 		  });
 	}
 
-    function refreshSearchResults(partialHtml) {
+  function refreshSearchResults(partialHtml) {
 	  $('#searchResults').show();
 	  $('#searchResults').html(partialHtml);
     }

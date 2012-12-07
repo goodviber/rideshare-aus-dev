@@ -32,7 +32,6 @@
       <%= t("trip_time.afternoon") %>
     </li>
     </br>
-    <br/>
     <li id="liTripTime">
       <%= f.label :trip_time, t(:ttime) %>
       <%= time_select("trip","trip_time", {:minute_step => 15}) %>
