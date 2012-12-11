@@ -73,6 +73,7 @@ lt:
     trip_summary: "Kelionės duomenys"
     driver_details: "Vairuotojo duomenys"
     my_trips: "Mano kelionės"
+    contact_driver: "Susisiekti vairuotojas"
 
   tabs:
     home: "Į pradžią"

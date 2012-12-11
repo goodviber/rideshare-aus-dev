@@ -8,6 +8,7 @@ gem 'taps'
 gem 'activeadmin'
 gem 'will_paginate'
 gem 'paperclip', '~> 3.0'
+gem 'rest-client'
 
 # gem 'blueprint-rails'
 

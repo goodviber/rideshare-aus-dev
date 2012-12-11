@@ -1,6 +1,9 @@
 <div id="show-content" class="sixteen columns">
-  <div class="eight columns">
-
+    <% if (params[:popup] == 'true')  %> 
+      <div class="three columns alpha">
+    <% else %>
+      <div class="three columns alpha">
+    <% end %>
     <fieldset>
       <legend><%= t "headings.trip_summary" %></legend>
       <ol>
@@ -36,54 +39,57 @@
     </fieldset>
 
   </div>
-  <div class="eight columns">
+  <div class="seven columns omega">
+    <div class="four columns alpha">
+      <fieldset>
+        <legend><%= t "headings.driver_details" %></legend>
 
-    <fieldset>
-      <legend><%= t "headings.driver_details" %></legend>
-      <div class="span-7">
-        <ol>
-          <li>
-            <label class="long"><%= t :driver_name %>:</label><br/>
-            <%= @trip.driver.full_name %>
-          </li>
-          <br/>
-          <li>
-            <label class="long"><%= t :gender %>:</label><br/>
-            <%= @trip.driver.gender %>
-          </li>
-          <br/>
-          <li>
-            <label class="long"><%= t :birthdate %>:</label><br/>
-            <%= @trip.driver.dob %>
-          </li>
-          <br/>
-          <li>
-            <label class="long"><%= t :location %>:</label><br/>
-            <%= @trip.driver.city %>
-          </li>
-          <br/>
+          <ol>
+            <li>
+              <label class="long"><%= t :driver_name %>:</label><br/>
+              <%= @trip.driver.full_name %>
+            </li>
+            <br/>
+            <li>
+              <label class="long"><%= t :gender %>:</label><br/>
+              <%= @trip.driver.gender %>
+            </li>
+            <br/>
+            <li>
+              <label class="long"><%= t :birthdate %>:</label><br/>
+              <%= @trip.driver.dob %>
+            </li>
+            <br/>
+            <li>
+              <label class="long"><%= t :location %>:</label><br/>
+              <%= @trip.driver.city %>
+            </li>
+            <br/>
 
-          <li>
-            <label class="long"><%= t :message %>:</label><br/>
-            <%= @trip.trip_details %>
-          </li>
-          <br/>
-          <li>
-            <div class="ui-style">
-              <form action="http://www.facebook.com/<%= @trip.driver.fb_id %>" target="_blank">­
-                <input type="Submit" value="<%= t :contact %> <%= @trip.driver.first_name %>">
-              </form>
-            </div>
-          </li>
-        </ol>
-      </div>
+            <li>
+              <label class="long"><%= t :message %>:</label><br/>
+              <%= @trip.trip_details %>
+            </li>
+            <br/>
+            
+          </ol>
 
-
-
-      <div class="two columns">
+        
+      </fieldset>
+    </div>
+    <div class="two columns omega">
+      <fieldset>
+        <legend><%= t "headings.contact_driver" %></legend>
         <img src="<%= @trip.driver.fb_pic_large_url %>" />
-      </div>
-    </fieldset>
+        </br>
+        </br>
+        <div class="ui-style">
+          <form action="http://www.facebook.com/<%= @trip.driver.fb_id %>" target="_blank">­
+            <input type="Submit" value="<%= t :contact %> <%= @trip.driver.first_name %>">
+          </form>
+        </div>
+      </fieldset>
+    </div>
   </div>
   <!--<%= link_to t(:return_sr), trips_path %>-->
 </div>

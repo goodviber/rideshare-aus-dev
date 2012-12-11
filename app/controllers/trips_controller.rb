@@ -156,7 +156,7 @@ class TripsController < ApplicationController
     @trips = Trip.where(conditions)
                  .where("trip_date >= ?", DateTime.now.to_date)
                  .order("trip_date, trip_time")
-                 .paginate(:page => p_page, :per_page => 10)
+                 .paginate(:page => p_page, :per_page => 20)
     
     if (!date.nil?)
       @sel_trip_date = date.to_date if date != "-1" 

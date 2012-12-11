@@ -200,8 +200,8 @@ padding:0;
 border: 0;
 outline: 0;
 background: transparent;
-background-color: #D6D6DE; 
-/*background-image: url(images/background.jpg);*/
+/*background-color: #D6D6DE;*/
+background-image: url(images/background.jpg);
 }
 
 .tabs-container {
@@ -657,6 +657,6 @@ h1 {  font-size: 2rem; /* 32px */ }
 
 #show-content fieldset 
 {
-   max-width: 45%;
+   /*max-width: 45%;*/
    float: left;
 }

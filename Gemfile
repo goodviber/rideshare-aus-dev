@@ -46,7 +46,8 @@ group :development, :test do
   else 
     gem 'ruby-debug' 
   end 
-  
+  gem 'taps'
+  gem 'sqlite3'
   #gem 'ruby-debug-base19x', '~> 0.11.30.pre4'
 end
 

@@ -324,7 +324,7 @@ width: auto;
 }
 
 label.long {
-width: 16%;
+/*width: 16%;*/
 }
 
 .ui-dialog .ui-state-error {
@@ -657,6 +657,6 @@ h1 {  font-size: 2rem; /* 32px */ }
 
 #show-content fieldset 
 {
-   max-width: 45%;
+   /*max-width: 45%;*/
    float: left;
 }

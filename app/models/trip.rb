@@ -21,7 +21,9 @@ class Trip < ActiveRecord::Base
   #validate :future_date?
 
   @@load_count = 0
-  
+
+  self.per_page = 10
+
   def future_date?
     unless self[:trip_date] >= DateTime.now.to_date
       errors.add(:trip_date, "must not be in the past.")
