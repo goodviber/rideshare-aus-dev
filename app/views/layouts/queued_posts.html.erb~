@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+  <title><%= page_title %></title>
+  <!--[if lte IE 9]><%= stylesheet_link_tag 'ie' %><![endif]-->
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application", "jquery-1.5.2.min", "jquery-ui-1.8.13.custom.min", "jquery.tools.min", "jquery-ui-init" %>
+  <%= csrf_meta_tags %>
+
+  <%= yield(:header) %>
+
+  <script>
+    // this needs to go here rather than in .erb.js file, as local is not set correctly in .erb.js file
+    // "locale" is used in javascript code throughout the application
+    locale = "<%= I18n.locale %>";
+
+	  $(function() {
+		  $( "input:submit, a, button", ".ui-style" ).button();
+		  $( "a", ".ui-style" ).click(function() { return false; });
+
+		  $("#topPanLong ul li").removeClass("selected");
+		  $("#<%= @selected_tab %>").addClass("selected");
+	  });
+  </script>
+
+  <!-- authenticity_token -->
+  <%= javascript_tag "window._token = '#{form_authenticity_token}'" %>;
+</head>
+<body <%= yield(:body_attr) %>>
+
+  <div class="container">
+
+      <div class="sixteen columns">
+          <div id="staffMenu">
+
+		        <div id="topPanLong" >
+		          <ul>
+
+                <li id="need_att" class="selected"><%= link_to(t("tabs.need_attention_(#{need_att_count})"), posts_need_attention_url) %></li>
+		            <li id="man_processed"><%= link_to(t("tabs.manually_processed_(#{man_processed_count})"), posts_manually_processed_url) %></li>
+		            <li id="auto_processed"><%= link_to(t("tabs.auto_processed_(#{auto_processed_count})"), posts_auto_processed_url)%></li>
+		            <li id="deleted"><%= link_to(t("tabs.deleted_(#{deleted_count})"), posts_deleted_url)%></li>
+              </ul>
+            </div>
+         </div>
+      </div>
+      </br>
+      </br>
+      </br>
+      <div class="sixteen columns">
+
+        <% if notice %>
+          <p class="notice"><%= notice %></p>
+        <% end %>
+
+        <% if alert %>
+          <p class="alert"><%= alert %></p>
+        <% end %>
+
+        <%= yield %>
+      </div>
+
+	  <div class="sixteen columns" >
+			  <p id="footerText">Privacy | Terms & Conditions | FAQ's | Contact Us</p>
+	  </div>
+
+  </div><!--end outer-->
+
+</body>
+</html>
+

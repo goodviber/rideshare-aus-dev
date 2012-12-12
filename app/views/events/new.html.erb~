@@ -1,0 +1,67 @@
+<% content_for :header, javascript_include_tag("events") %>
+
+<div class="sixteen columns" style="padding:20px 0 10px;">
+
+<%= form_for @event, :url => events_path, :html => { :multipart => true } do |e| %>
+  <div class="eight columns">
+    <%= render 'error_message' %>
+  </div>
+  <h3><%= t "headings.new_event" %></h3>
+  <br/>
+  <ul>
+    <li>
+      <%= e.label :name %> <%= e.text_field :name %>
+    </li>
+    <li>
+      <%= e.label :location %> <%= text_field_tag :event_location, '', :size => 30 %>
+    </li>
+    <li>
+      
+    </li>
+  <%= e.hidden_field :location_id %>
+  <%= e.hidden_field :latitude %>
+  <%= e.hidden_field :longitude %>
+    <li>
+      <%= e.label :event_date %> <%= e.text_field :event_date, :class => 'calendar' %>
+    </li>
+    <li>
+      <%= e.label :event_time %> <%= e.text_field :event_time %>
+    </li>
+    <li>
+      <%= e.label :website %> <%= e.text_field :website %>
+    </li>
+    <li>
+      <%= e.label :description %> <%= e.text_area :description, :rows => 10, :cols => 39 %><br/>
+    </li>
+      <%#= label_tag :photos %>
+      <%#= e.fields_for :photos do |p| %>
+        <%#= p.file_field :photo %><br/><%= label_tag '' %>
+      <%# end %>
+    <li>
+      <%= e.submit %>
+    </li>
+  </ul>
+<% end %>
+
+</div>
+
+<script>
+
+  $('.calendar').datepicker({
+    dateFormat: "yy-mm-dd"
+  });
+
+  $("#event_location" ).autocomplete({
+    source: "/events/load_locations",
+    minLength: 2,
+    select: function( event, ui ) {
+      console.log( ui.item ?
+        "Selected: " + ui.item.value + " aka " + ui.item.id :
+        "Nothing selected, input was " + this.value );
+      $('#event_location_id').val(ui.item.id);
+      $('#event_latitude').val(ui.item.lat);
+      $('#event_longitude').val(ui.item.long);
+    }
+  });
+
+</script>
