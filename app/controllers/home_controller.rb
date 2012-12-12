@@ -67,7 +67,8 @@ class HomeController < ApplicationController
         :name=>row[0], 
         :latitude=>row[2], 
         :longitude=>row[3], 
-        :population=>row[2]
+        :population=>row[2],
+        :country_code=>"AU"
       )
 
     end    

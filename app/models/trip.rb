@@ -77,8 +77,6 @@ class Trip < ActiveRecord::Base
     end
   end
 
-  
-
   def self.load_from_fb_page(page_id)
     #TO DO - setup using app_id and secret in config file
     #see https://github.com/iliu/mysite-examples/blob/fb_graph_cache/config/facebook.yml for example

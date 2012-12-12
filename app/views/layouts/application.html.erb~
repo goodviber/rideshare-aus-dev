@@ -57,7 +57,7 @@
     
   </script>
 
-  <link rel="shortcut icon" href="/assets/favicon.ico" />
+  <link rel="shortcut icon" href="/assets/#{I18n.locale}/favicon.ico" />
   <%= javascript_include_tag "feedback" %>
   <%= javascript_include_tag "google-analytics" %>
   <!-- authenticity_token -->
@@ -77,7 +77,7 @@
           <div id="lan" class="two columns alpha">
              <%= link_to(image_tag("lt_flag.png", :alt => "English", :title => "Versti į lietuvių"),root_url(:locale => :lt)) %> Lithuanian
              <br/>
-             <%= link_to(image_tag("en_flag.png", :alt => "English", :title => "Translate to English"),root_url(:locale => :en)) %> English
+             <%= link_to(image_tag("en_flag.png", :alt => "English", :title => "Translate to English"),root_url(:locale => :au)) %> Australian
           </div>	
           <div id="loginDetailsImage" class="two columns omega">
             <ul>
@@ -137,12 +137,7 @@
 
           <%= yield %>
       </div>
-      <div id="topFooter" class="sixteen columns">
-	      <div id="lan" class="three columns alpha">
-	         <%= link_to(image_tag("lt_flag.png", :alt => "English", :title => "Versti į lietuvių"),root_url(:locale => :lt)) %> Lithuanian
-	         <br/>
-	         <%= link_to(image_tag("en_flag.png", :alt => "English", :title => "Translate to English"),root_url(:locale => :en)) %> English
-	      </div>	
+      <div id="topFooter" class="sixteen columns">	
 	      <div id="paypal" class="three columns omega">
 	        <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 	          <input type="hidden" name="cmd" value="_s-xclick">

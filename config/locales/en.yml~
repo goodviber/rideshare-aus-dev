@@ -72,6 +72,8 @@ en:
     trip_summary: "Trip Summary"
     driver_details: "Driver Details"
     my_trips: "My Trips"
+    contact_driver: "Contact Driver"
+    new_event: "New Event"
 
   tabs:
     home: "Home"

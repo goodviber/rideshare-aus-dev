@@ -12,7 +12,7 @@ Cocoride::Application.routes.draw do
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
 
-  scope "(:locale)", :locale => /en|lt/ do
+  scope "(:locale)", :locale => /en|lt|au/ do
 
     match 'auth/:provider/callback' => 'authentications#create'
     match 'auth/facebook/logout' => 'authentications#facebook_logout', :as => :facebook_logout

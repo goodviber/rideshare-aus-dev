@@ -25,7 +25,7 @@ module ApplicationHelper
       end
     
     else
-      link_to image_tag('fb-login-button.png'), './user/sign_in/'
+      link_to image_tag('fb-login-button.png'), "/users/sign_in/?locale=" + (I18n.locale.to_s)
     end
     
   end

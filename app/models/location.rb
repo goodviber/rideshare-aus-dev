@@ -53,14 +53,14 @@ class Location < ActiveRecord::Base
 
     #Attempt to fix cache issue
     if I18n.locale == :lt
-      p1 = Location.select("-1 as id, 'Visi miestai (' || count(name) || ')' as name").joins(:trips_from).where("trip_date >= ?", DateTime.now.to_date)
-    else
-      p1 = Location.select("-1 as id, 'All cities (' || count(name) || ')' as name").joins(:trips_from).where("trip_date >= ?", DateTime.now.to_date)
+      p1 = Location.select("-1 as id, 'Visi miestai (' || count(name) || ')' as name").joins(:trips_from).where("country_code='LT' AND trip_date >= ?", DateTime.now.to_date)
+    elsif I18n.locale == :au
+      p1 = Location.select("-1 as id, 'All cities (' || count(name) || ')' as name").joins(:trips_from).where("country_code='AU' AND trip_date >= ?", DateTime.now.to_date)
     end
 
     p2 = Location.select("locations.id, name || ' (' || count(name) || ')' as name")
                 .joins(:trips_from)
-                .where("trip_date >= ?", DateTime.now.to_date)
+                .where("country_code='" + (I18n.locale.to_s) + " AND trip_date >= ?", DateTime.now.to_date)
                 .group("locations.id, name")
                 .order("name")
     full_list = p1 + p2
@@ -80,7 +80,7 @@ class Location < ActiveRecord::Base
 #    full_list = p1 + p2
     
     p1 = Location.select("id, name")
-                .where("lower(name) LIKE lower(?)", "#{term}%")
+                .where("country_code='" + (I18n.locale.to_s.upcase) + "' AND lower(name) LIKE lower(?)", "#{term}%")
                 .group("locations.id, name")
                 .order("name")
 
@@ -122,7 +122,7 @@ class Location < ActiveRecord::Base
 #
 #    full_list = p1 + p2
     p1 = Location.select("id, name")
-                .where("lower(name) LIKE lower(?)", "#{term}%")
+                .where("country_code='" + (I18n.locale.to_s.upcase) + "' AND lower(name) LIKE lower(?)", "#{term}%")
                 .group("locations.id, name")
                 .order("name")
   end

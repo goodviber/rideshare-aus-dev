@@ -73,6 +73,7 @@ en:
     driver_details: "Driver Details"
     my_trips: "My Trips"
     contact_driver: "Contact Driver"
+    new_event: "Enter the event details"
 
   tabs:
     home: "Home"

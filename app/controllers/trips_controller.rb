@@ -153,10 +153,11 @@ class TripsController < ApplicationController
     conditions[:endable_type]   = end_type   if !end_type.blank?
     conditions[:trip_date] = date         if date != "-1"
 
-    @trips = Trip.where(conditions)
-                 .where("trip_date >= ?", DateTime.now.to_date)
+    @trips = Trip.joins('INNER JOIN locations on locations.id = trips.startable_id')
+                 .where(conditions)
+                 .where("locations.country_code='" + (I18n.locale.to_s.upcase) + "' AND trip_date >= ?", DateTime.now.to_date)
                  .order("trip_date, trip_time")
-                 .paginate(:page => p_page, :per_page => 20)
+                 .paginate(:page => p_page, :per_page => 10)
     
     if (!date.nil?)
       @sel_trip_date = date.to_date if date != "-1" 
@@ -207,29 +208,45 @@ class TripsController < ApplicationController
   def post_to_users_wall(trip)
     me = FbGraph::User.me(session['token'])
     message = trip.startable.to_s + " - " + trip.endable.to_s + " [" + trip.trip_date.to_s(:short) + "]"
+    url = request.env['HTTP_HOST'] + (I18n.locale.to_s) + "/trips/#{trip.id}"
+    description = t 'site_description'
+    picture = request.env['HTTP_HOST'] + "assets/" + I18n.locale.to_s + "/fb-icon.png"
+    puts "****************************" + fb_page_id
     me.feed!(
       :message => trip.trip_details,
-      :link => 'www.pavesiu.lt',
+      :link => url,
       :name => message,
-      :description => "Pavesiu.lt Vaziuoju is miesto A i miesta B",
-      :picture => "http://pavesiu.heroku.com/assets/pavesiu-logo-50x50.png"
+      :description => description,
+      :picture => picture
     )
     flash[:notice] = flash[:notice] + ' Trip posted to your facebook wall.'
   end
 
   def post_to_fanpage_wall(trip)
-    fb_page_id = ENV['FB_PAGE_ID'] || '116697818393412' #default: ridesurfing fan page
+    fb_page_id = ""    
+    if (I18n.locale.to_s == "au")
+      fb_page_id = "300613093283942"
+    elsif(I18n.locale.to_s == "lt")
+      fb_page_id = "161847627166445"
+    end
+    #fb_page_id = ENV['FB_PAGE_ID'] || '116697818393412' #default: ridesurfing fan page
+    puts "****************************" + fb_page_id
     page = FbGraph::Page.new(fb_page_id)
     message = trip.startable.to_s + " - " + trip.endable.to_s + " [" + l(trip.trip_date, :format => :very_short) + "]"
-
-    page.feed!(
-      :access_token => session['token'],
-      :message => trip.trip_details,
-      :link => 'www.pavesiu.lt',
-      :name => message,
-      :description => "Pavesiu.lt Vaziuoju is miesto A i miesta B",
-      :picture => "http://pavesiu.heroku.com/assets/pavesiu-logo-50x50.png"
-    )
+    url = request.env['HTTP_HOST'] + (I18n.locale.to_s) + "/trips/#{trip.id}"
+    description = t 'site_description'
+    picture = request.env['HTTP_HOST'] + "assets/" + I18n.locale.to_s + "/fb-icon.png"    
+  
+    
+    #page.feed!(
+    #  :access_token => session['token'],
+    #  :message => trip.trip_details,
+    #  :link => url,
+    #  :name => message,
+    #  :description => description,
+    #  :picture => picture
+    #)
+    
   end
   
   def load_from_location_data

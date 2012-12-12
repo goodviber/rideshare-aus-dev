@@ -12,6 +12,7 @@ lt:
   sign_up: "Užsiregistruoti"
   
   site_name: "Pavesiu"
+  site_description: "Pavesiu.lt Vaziuoju is miesto A i miesta B"
 
   leaving: "Išvyksta"
   arriving: "Atvyksta"
@@ -74,6 +75,7 @@ lt:
     driver_details: "Vairuotojo duomenys"
     my_trips: "Mano kelionės"
     contact_driver: "Susisiekti vairuotojas"
+    new_event: "Įveskite informaciją apie įvykį"
 
   tabs:
     home: "Į pradžią"

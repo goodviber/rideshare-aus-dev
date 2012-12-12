@@ -1,29 +1,46 @@
 <% content_for :header, javascript_include_tag("events") %>
 
-<div style="padding:20px 0 10px;">
+<div class="sixteen columns">
 
 <%= form_for @event, :url => events_path, :html => { :multipart => true } do |e| %>
-  <div class="span-22">
+  <div class="eight columns">
     <%= render 'error_message' %>
   </div>
-
-  <%= e.label :name %> <%= e.text_field :name %><br/>
-  <%= e.label :location %> <%= text_field_tag :event_location, '', :size => 30 %><br/>
+  <h3><%= t "headings.new_event" %></h3>
+  <br/>
+  <ul>
+    <li>
+      <%= e.label :name %> <%= e.text_field :name %>
+    </li>
+    <li>
+      <%= e.label :location %> <%= text_field_tag :event_location, '', :size => 30 %>
+    </li>
+    <li>
+      
+    </li>
   <%= e.hidden_field :location_id %>
   <%= e.hidden_field :latitude %>
   <%= e.hidden_field :longitude %>
-  <%= e.label :event_date %> <%= e.text_field :event_date, :class => 'calendar' %><br/>
-  <%= e.label :event_time %> <%= e.text_field :event_time %><br/>
-  <%= e.label :website %> <%= e.text_field :website %><br/>
-  <%= e.label :description %> <%= e.text_area :description, :rows => 10, :cols => 39 %><br/>
-  
-  <%#= label_tag :photos %>
-
-  <%#= e.fields_for :photos do |p| %>
-    <%#= p.file_field :photo %><br/><%= label_tag '' %>
-  <%# end %>
-
-  <br/><%= e.submit %>
+    <li>
+      <%= e.label :event_date %> <%= e.text_field :event_date, :class => 'calendar' %>
+    </li>
+    <li>
+      <%= e.label :event_time %> <%= e.text_field :event_time %>
+    </li>
+    <li>
+      <%= e.label :website %> <%= e.text_field :website %>
+    </li>
+    <li>
+      <%= e.label :description %> <%= e.text_area :description, :rows => 10, :cols => 39 %><br/>
+    </li>
+      <%#= label_tag :photos %>
+      <%#= e.fields_for :photos do |p| %>
+        <%#= p.file_field :photo %><br/><%= label_tag '' %>
+      <%# end %>
+    <li>
+      <%= e.submit %>
+    </li>
+  </ul>
 <% end %>
 
 </div>
