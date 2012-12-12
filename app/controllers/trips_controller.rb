@@ -208,10 +208,14 @@ class TripsController < ApplicationController
   def post_to_users_wall(trip)
     me = FbGraph::User.me(session['token'])
     message = trip.startable.to_s + " - " + trip.endable.to_s + " [" + trip.trip_date.to_s(:short) + "]"
-    url = request.env['HTTP_HOST'] + (I18n.locale.to_s) + "/trips/#{trip.id}"
+    if (request.env['HTTP_HOST'].include?('localhost'))
+      url = "rideshare-aus-dev.herokuapp.com/au/trips/471"    
+    else
+      url = "http://" + request.env['HTTP_HOST'] + "/" + (I18n.locale.to_s) + "/trips/#{trip.id}"
+    end
     description = t 'site_description'
-    picture = request.env['HTTP_HOST'] + "assets/" + I18n.locale.to_s + "/fb-icon.png"
-    puts "****************************" + fb_page_id
+    picture = "http://" + request.env['HTTP_HOST'] + "/assets/" + I18n.locale.to_s + "/fb-icon.png"
+    puts "****************************" + url + "\n" + picture
     me.feed!(
       :message => trip.trip_details,
       :link => url,
@@ -229,23 +233,26 @@ class TripsController < ApplicationController
     elsif(I18n.locale.to_s == "lt")
       fb_page_id = "161847627166445"
     end
-    #fb_page_id = ENV['FB_PAGE_ID'] || '116697818393412' #default: ridesurfing fan page
+    if (request.env['HTTP_HOST'].include?('localhost'))
+      url = "rideshare-aus-dev.herokuapp.com/au/trips/471"    
+    else
+      url = "http://" + request.env['HTTP_HOST'] + "/" + (I18n.locale.to_s) + "/trips/#{trip.id}"
+    end
     puts "****************************" + fb_page_id
     page = FbGraph::Page.new(fb_page_id)
     message = trip.startable.to_s + " - " + trip.endable.to_s + " [" + l(trip.trip_date, :format => :very_short) + "]"
-    url = request.env['HTTP_HOST'] + (I18n.locale.to_s) + "/trips/#{trip.id}"
     description = t 'site_description'
-    picture = request.env['HTTP_HOST'] + "assets/" + I18n.locale.to_s + "/fb-icon.png"    
+    picture = request.env['HTTP_HOST'] + "/assets/" + I18n.locale.to_s + "/fb-icon.png"    
   
     
-    #page.feed!(
-    #  :access_token => session['token'],
-    #  :message => trip.trip_details,
-    #  :link => url,
-    #  :name => message,
-    #  :description => description,
-    #  :picture => picture
-    #)
+    page.feed!(
+      :access_token => session['token'],
+      :message => trip.trip_details,
+      :link => url,
+      :name => message,
+      :description => description,
+      :picture => picture
+    )
     
   end
   
