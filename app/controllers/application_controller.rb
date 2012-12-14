@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   before_filter :set_current_user
 
   def set_locale
+puts "111 locale: #{I18n.locale}"
+puts "222 params: #{params[:locale]}"
     I18n.locale = params[:locale] if !params[:locale].blank?
     #if params[:locale].blank?
     #  I18n.locale = I18n.default_locale
