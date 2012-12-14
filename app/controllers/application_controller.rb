@@ -5,11 +5,12 @@ class ApplicationController < ActionController::Base
   before_filter :set_current_user
 
   def set_locale
-    if params[:locale].blank?
-      I18n.locale = I18n.default_locale
-    else
-      I18n.locale = params[:locale]
-    end
+    I18n.locale = params[:locale] if params[:locale].present?
+    #if params[:locale].blank?
+    #  I18n.locale = I18n.default_locale
+    #else
+    #  I18n.locale = params[:locale]
+    #end
   end
 
   def default_url_options(options={})
