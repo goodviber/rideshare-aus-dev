@@ -1,6 +1,6 @@
 class TripsController < ApplicationController
 
-  before_filter :authenticate_user!, :only => [:new, :edit, :update, :my_trips]
+  before_filter :login_required, :only => [:new, :edit, :update, :my_trips]
 
   def index
     @selected_tab = "search"

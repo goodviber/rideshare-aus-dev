@@ -5,8 +5,6 @@ class ApplicationController < ActionController::Base
   before_filter :set_current_user
 
   def set_locale
-puts "111 locale: #{I18n.locale}"
-puts "222 params: #{params[:locale]}"
     I18n.locale = params[:locale] if !params[:locale].blank?
     #if params[:locale].blank?
     #  I18n.locale = I18n.default_locale
@@ -16,9 +14,16 @@ puts "222 params: #{params[:locale]}"
   end
 
   def default_url_options(options={})
-    puts "!!!!!!!!!!!!!!!!1 default_url_options is passed options: #{options.inspect}\n"
     logger.debug "default_url_options is passed options: #{options.inspect}\n"
     { :locale => I18n.locale }
+  end
+
+  def login_required
+    if user_signed_in?
+      return true
+    else
+      redirect_to new_user_session_url
+    end
   end
 
   #def current_user
