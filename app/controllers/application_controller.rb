@@ -15,7 +15,7 @@ puts "222 params: #{params[:locale]}"
     #end
   end
 
-  def default_url_options(options={})
+  def url_options(options={})
     puts "!!!!!!!!!!!!!!!!1 default_url_options is passed options: #{options.inspect}\n"
     logger.debug "default_url_options is passed options: #{options.inspect}\n"
     { :locale => I18n.locale }
