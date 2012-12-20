@@ -21,8 +21,8 @@
             <tr>
               <td class="col1"><%= l trip.trip_date, :format => :very_short %></td>
               <td class="deptime col2"><%= trip.dis_trip_time %></td>
-              <td class="col3"><%= trip.from_location.name %></td>
-              <td class="col4"><%= trip.to_location.name %></td>
+              <td class="col3"><%= trip.startable.to_s %></td>
+              <td class="col4"><%= trip.endable.to_s %></td>
               <td><%= trip.cost %></td>
               <td>
                 <div class="customTooltip">
