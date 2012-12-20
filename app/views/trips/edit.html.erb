@@ -1,16 +1,17 @@
 <% content_for :header, javascript_include_tag("http://maps.google.com/maps/api/js?sensor=false", "trips-new-edit") %>
 
 <%= form_for(@trip) do |f| %>
-  <div class="sixteen columns">
+  <div class="16 columns">
     <%= render 'error_message' %>
   </div>
 
   <div class="sixteen columns">
-    <%= render 'form', :f => f, :post_id => nil %>
-  </div>
+    <div class="eight columns alpha">
+      <%= render 'form', :f => f, :post_id => nil %>
+    </div>
 
-  <div class="sixteen columns">
-    <%= render 'google_map' %>
+    <div class="eight columns omega">
+      <%= render 'google_map' %>
+    </div>
   </div>
 <% end %>
-

@@ -81,16 +81,12 @@
 
 <script>
 
-  $('.calendar').datepicker({
-    dateFormat: "yy-mm-dd"
-  });
+  $(window).load(function() {
 
-  $(function() {
-    function log( message ) {
-      $( "<div/>" ).text( message ).prependTo( "#log" );
-      $( "#log" ).scrollTop( 0 );
-    }
-
+    $('.calendar').datepicker({
+      dateFormat: "yy-mm-dd"
+    });
+    
     $( "#location_from" ).autocomplete({
       source: "<%= load_locations_and_events_trips_path %>",
       minLength: 2,
@@ -106,20 +102,6 @@
         }
       }
     });
-  });
-
-  function getEventDate(event_id) {
-    $.post("/events/get_event_date", { id: event_id, authenticity_token: _token })
-      .success(function(data) {
-        $('#trip_trip_date').val(data);
-    });
-  }
-  
-  $(function() {
-    function log( message ) {
-      $( "<div/>" ).text( message ).prependTo( "#log" );
-      $( "#log" ).scrollTop( 0 );
-    }
 
     $( "#location_to" ).autocomplete({
       source: "<%= load_locations_and_events_trips_path %>",
@@ -134,9 +116,20 @@
         if (ui.item.type = 'Event') {
           event_date = getEventDate(ui.item.id);
         }
-
       }
     });
   });
-</script>
 
+  function log( message ) {
+    $( "<div/>" ).text( message ).prependTo( "#log" );
+    $( "#log" ).scrollTop( 0 ); 
+  };
+
+  function getEventDate(event_id) {
+    $.post("/events/get_event_date", { id: event_id, authenticity_token: _token })
+      .success(function(data) {
+        $('#trip_trip_date').val(data);
+    })
+  };
+
+</script>
