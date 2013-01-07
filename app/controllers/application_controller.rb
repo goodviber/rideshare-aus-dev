@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
     if request.env['omniauth.origin']
       request.env['omniauth.origin']
     else
-      root_url
+      root_url(:locale => params[:locale])
     end
   end
 
