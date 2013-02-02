@@ -26,6 +26,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def after_sign_in_path_for(resource_or_scope)
+    if request.env['omniauth.origin']
+      request.env['omniauth.origin']
+    else
+      root_url(:locale => params[:locale])
+    end
+  end
+
   #def current_user
   #  @current_user ||= User.find(session[:user_id]) if session[:user_id]
   #end
