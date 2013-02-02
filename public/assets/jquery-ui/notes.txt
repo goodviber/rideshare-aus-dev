@@ -1,0 +1,9 @@
+
+MODIFICATIONS to standard jquery-ui-1.8.11.custom.css
+------------------------------------------------------
+
+- add ".erb" to jquery-ui-1.8.11.custom.css file name
+
+- replace "images/" with <%=asset_path "jquery-ui/images/
+- replace ".png)" with .png)" %>
+
