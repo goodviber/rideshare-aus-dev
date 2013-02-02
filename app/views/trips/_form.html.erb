@@ -88,7 +88,11 @@
     });
     
     $( "#location_from" ).autocomplete({
-      source: "<%= load_locations_and_events_trips_path %>",
+      #source: "<%= load_locations_and_events_trips_path %>",
+      source: function (request, response) { 
+          //in rides-autocomplete.js
+          places_autocomplete(request, response, '<%=I18n.locale.upcase%>'); 
+      },
       minLength: 2,
       select: function( event, ui ) {
         console.log( ui.item ?
@@ -104,7 +108,11 @@
     });
 
     $( "#location_to" ).autocomplete({
-      source: "<%= load_locations_and_events_trips_path %>",
+      #source: "<%= load_locations_and_events_trips_path %>",
+      source: function (request, response) { 
+          //in rides-autocomplete.js
+          places_autocomplete(request, response, '<%=I18n.locale.upcase%>'); 
+      },      
       minLength: 2,
       select: function( event, ui ) {
         console.log( ui.item ?

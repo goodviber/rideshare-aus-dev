@@ -3,15 +3,15 @@
   <ol>
     <li>
       <%= f.label :from_location_id, t(:from), :class => 'span-3' %>
-      <input id="location_from" type="text" name="from_autocomplete" />
-      <input id="trip_startable_id" type="hidden" value="" name="trip[startable_id]" />
-      <input id="trip_startable_type" type="hidden" value="" name="trip[startable_type]" />
+      <input id="location_from" type="text" name="from_autocomplete" value="<%= @trip.startable.to_s %>" />
+      <input id="trip_startable_id" type="hidden" name="trip[startable_id]" value="<%= @trip.startable_id %>" />
+      <input id="trip_startable_type" type="hidden" name="trip[startable_type]" value="<%= @trip.startable_type %>" />
     </li>
     <li>
       <%= f.label :to_location_id, t(:to), :class => 'span-3' %>
-      <input id="location_to" type="text" name="to_autocomplete"/>
-      <input id="trip_endable_id" type="hidden" value="" name="trip[endable_id]" />
-      <input id="trip_endable_type" type="hidden" value="" name="trip[endable_type]" />
+      <input id="location_to" type="text" name="to_autocomplete" value="<%= @trip.endable.to_s %>" />
+      <input id="trip_endable_id" type="hidden" value="<%= @trip.endable_id %>" name="trip[endable_id]" />
+      <input id="trip_endable_type" type="hidden" value="<%= @trip.endable_type %>" name="trip[endable_type]" />
     </li>
   </ol>
 </fieldset>
@@ -31,6 +31,7 @@
       <%= f.radio_button :time_of_day, "A" %>
       <%= t("trip_time.afternoon") %>
     </li>
+    </br>
     </br>
     <li id="liTripTime">
       <%= f.label :trip_time, t(:ttime) %>
@@ -80,16 +81,12 @@
 
 <script>
 
-  $('.calendar').datepicker({
-    dateFormat: "yy-mm-dd"
-  });
+  $(window).load(function() {
 
-  $(function() {
-    function log( message ) {
-      $( "<div/>" ).text( message ).prependTo( "#log" );
-      $( "#log" ).scrollTop( 0 );
-    }
-
+    $('.calendar').datepicker({
+      dateFormat: "yy-mm-dd"
+    });
+    
     $( "#location_from" ).autocomplete({
       source: "<%= load_locations_and_events_trips_path %>",
       minLength: 2,
@@ -105,20 +102,6 @@
         }
       }
     });
-  });
-
-  function getEventDate(event_id) {
-    $.post("/events/get_event_date", { id: event_id, authenticity_token: _token })
-      .success(function(data) {
-        $('#trip_trip_date').val(data);
-    });
-  }
-  
-  $(function() {
-    function log( message ) {
-      $( "<div/>" ).text( message ).prependTo( "#log" );
-      $( "#log" ).scrollTop( 0 );
-    }
 
     $( "#location_to" ).autocomplete({
       source: "<%= load_locations_and_events_trips_path %>",
@@ -133,9 +116,20 @@
         if (ui.item.type = 'Event') {
           event_date = getEventDate(ui.item.id);
         }
-
       }
     });
   });
-</script>
 
+  function log( message ) {
+    $( "<div/>" ).text( message ).prependTo( "#log" );
+    $( "#log" ).scrollTop( 0 ); 
+  };
+
+  function getEventDate(event_id) {
+    $.post("/events/get_event_date", { id: event_id, authenticity_token: _token })
+      .success(function(data) {
+        $('#trip_trip_date').val(data);
+    })
+  };
+
+</script>
