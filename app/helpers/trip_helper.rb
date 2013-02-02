@@ -82,5 +82,9 @@ module TripHelper
     end
   end
 
+  def country_name
+    I18n.t(:country_name)
+  end
+
 end
 

@@ -1,4 +1,4 @@
-<% content_for :header, javascript_include_tag("trips-search") %>
+<% content_for :header, javascript_include_tag("trips-search","trips-autocomplete") %>
 
 <div class="sixteen columns" id="search_box" class="form">
   <fieldset>
@@ -38,16 +38,29 @@
   <%= render "home/intro_text" %>
 </div>
 
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false&components=country:<%= (I18n.locale).upcase%>"></script>
 
 <script>
+  var service = new google.maps.places.AutocompleteService();
+
   $(function() {
     function log( message ) {
       $( "<div/>" ).text( message ).prependTo( "#log" );
       $( "#log" ).scrollTop( 0 );
     }
 
+    function getBaseURL()
+    {
+      var l = window.location;
+      var base_url = l.protocol + "//" + l.host + "/" + l.pathname.split('/')[1];
+      return base_url;
+    }
+
     $( "#location_from" ).autocomplete({
-      source: "<%= load_locations_and_events_trips_path %>",
+      source: function (request, response) { 
+          places_autocomplete(request, response, '<%=I18n.locale.upcase%>'); 
+      },
+      //source: "<%= load_locations_and_events_trips_path %>",
       minLength: 2,
       select: function( event, ui ) {
         console.log( ui.item ?
@@ -58,7 +71,7 @@
       }
     });
   });
-  
+
   $(function() {
     function log( message ) {
       $( "<div/>" ).text( message ).prependTo( "#log" );

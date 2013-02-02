@@ -17,7 +17,7 @@ test:
 #  app_secret: 824d2398c1e4a61e092c574dfec08989
 
 #http://rideshare-aus-dev.heroku.com
-production:
-  app_id: 308853575849049
-  app_secret: 4afdead0b27ff1d819362ac240ec40f6
+#production:
+#  app_id: 308853575849049
+#  app_secret: 4afdead0b27ff1d819362ac240ec40f6
 

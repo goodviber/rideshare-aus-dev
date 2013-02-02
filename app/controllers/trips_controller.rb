@@ -275,5 +275,14 @@ class TripsController < ApplicationController
     render :json => @results.collect{ |x| { :label => x.name, :id => x.id, :type => x.class.to_s } }.uniq
   end
 
+  # search events and cities
+  def load_events
+    events    = Event.find(:all, :conditions => ["lower(name) LIKE lower(?)", params[:term]+ '%'])
+
+    @results  = events
+    render :json => @results.collect{ |x| { :label => x.name, :id => x.id, :type => x.class.to_s } }.uniq
+  end
+
+
 end
 

@@ -1,6 +1,6 @@
 class TripsController < ApplicationController
 
-  before_filter :authenticate_user!, :only => [:new, :edit, :update, :my_trips]
+  before_filter :login_required, :only => [:new, :edit, :update, :my_trips]
 
   def index
     @selected_tab = "search"
@@ -241,7 +241,6 @@ class TripsController < ApplicationController
     puts "****************************" + fb_page_id
     page = FbGraph::Page.new(fb_page_id)
     message = trip.startable.to_s + " - " + trip.endable.to_s + " [" + l(trip.trip_date, :format => :very_short) + "]"
-    url = "http://" + request.env['HTTP_HOST'] + "/" + (I18n.locale.to_s) + "/trips/#{trip.id}"
     description = t 'site_description'
     picture = request.env['HTTP_HOST'] + "/assets/" + I18n.locale.to_s + "/fb-icon.png"    
   
@@ -275,6 +274,15 @@ class TripsController < ApplicationController
     @results  = locations + events
     render :json => @results.collect{ |x| { :label => x.name, :id => x.id, :type => x.class.to_s } }.uniq
   end
+
+  # search events and cities
+  def load_events
+    events    = Event.find(:all, :conditions => ["lower(name) LIKE lower(?)", params[:term]+ '%'])
+
+    @results  = events
+    render :json => @results.collect{ |x| { :label => x.name, :id => x.id, :type => x.class.to_s } }.uniq
+  end
+
 
 end
 

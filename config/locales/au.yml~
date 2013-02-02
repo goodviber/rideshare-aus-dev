@@ -11,7 +11,8 @@ au:
   logout: "Log out"
   sign_up: "Sign up"
   site_name: "CoCoRide"
-
+  site_description: "CoCoRide - Rideshare for active people"  
+  
   leaving: "Leaving"
   arriving: "Arriving"
   Seats: "Seats"

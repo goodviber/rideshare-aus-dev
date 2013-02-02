@@ -9,7 +9,7 @@ Cocoride::Application.routes.draw do
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
 
-  scope "(:locale)", :locale => /en|lt|au/, :shallow_path => ":locale" do
+  scope "(:locale)", :locale => /en|lt|au|ca/, :shallow_path => ":locale" do
     resources :authentications, :shallow => true
     devise_for :users, :shallow => true
 
@@ -32,6 +32,7 @@ Cocoride::Application.routes.draw do
       get 'load_from_location_data', :on => :collection
       get 'load_to_location_data', :on => :collection
       get 'load_locations_and_events', :on => :collection
+      get 'load_events', :on => :collection
     end
 
     resources :queued_posts
@@ -49,6 +50,7 @@ Cocoride::Application.routes.draw do
 
     match '/import_locations' => 'home#import_locations'
     match '/import_australian_cities' => 'home#import_australian_cities'
+    match '/import_canada_cities' => 'home#import_canada_cities'
 
     resources :locations
 

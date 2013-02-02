@@ -22,17 +22,17 @@
     locale = "<%= I18n.locale %>";
 
 	  $(function() {
-		  $( "input:submit, a, button", ".ui-style" ).button();
-		  $( "a", ".ui-style" ).click(function() { return false; });
+	      $( "input:submit, a, button", ".ui-style" ).button();
+	      $( "a", ".ui-style" ).click(function() { return false; });
 
-		  $("#topPan ul li").removeClass("selected");
-		  $("#<%= @selected_tab %>").addClass("selected");
+	      $("#topPan ul li").removeClass("selected");
+	      $("#<%= @selected_tab %>").addClass("selected");
       
-      fitToDevice();
+      	      fitToDevice();
 	  });
     
     $(window).resize(function () { 
-      //fitToDevice();
+      fitToDevice();
     });
     
     function fitToDevice()
@@ -75,9 +75,11 @@
 		    </div>
         <div class="four columns omega">   
           <div id="lan" class="two columns alpha">
-             <%= link_to(image_tag("lt_flag.png", :alt => "English", :title => "Versti į lietuvių"), :locale => :lt) %> Lithuanian
+             <%= link_to(image_tag("lt_flag.png", :alt => "Lithuanian version", :title => "Versti į lietuvių"), :locale => :lt) %> Lithuanian
              <br/>
-             <%= link_to(image_tag("en_flag.png", :alt => "English", :title => "Translate to English"), :locale => :au) %> Australian
+             <%= link_to(image_tag("en_flag.png", :alt => "Australian version", :title => "Translate to English"), :locale => :au) %> Australian
+             <br/>
+             <%= link_to(image_tag("ca_flag.png", :alt => "Canadian version", :title => "Translate to English"), :locale => :ca) %> Canadian
           </div>	
           <div id="loginDetailsImage" class="two columns omega">
             <ul>

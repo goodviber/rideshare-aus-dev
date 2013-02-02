@@ -1,0 +1,308 @@
+# Canadian English translations for Ruby on Rails
+
+ca:
+  will_paginate:
+    next_label: Next →
+    page_gap: ! '&hellip;'
+    previous_label: ← Previous
+
+  current_lng: "en"
+  login: "Log in"
+  logout: "Log out"
+  sign_up: "Sign up"
+  site_name: "CoCoRide"
+  site_description: "CoCoRide - Rideshare for active people"  
+  
+  leaving: "Leaving"
+  arriving: "Arriving"
+  Seats: "Seats"
+  from: "From"
+  to: "To"
+  duration: "Duration"
+  distance: "Distance"
+  departing: "Departing"
+  arriving: "Arriving (est)"
+  cost: "Cost"
+  no_cost: "Free"
+  morning: "Morning"
+  afternoon: "Afternoon"
+  driver_name: "Driver Name"
+  driver: "Driver"
+  message: "Message"
+  ttime: "Time"
+  when: "When"
+  ddate: "Date"
+  location: "Location"
+  event: "Event"
+  gender: "Gender"
+  birthdate: "Birthdate"
+
+  search_all_dates: "Search all dates"
+  search: "Search"
+  more: "More"
+  more_details: "More Details"
+  show_more_details: "Show Details"
+  loading: "Loading..."
+  contact: "Contact"
+  contact_only: "Contact"
+
+  return_sr: "Return to Search Results"
+  no_trips_msg: "You have not posted any trips yet."
+  fb_post_msg: "Post trip to my facebook wall, so my friends can see it"
+  auth_failed: "Authentication failed. Please try again."
+
+  select_list:
+    select_city: "Select City"
+    all_cities: "All Cities"
+
+  trip_time:
+    exact: "Exact Time"
+    morning: "Morn"
+    afternoon: "A/noon"
+
+  buttons:
+    post_trip: "Post Trip"
+
+  headings:
+    search_results: "Search Results"
+    search_filter: "Search Filters"
+    where: "Where?"
+    when: "When?"
+    other_details: "Other Details"
+    route_details: "Route Details"
+    trip_summary: "Trip Summary"
+    driver_details: "Driver Details"
+    my_trips: "My Trips"
+    contact_driver: "Contact Driver"
+    new_event: "Enter the event details"
+
+  tabs:
+    home: "Home"
+    search: "Search"
+    post: "Post"
+    my_trips: "My Trips"
+    about: "About"
+    events: "Events"
+
+  date:
+    formats:
+      default: "%d-%m-%Y"
+      short: "%b %d"
+      long: "%B %d, %Y"
+      very_short: "%d/%m"
+
+    day_names:
+      - Sunday
+      - Monday
+      - Tuesday
+      - Wednesday
+      - Thursday
+      - Friday
+      - Saturday
+    abbr_day_names:
+      - Sun
+      - Mon
+      - Tue
+      - Wed
+      - Thu
+      - Fri
+      - Sat
+
+    month_names:
+      - ~
+      - January
+      - February
+      - March
+      - April
+      - May
+      - June
+      - July
+      - August
+      - September
+      - October
+      - November
+      - December
+    abbr_month_names:
+      - ~
+      - Jan
+      - Feb
+      - Mar
+      - Apr
+      - May
+      - Jun
+      - Jul
+      - Aug
+      - Sep
+      - Oct
+      - Nov
+      - Dec
+    order:
+      - :year
+      - :month
+      - :day
+
+  time:
+    formats:
+      default: "%a, %d %b %Y %H:%M:%S %z"
+      short: "%H:%M, %d %B"
+      long: "%B %d, %Y %H:%M"
+      time_only: "%H:%M"
+      time_only_long: "%Hhr, %Mmin"
+      time_date_short: "%d [%H:%M]"
+    am: "am"
+    pm: "pm"
+
+  support:
+    array:
+      words_connector: ", "
+      two_words_connector: " and "
+      last_word_connector: ", and "
+
+    select:
+      prompt: "Please select"
+
+  number:
+    format:
+      separator: "."
+      delimiter: ","
+      precision: 3
+      significant: false
+      strip_insignificant_zeros: false
+
+    currency:
+      format:
+        format: "%n %u"
+        unit: "Lt"
+        separator: "."
+        delimiter: ","
+        precision: 2
+        significant: false
+        strip_insignificant_zeros: false
+
+    percentage:
+      format:
+        delimiter: ""
+
+    precision:
+      format:
+        delimiter: ""
+
+    human:
+      format:
+        delimiter: ""
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one:   "Byte"
+            other: "Bytes"
+          kb: "KB"
+          mb: "MB"
+          gb: "GB"
+          tb: "TB"
+      decimal_units:
+        format: "%n %u"
+        units:
+          unit: ""
+          thousand: Thousand
+          million: Million
+          billion: Billion
+          trillion: Trillion
+          quadrillion: Quadrillion
+
+  datetime:
+    distance_in_words:
+      half_a_minute: "half a minute"
+      less_than_x_seconds:
+        one:   "less than 1 second"
+        other: "less than %{count} seconds"
+      x_seconds:
+        one:   "1 second"
+        other: "%{count} seconds"
+      less_than_x_minutes:
+        one:   "less than a minute"
+        other: "less than %{count} minutes"
+      x_minutes:
+        one:   "1 minute"
+        other: "%{count} minutes"
+      about_x_hours:
+        one:   "about 1 hour"
+        other: "about %{count} hours"
+      x_days:
+        one:   "1 day"
+        other: "%{count} days"
+      about_x_months:
+        one:   "about 1 month"
+        other: "about %{count} months"
+      x_months:
+        one:   "1 month"
+        other: "%{count} months"
+      about_x_years:
+        one:   "about 1 year"
+        other: "about %{count} years"
+      over_x_years:
+        one:   "over 1 year"
+        other: "over %{count} years"
+      almost_x_years:
+        one:   "almost 1 year"
+        other: "almost %{count} years"
+    prompts:
+      year:   "Year"
+      month:  "Month"
+      day:    "Day"
+      hour:   "Hour"
+      minute: "Minute"
+      second: "Seconds"
+
+  helpers:
+    select:
+      prompt: "Please select"
+
+    submit:
+      create: 'Create %{model}'
+      update: 'Update %{model}'
+      submit: 'Save %{model}'
+
+  errors:
+    format: "%{attribute} %{message}"
+
+    messages: &errors_messages
+      inclusion: "is not included in the list"
+      exclusion: "is reserved"
+      invalid: "is invalid"
+      confirmation: "doesn't match confirmation"
+      accepted: "must be accepted"
+      empty: "can't be empty"
+      blank: "can't be blank"
+      too_long: "is too long (maximum is %{count} characters)"
+      too_short: "is too short (minimum is %{count} characters)"
+      wrong_length: "is the wrong length (should be %{count} characters)"
+      not_a_number: "is not a number"
+      not_an_integer: "must be an integer"
+      greater_than: "must be greater than %{count}"
+      greater_than_or_equal_to: "must be greater than or equal to %{count}"
+      equal_to: "must be equal to %{count}"
+      less_than: "must be less than %{count}"
+      less_than_or_equal_to: "must be less than or equal to %{count}"
+      odd: "must be odd"
+      even: "must be even"
+
+  activerecord:
+    errors:
+      template:
+        header:
+          one:    "1 error prohibited this %{model} from being saved"
+          other:  "%{count} errors prohibited this %{model} from being saved"
+        body: "There were problems with the following fields:"
+
+      messages:
+        taken: "has already been taken"
+        record_invalid: "Validation failed: %{errors}"
+        <<: *errors_messages
+
+      full_messages:
+        format: "%{attribute} %{message}"
+

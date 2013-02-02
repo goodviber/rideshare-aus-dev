@@ -1,8 +1,5 @@
 Cocoride::Application.routes.draw do
 
-  resources :authentications
-  devise_for :users
-
   ActionController::Routing::SEPARATORS <<  "-" unless ActionController::Routing::SEPARATORS.include?("-")
 
   # The priority is based upon order of creation:
@@ -12,7 +9,9 @@ Cocoride::Application.routes.draw do
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
 
-  scope "(:locale)", :locale => /en|lt/ do
+  scope "(:locale)", :locale => /en|lt|au|ca/, :shallow_path => ":locale" do
+    resources :authentications, :shallow => true
+    devise_for :users, :shallow => true
 
     match 'auth/:provider/callback' => 'authentications#create'
     match 'auth/facebook/logout' => 'authentications#facebook_logout', :as => :facebook_logout
@@ -29,13 +28,16 @@ Cocoride::Application.routes.draw do
 
     match '/trips/manual_new' => 'trips#manual_new', :as => :new_manual_trip
 
-    resources :trips do
+    resources :trips, :shallow => true do
       get 'load_from_location_data', :on => :collection
       get 'load_to_location_data', :on => :collection
       get 'load_locations_and_events', :on => :collection
+      get 'load_events', :on => :collection
     end
+
     resources :queued_posts
-    resources :events do
+
+    resources :events, :shallow => true do
       get 'load_locations', :on => :collection
       get 'load_locations_and_events', :on => :collection
       post 'search',  	    :on => :collection
@@ -48,20 +50,19 @@ Cocoride::Application.routes.draw do
 
     match '/import_locations' => 'home#import_locations'
     match '/import_australian_cities' => 'home#import_australian_cities'
+    match '/import_canada_cities' => 'home#import_canada_cities'
 
     resources :locations
 
+    # Sample of named route:
+    #match 'trip/search' => 'trip#search', :as => :trip_search
+    #match 'trip/post' => 'trip#post', :as => :trip_post
+    match 'login/user_login' => 'login#user_login'
+
+    match ':controller(/:action(.:format))'
+
+    root :to => 'trips#index' 
   end
-
-
-
-  # Sample of named route:
-  #match 'trip/search' => 'trip#search', :as => :trip_search
-  #match 'trip/post' => 'trip#post', :as => :trip_post
-  match 'login/user_login' => 'login#user_login'
-
-  match ':controller(/:action(.:format))'
-
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
 
@@ -103,7 +104,6 @@ Cocoride::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'trips#index' 
 
   # See how all your routes lay out with "rake routes"
 

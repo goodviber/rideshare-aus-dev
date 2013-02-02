@@ -76,5 +76,30 @@ class HomeController < ApplicationController
     redirect_to root_url
   end
 
+  def import_canada_cities
+    require 'csv'  
+        
+    filename = Rails.root + "db/canadian-locations.csv"
+        
+    conn = ActiveRecord::Base.connection
+    
+    csv_text = File.read(filename)
+    
+    csv = CSV.parse(csv_text, :headers => true, :col_sep =>",")
+    csv.each do |row|
+
+    Location.create(
+        :name=>row[1], 
+        :latitude=>row[3], 
+        :longitude=>row[4], 
+        :country_code=>row[5], 
+        :population=>row[4], 
+      )
+
+    end    
+    
+    redirect_to root_url
+  end
+
 end
 
