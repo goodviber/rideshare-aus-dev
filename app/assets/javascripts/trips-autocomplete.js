@@ -38,9 +38,9 @@
                 );
                 locationsArray = (["---Locations:---"]).concat(locationsArray);
                 results = eventsArray.concat(locationsArray);
-              
+                
+                //send results back to autocomplete
                 response(results);
-                //still not working properly -> TypeError: b is null
             });
           }
       });

@@ -13,7 +13,7 @@
     * Autocomplete function to attach to search boxes so that it filters 
     */
     function places_autocomplete (request, response, locale) {
-      var service = new google.maps.places.AutocompleteService(null, {types: ['geocode'], componentRestrictions: {country: locale}});
+      var service = new google.maps.places.AutocompleteService(null, {types: ['cities'], componentRestrictions: {country: "au"}});
       $.ajax({
         url: getBaseURL() + "/trips/load_events?term=" + request.term, //where is script located 
         success: function( data ) {

@@ -1,3 +1,4 @@
+<% content_for :header, javascript_include_tag("trips-search","trips-autocomplete") %>
 <fieldset class="form">
   <legend><%= t "headings.where" %></legend>
   <ol>
@@ -88,7 +89,7 @@
     });
     
     $( "#location_from" ).autocomplete({
-      #source: "<%= load_locations_and_events_trips_path %>",
+      //source: "<%= load_locations_and_events_trips_path %>",
       source: function (request, response) { 
           //in rides-autocomplete.js
           places_autocomplete(request, response, '<%=I18n.locale.upcase%>'); 
@@ -108,7 +109,7 @@
     });
 
     $( "#location_to" ).autocomplete({
-      #source: "<%= load_locations_and_events_trips_path %>",
+      //source: "<%= load_locations_and_events_trips_path %>",
       source: function (request, response) { 
           //in rides-autocomplete.js
           places_autocomplete(request, response, '<%=I18n.locale.upcase%>'); 

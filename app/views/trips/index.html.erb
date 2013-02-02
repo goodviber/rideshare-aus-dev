@@ -80,10 +80,10 @@
     }
 
     $( "#location_to" ).autocomplete({
-      #source: "<%= load_locations_and_events_trips_path %>",
+      //source: "<%= load_locations_and_events_trips_path %>",
       source: function (request, response) { 
           places_autocomplete(request, response, '<%=I18n.locale.upcase%>'); 
-      }      
+      },      
       minLength: 2,
       select: function( event, ui ) {
         console.log( ui.item ?
